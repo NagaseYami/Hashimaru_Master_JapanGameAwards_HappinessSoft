@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player1Controller : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public GameObject PlayerManager;
     public GameObject Body;
     public GameObject ArmL;
     public GameObject ArmR;
-    
+
+	public int GamePadNum;
+
     //Controller
     public float RotateSpeed;
     public float MoveSpeed;
@@ -38,44 +40,45 @@ public class Player1Controller : MonoBehaviour
 
     void Controller()
     {
-        // 上方向
-        if (Input.GetAxisRaw("Vertical1") > 0)
-        {
-            rb.AddForce(Body.transform.forward * MoveSpeed);
-        }
+		// 上方向
+		if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0)
+		{
+			rb.AddForce(Body.transform.forward * MoveSpeed);
+		}
 
-        // 下方向
-        if (Input.GetAxisRaw("Vertical1") < 0)
-        {
-            rb.AddForce(-Body.transform.forward * MoveSpeed);
-        }
+		// 下方向
+		if (Input.GetAxisRaw("Vertical" + GamePadNum) < 0)
+		{
+			rb.AddForce(-Body.transform.forward * MoveSpeed);
+		}
 
-        Vector3 TurnLeft = new Vector3(0.0f, -RotateSpeed, 0.0f);
-        Vector3 TurnRight = new Vector3(0.0f, RotateSpeed, 0.0f);
+		Vector3 TurnLeft = new Vector3(0.0f, -RotateSpeed, 0.0f);
+		Vector3 TurnRight = new Vector3(0.0f, RotateSpeed, 0.0f);
 
-        Quaternion deltaRotation;
+		Quaternion deltaRotation;
 
-        // 左方向
-        if (Input.GetAxisRaw("Horizontal1") > 0.01)
-        {
-            deltaRotation = Quaternion.Euler(TurnLeft * Time.deltaTime);
-            rb.MoveRotation(rb.rotation * deltaRotation);
-            ArmR.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
-            ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
-        }
+		// 左方向
+		if (Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.01)
+		{
+			deltaRotation = Quaternion.Euler(TurnLeft * Time.deltaTime);
+			rb.MoveRotation(rb.rotation * deltaRotation);
+			ArmR.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
+			ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
+		}
 
-        // 右方向
-        if (Input.GetAxisRaw("Horizontal1") < -0.01)
-        {
-            deltaRotation = Quaternion.Euler(TurnRight * Time.deltaTime);
-            rb.MoveRotation(rb.rotation * deltaRotation);
-            ArmR.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
-            ArmL.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
-        }
+		// 右方向
+		if (Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.01)
+		{
+			deltaRotation = Quaternion.Euler(TurnRight * Time.deltaTime);
+			rb.MoveRotation(rb.rotation * deltaRotation);
+			ArmR.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
+			ArmL.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
+		}
+		
     }
     void Attack()
     {
-        if (Input.GetButtonDown("Fire1") && !CloseFlag && !OpenFlag)
+        if (Input.GetButtonDown("Fire" + GamePadNum) && !CloseFlag && !OpenFlag)
         {
             CloseFlag = true;
         }

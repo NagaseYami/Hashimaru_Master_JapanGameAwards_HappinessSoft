@@ -4,55 +4,51 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour {
-
-    //public public
-    public GameObject ArmL, ArmR;
-
-    //Controller
-    public float RotateSpeed;
-    public float MoveSpeed;
+    //KM_Mathを導入
+    GameObject KM_Math;
+    //すべての子オブジェクトを参照
     public GameObject Body;
-    private Rigidbody rb;
-
-    //Attack    
-    public float CloseSpeed, OpenSpeed;
-    private bool CloseFlag, OpenFlag;
-    private float AlreadyRotation;
+    public GameObject ArmL;
+    public GameObject ArmR;
 
     //Battle
     public int RespawnTimeForL = 5, RespawnTimeForR = 5;
     Collision Lattach, Rattach;
-    Vector3 ArmLVec, ArmRVec;
     Vector3 ArmRtoL, ArmRtoOL, ArmRtoOR;
     static int TimerForL = 0, TimerForR = 0;
 
     //HP
     public GameObject HpBar;
-    public float Hp;    
-    Slider _slider;   
+    public float Hp;
+    public float Damage = 20;
+    Slider _slider;
+    public bool bDead;
+
+    public bool Invincible = false;
+    public int InvincibleTimerMax = 180;
+    public int InvincibleTimer = 0;
 
     // Use this for initialization
     void Start () {
 		Lattach = ArmL.GetComponent<Attach> ().attach;
 		Rattach = ArmR.GetComponent<Attach> ().attach;
-        rb = Body.GetComponent<Rigidbody>();
         _slider = HpBar.GetComponent<Slider>();
+        KM_Math = GameObject.Find("KM_Math");
 
-        CloseFlag = false;
-        OpenFlag = false;
-        AlreadyRotation = 0;
-    }
-
-    void FixedUpdate()
-    {
-        Controller();
-        Attack();
+        InvincibleTimer = InvincibleTimerMax;
     }
 
     // Update is called once per frame
-    void Update () {        
-        Battle();
-        HpUpdate();
+    void Update () {
+        if (!bDead)
+        {
+            Battle();
+            HpUpdate();
+        }
+        else
+        {
+            Dead();
+        }
     }
 
     void Battle()
@@ -63,15 +59,21 @@ public class PlayerManager : MonoBehaviour {
         if (ArmL.GetComponent<Renderer>().enabled != false && ArmR.GetComponent<Renderer>().enabled != false &&
             Lattach != null && Rattach != null &&
             ArmL.GetComponent<ArmHasamuFlag>().bHasamu && ArmR.GetComponent<ArmHasamuFlag>().bHasamu &&
-            (Lattach.gameObject.tag == "ArmR" || Lattach.gameObject.tag == "ArmL") &&
-            (Rattach.gameObject.tag == "ArmR" || Rattach.gameObject.tag == "ArmL")
+            (Lattach.gameObject.tag == "ArmR" || Lattach.gameObject.tag == "ArmL" || Lattach.gameObject.tag == "Body") &&
+            (Rattach.gameObject.tag == "ArmR" || Rattach.gameObject.tag == "ArmL" || Rattach.gameObject.tag == "Body") 
             )
         {
             if (Lattach.gameObject == Rattach.gameObject)
             {
-                Debug.Log("LeftArm and RightArm are attaching same obj!!");
-                Lattach.gameObject.GetComponent<Renderer>().enabled = false;
-                Lattach.gameObject.GetComponent<Collider>().enabled = false;
+                if (Lattach.gameObject.tag == "Body")
+                {
+                    Lattach.gameObject.GetComponent<BodyManager>().GetDamage = true;
+                }
+                else
+                {
+                    Lattach.gameObject.GetComponent<Renderer>().enabled = false;
+                    Lattach.gameObject.GetComponent<Collider>().enabled = false;
+                }
             }
 
             else if (Lattach.gameObject.tag == "ArmR" && Rattach.gameObject.tag == "ArmL")
@@ -119,98 +121,52 @@ public class PlayerManager : MonoBehaviour {
 
     void HpUpdate()
     {
+        if (Body.GetComponent<BodyManager>().GetDamage && !Invincible)
+        {
+            Hp -= Damage;
+            Invincible = true;
+        }
+
+        if (Invincible)
+        {
+
+           if (KM_Math.GetComponent<KM_Math>().KM_ChangeFlagTimer(6))
+           {
+               Body.GetComponent<Renderer>().enabled = false;
+           }
+           else
+           {
+               Body.GetComponent<Renderer>().enabled = true;
+           }
+           InvincibleTimer--;
+            if (InvincibleTimer<=0)
+            {
+                InvincibleTimer = 0;
+                Invincible = false;
+                Body.GetComponent<BodyManager>().GetDamage = false;
+                InvincibleTimer = InvincibleTimerMax;
+            }
+        }
+
         if (Hp > _slider.maxValue)
         {
             // 最大を超えたら0に戻す
             Hp = _slider.maxValue;
         }
 
-        if (Hp < _slider.minValue)
+        if (Hp <= _slider.minValue)
         {
             // 最大を超えたら0に戻す
             Hp = _slider.minValue;
+            bDead = true;
         }
 
         // HPゲージに値を設定
         _slider.value = Hp + 0.01f;
     }
 
-    void Controller()
+    void Dead()
     {
-        // 上方向
-        if (Input.GetAxisRaw("Vertical1") > 0)
-        {
-            rb.AddForce(Body.transform.forward * MoveSpeed);
-        }
-
-        // 下方向
-        if (Input.GetAxisRaw("Vertical1") < 0)
-        {
-            rb.AddForce(-Body.transform.forward * MoveSpeed);
-        }
-
-        Vector3 TurnLeft = new Vector3(0.0f, -RotateSpeed, 0.0f);
-        Vector3 TurnRight = new Vector3(0.0f, RotateSpeed, 0.0f);
-
-        Quaternion deltaRotation;
-
-        // 左方向
-        if (Input.GetAxisRaw("Horizontal1") > 0.01)
-        {
-            deltaRotation = Quaternion.Euler(TurnLeft * Time.deltaTime);
-            rb.MoveRotation(rb.rotation * deltaRotation);
-            ArmR.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
-            ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
-        }
-
-        // 右方向
-        if (Input.GetAxisRaw("Horizontal1") < -0.01)
-        {
-            deltaRotation = Quaternion.Euler(TurnRight * Time.deltaTime);
-            rb.MoveRotation(rb.rotation * deltaRotation);
-            ArmR.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
-            ArmL.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
-        }
-    }
-
-    void Attack()
-    {
-        if (Input.GetButtonDown("Fire1") && !CloseFlag && !OpenFlag)
-        {
-            CloseFlag = true;
-        }
-
-        if (CloseFlag)
-        {
-            ArmR.transform.RotateAround(Body.transform.position, Vector3.up, -CloseSpeed * Time.deltaTime);
-            ArmL.transform.RotateAround(Body.transform.position, Vector3.up, CloseSpeed * Time.deltaTime);
-            AlreadyRotation += CloseSpeed * Time.deltaTime;
-            ArmR.GetComponent<ArmHasamuFlag>().bHasamu = true;
-            ArmL.GetComponent<ArmHasamuFlag>().bHasamu = true;
-            if (AlreadyRotation >= 30)
-            {
-                ArmR.transform.eulerAngles = new Vector3(0, Body.transform.eulerAngles.y - 30, 0);
-                ArmL.transform.eulerAngles = new Vector3(0, Body.transform.eulerAngles.y + 30, 0);
-                CloseFlag = false;
-                OpenFlag = true;
-                AlreadyRotation = 0;
-                ArmR.GetComponent<ArmHasamuFlag>().bHasamu = false;
-                ArmL.GetComponent<ArmHasamuFlag>().bHasamu = false;
-            }
-        }
-
-        if (OpenFlag)
-        {
-            ArmR.transform.RotateAround(Body.transform.position, Vector3.up, OpenSpeed * Time.deltaTime);
-            ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -OpenSpeed * Time.deltaTime);
-            AlreadyRotation += OpenSpeed * Time.deltaTime;
-            if (AlreadyRotation >= 30)
-            {
-                ArmR.transform.eulerAngles = new Vector3(0, Body.transform.eulerAngles.y, 0);
-                ArmL.transform.eulerAngles = new Vector3(0, Body.transform.eulerAngles.y, 0);
-                OpenFlag = false;
-                AlreadyRotation = 0;
-            }
-        }
+        Body.SetActive(false);
     }
 }

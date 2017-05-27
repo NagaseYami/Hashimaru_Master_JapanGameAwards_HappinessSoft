@@ -25,6 +25,7 @@ namespace BBUnity.Actions
                 return;
             }
             BoxCollider boxCollider = area.GetComponent<BoxCollider>();
+			
             if (boxCollider != null)
             {
                 randomPosition = new Vector3(UnityEngine.Random.Range(area.transform.position.x - area.transform.localScale.x * boxCollider.size.x * 0.5f,

@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManeger : MonoBehaviour
 {
+    public GameObject Player1, Player2;
+    public GameObject Player1WinText, Player2WinText;
 
 	// Use this for initialization
 	void Start()
@@ -27,5 +29,20 @@ public class GameManeger : MonoBehaviour
 			// シーンを読み込む
 			SceneManager.LoadScene("GameScene");
 		}
+
+        if (Player1.GetComponent<PlayerManager>().bDead)
+        {
+            Player2WinText.SetActive(true);
+        }
+        if (Player2.GetComponent<PlayerManager>().bDead)
+        {
+            Player1WinText.SetActive(true);
+        }
+
 	}
+
+    void LateUpdate()
+    {
+        
+    }
 }

@@ -19,5 +19,11 @@ public class TitleManager : MonoBehaviour
 		{
 			SceneManager.LoadScene("SelectScene");
 		}
+
+		// エスケープキーが入力されたらアプリを終了する
+		if (Input.GetKey("escape"))
+		{
+			Application.Quit();
+		}
 	}
 }

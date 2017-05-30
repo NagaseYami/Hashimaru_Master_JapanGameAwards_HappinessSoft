@@ -21,8 +21,13 @@ public class CursorControl : MonoBehaviour
 	static public CHARATYPE CharaType1 = CHARATYPE.DOG;  // プレイヤーのタイプ1
 	static public CHARATYPE CharaType2 = CHARATYPE.GIRFFE;  // プレイヤーのタイプ2
 
-	private RectTransform CursorObj;	// カーソル情報
+	private RectTransform CursorObj;    // カーソル情報
+	private AudioSource sound01;        // 効果音 カーソル
+	private AudioSource sound02;        // 効果音 決定
+	private AudioSource sound03;        // 効果音 キャンセル
 
+	private bool CharSelectFlag;		// キャラクター選択フラグ
+	
 	// キャラクタータイプ
 	public enum CHARATYPE
 	{
@@ -49,6 +54,12 @@ public class CursorControl : MonoBehaviour
 	void Start()
 	{
 		CursorObj = GameObject.Find("Cursor" + GamePadNum).GetComponent<RectTransform>();
+
+		//AudioSourceコンポーネントを取得し、変数に格納
+		AudioSource[] audioSources = GetComponents<AudioSource>();
+		sound01 = audioSources[0];
+		sound02 = audioSources[1];
+		sound03 = audioSources[2];
 	}
 
 	// Update is called once per frame
@@ -64,74 +75,121 @@ public class CursorControl : MonoBehaviour
 	//=============================================================================
 	private void CharacterSelect()
 	{
-		// キャラセレクトカーソル移動処理
-		if (JoystickCnt >= JoyCntMax)
+		// 決定フラグがオフだったら更新
+		if (CharSelectFlag == false)
 		{
-			// 上方向
-			if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0.1f)
+			// キャラセレクトカーソル移動処理
+			if (JoystickCnt >= JoyCntMax)
 			{
-				if (CursorObj.localPosition.y >= UpMax)
+				// 上方向
+				if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0.1f)
 				{
-					CursorObj.localPosition = new Vector3(CursorObj.localPosition.x, CursorObj.localPosition.y - CursorMove, CursorObj.localPosition.z);
-				}
-				else
-				{
-					CursorObj.localPosition = new Vector3(CursorObj.localPosition.x, CursorObj.localPosition.y + CursorMove, CursorObj.localPosition.z);
+					if (CursorObj.localPosition.y >= UpMax)
+					{
+						CursorObj.localPosition = new Vector3(CursorObj.localPosition.x, CursorObj.localPosition.y - CursorMove, CursorObj.localPosition.z);
+					}
+					else
+					{
+						CursorObj.localPosition = new Vector3(CursorObj.localPosition.x, CursorObj.localPosition.y + CursorMove, CursorObj.localPosition.z);
+					}
+
+					JoystickCnt = 0;    // カウンタ初期化
+
+					// 効果音 カーソル音 再生
+					sound01.PlayOneShot(sound01.clip);
 				}
 
-				JoystickCnt = 0;    // カウンタ初期化
+				// 下方向
+				if (Input.GetAxisRaw("Vertical" + GamePadNum) < -0.1f)
+				{
+					if (CursorObj.localPosition.y <= DownMax)
+					{
+						CursorObj.localPosition = new Vector3(CursorObj.localPosition.x, CursorObj.localPosition.y + CursorMove, CursorObj.localPosition.z);
+					}
+					else
+					{
+						CursorObj.localPosition = new Vector3(CursorObj.localPosition.x, CursorObj.localPosition.y - CursorMove, CursorObj.localPosition.z);
+					}
+
+					JoystickCnt = 0;    // カウンタ初期化
+
+					// 効果音 カーソル音 再生
+					sound01.PlayOneShot(sound01.clip);
+				}
+
+				// 左方向
+				if (Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.1f)
+				{
+					if (CursorObj.localPosition.x <= -LeftAndRightMax)
+					{
+						CursorObj.localPosition = new Vector3(CursorObj.localPosition.x + CursorMove, CursorObj.localPosition.y, CursorObj.localPosition.z);
+					}
+					else
+					{
+						CursorObj.localPosition = new Vector3(CursorObj.localPosition.x - CursorMove, CursorObj.localPosition.y, CursorObj.localPosition.z);
+					}
+
+					JoystickCnt = 0;    // カウンタ初期化
+
+					// 効果音 カーソル音 再生
+					sound01.PlayOneShot(sound01.clip);
+				}
+
+				// 右方向
+				if (Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.1f)
+				{
+					if (CursorObj.localPosition.x >= LeftAndRightMax)
+					{
+						CursorObj.localPosition = new Vector3(CursorObj.localPosition.x - CursorMove, CursorObj.localPosition.y, CursorObj.localPosition.z);
+					}
+					else
+					{
+						CursorObj.localPosition = new Vector3(CursorObj.localPosition.x + CursorMove, CursorObj.localPosition.y, CursorObj.localPosition.z);
+					}
+
+					JoystickCnt = 0;    // カウンタ初期化
+
+					// 効果音 カーソル音 再生
+					sound01.PlayOneShot(sound01.clip);
+				}
 			}
 
-			// 下方向
-			if (Input.GetAxisRaw("Vertical" + GamePadNum) < -0.1f)
+			// カウンタ加算
+			if (JoystickCnt < JoyCntMax)
 			{
-				if (CursorObj.localPosition.y <= DownMax)
-				{
-					CursorObj.localPosition = new Vector3(CursorObj.localPosition.x, CursorObj.localPosition.y + CursorMove, CursorObj.localPosition.z);
-				}
-				else
-				{
-					CursorObj.localPosition = new Vector3(CursorObj.localPosition.x, CursorObj.localPosition.y - CursorMove, CursorObj.localPosition.z);
-				}
-
-				JoystickCnt = 0;    // カウンタ初期化
-			}
-
-			// 左方向
-			if (Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.1f)
-			{
-				if (CursorObj.localPosition.x <= -LeftAndRightMax)
-				{
-					CursorObj.localPosition = new Vector3(CursorObj.localPosition.x + CursorMove, CursorObj.localPosition.y, CursorObj.localPosition.z);
-				}
-				else
-				{
-					CursorObj.localPosition = new Vector3(CursorObj.localPosition.x - CursorMove, CursorObj.localPosition.y, CursorObj.localPosition.z);
-				}
-
-				JoystickCnt = 0;    // カウンタ初期化
-			}
-
-			// 右方向
-			if (Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.1f)
-			{
-				if (CursorObj.localPosition.x >= LeftAndRightMax)
-				{
-					CursorObj.localPosition = new Vector3(CursorObj.localPosition.x - CursorMove, CursorObj.localPosition.y, CursorObj.localPosition.z);
-				}
-				else
-				{
-					CursorObj.localPosition = new Vector3(CursorObj.localPosition.x + CursorMove, CursorObj.localPosition.y, CursorObj.localPosition.z);
-				}
-
-				JoystickCnt = 0;    // カウンタ初期化
+				JoystickCnt++;
 			}
 		}
 
-		// カウンタ加算
-		if (JoystickCnt < JoyCntMax)
+		// 決定フラグがオフだったら
+		if (CharSelectFlag == false)
 		{
-			JoystickCnt++;
+			// Aボタンが押されたら
+			if (Input.GetButtonDown("Fire" + GamePadNum))
+			{
+				// 効果音 決定 再生
+				sound02.PlayOneShot(sound02.clip);
+
+				// フラグオン
+				CharSelectFlag = true;
+
+				// カーソルのスケールを元のサイズに戻す
+				CursorObj.localScale = new Vector3(0.6f, 0.6f, CursorObj.localScale.z);
+			}
+		}
+
+		// 決定フラグがオンだったら
+		if (CharSelectFlag == true)
+		{
+			// Bボタンが押されたら
+			if (Input.GetButtonDown("Back" + GamePadNum))
+			{
+				// 効果音 決定 再生
+				sound03.PlayOneShot(sound03.clip);
+
+				// フラグオフ
+				CharSelectFlag = false;
+			}
 		}
 	}
 
@@ -191,7 +249,7 @@ public class CursorControl : MonoBehaviour
 		// キャラクタータイプ デバッグ用
 		if (Input.GetKeyDown(KeyCode.O))
 		{
-			Debug.Log("P1:" + CharaType1 + "P2:" + CharaType2);
+			Debug.Log("P1:" + CharaType1 + " P2:" + CharaType2);
 		}
 	}
 
@@ -217,27 +275,32 @@ public class CursorControl : MonoBehaviour
 	//=============================================================================
 	public void CursorScaling()
 	{
-		
-		if(CursorObj.localScale.x <= 0.6 & CursorObj.localScale.y <= 0.6)
+		// 決定フラグがオフだったら
+		if(CharSelectFlag == false)
 		{
-			ScalingFlag = false;
-		}
+			// フラグをオフに
+			if (CursorObj.localScale.x <= 0.6 & CursorObj.localScale.y <= 0.6)
+			{
+				ScalingFlag = false;
+			}
 
-		if (CursorObj.localScale.x >= 0.68 & CursorObj.localScale.y >= 0.68)
-		{
-			ScalingFlag = true;
-		}
+			// フラグをオンに
+			if (CursorObj.localScale.x >= 0.68 & CursorObj.localScale.y >= 0.68)
+			{
+				ScalingFlag = true;
+			}
 
-		// フラグがオフだったら
-		if (ScalingFlag == false)
-		{
-			CursorObj.localScale = new Vector3(CursorObj.localScale.x + Scaling, CursorObj.localScale.y + Scaling, CursorObj.localScale.z);
-		}
+			// フラグがオフだったら
+			if (ScalingFlag == false)
+			{
+				CursorObj.localScale = new Vector3(CursorObj.localScale.x + Scaling, CursorObj.localScale.y + Scaling, CursorObj.localScale.z);
+			}
 
-		// フラグがオンだったら
-		if (ScalingFlag == true)
-		{
-			CursorObj.localScale = new Vector3(CursorObj.localScale.x - Scaling, CursorObj.localScale.y - Scaling, CursorObj.localScale.z);
+			// フラグがオンだったら
+			if (ScalingFlag == true)
+			{
+				CursorObj.localScale = new Vector3(CursorObj.localScale.x - Scaling, CursorObj.localScale.y - Scaling, CursorObj.localScale.z);
+			}
 		}
 	}
 }

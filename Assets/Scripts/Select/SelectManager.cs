@@ -14,10 +14,10 @@ public class SelectManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetButtonDown("Fire1"))
-		{
-			SceneManager.LoadScene("GameScene");
-		}
+		//if (Input.GetButtonDown("Fire1"))
+		//{
+		//	SceneManager.LoadScene("GameScene");
+		//}
 
 		if (Input.GetKeyDown(KeyCode.P))
 		{

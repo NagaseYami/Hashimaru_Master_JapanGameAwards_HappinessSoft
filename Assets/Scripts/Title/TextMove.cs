@@ -9,7 +9,7 @@ public class TextMove : MonoBehaviour
 {
 	private const float a_move = 0.01f;
 
-	public Text text;
+	private Text text;
 	private float a_color;
 	private bool a_flag;
 

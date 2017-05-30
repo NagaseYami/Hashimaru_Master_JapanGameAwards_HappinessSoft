@@ -23,7 +23,7 @@ public class GameManeger : MonoBehaviour
 		// キャラクタータイプ デバッグ用
 		if (Input.GetKeyDown(KeyCode.O))
 		{
-			Debug.Log("P1:" + CharaType1 + "P2:" + CharaType2);
+			Debug.Log("P1:" + CharaType1 + " P2:" + CharaType2);
 		}
 
 		// エスケープキーが入力されたらアプリを終了する
@@ -43,10 +43,10 @@ public class GameManeger : MonoBehaviour
         {
             Player2WinText.SetActive(true);
         }
-        if (Player2.GetComponent<PlayerManager>().bDead)
-        {
-            Player1WinText.SetActive(true);
-        }
+		if (Player2.GetComponent<PlayerManager>().bDead)
+		{
+			Player1WinText.SetActive(true);
+		}
 
 	}
 

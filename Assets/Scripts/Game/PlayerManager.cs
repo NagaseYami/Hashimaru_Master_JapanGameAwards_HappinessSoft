@@ -4,18 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour {
-    //KM_Mathを導入
-    GameObject KM_Math;
     //すべての子オブジェクトを参照
     public GameObject Body;
     public GameObject ArmL;
     public GameObject ArmR;
 
     //Battle
-    public int RespawnTimeForL = 5, RespawnTimeForR = 5;
     Collision Lattach, Rattach;
     Vector3 ArmRtoL, ArmRtoOL, ArmRtoOR;
-    static int TimerForL = 0, TimerForR = 0;
 
     //HP
     public GameObject HpBar;
@@ -30,11 +26,9 @@ public class PlayerManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		Lattach = ArmL.GetComponent<Attach> ().attach;
-		Rattach = ArmR.GetComponent<Attach> ().attach;
+		Lattach = ArmL.GetComponent<ChopsticksManager> ().attach;
+		Rattach = ArmR.GetComponent<ChopsticksManager> ().attach;
         _slider = HpBar.GetComponent<Slider>();
-        KM_Math = GameObject.Find("KM_Math");
-
         InvincibleTimer = InvincibleTimerMax;
     }
 
@@ -53,12 +47,12 @@ public class PlayerManager : MonoBehaviour {
 
     void Battle()
     {
-        Lattach = ArmL.GetComponent<Attach>().attach;
-        Rattach = ArmR.GetComponent<Attach>().attach;
+        Lattach = ArmL.GetComponent<ChopsticksManager>().attach;
+        Rattach = ArmR.GetComponent<ChopsticksManager>().attach;
 
         if (ArmL.GetComponent<Renderer>().enabled != false && ArmR.GetComponent<Renderer>().enabled != false &&
             Lattach != null && Rattach != null &&
-            ArmL.GetComponent<ArmHasamuFlag>().bHasamu && ArmR.GetComponent<ArmHasamuFlag>().bHasamu &&
+            ArmL.GetComponent<ChopsticksManager>().bHasamu && ArmR.GetComponent<ChopsticksManager>().bHasamu &&
             (Lattach.gameObject.tag == "ArmR" || Lattach.gameObject.tag == "ArmL" || Lattach.gameObject.tag == "Body") &&
             (Rattach.gameObject.tag == "ArmR" || Rattach.gameObject.tag == "ArmL" || Rattach.gameObject.tag == "Body") 
             )
@@ -71,16 +65,18 @@ public class PlayerManager : MonoBehaviour {
                 }
                 else
                 {
-                    Lattach.gameObject.GetComponent<Renderer>().enabled = false;
-                    Lattach.gameObject.GetComponent<Collider>().enabled = false;
+                    if (Lattach.gameObject.GetComponent<ChopsticksManager>().m_bDead == false)
+                    {
+                        Lattach.gameObject.GetComponent<ChopsticksManager>().m_bDead = true;
+                    }
                 }
-            }
 
+            }
             else if (Lattach.gameObject.tag == "ArmR" && Rattach.gameObject.tag == "ArmL")
             {
-                ArmRtoL = ArmL.GetComponent<GetArmHead>().ArmHead - ArmR.GetComponent<GetArmHead>().ArmHead;
-                ArmRtoOL = Lattach.gameObject.GetComponent<GetArmHead>().ArmHead - ArmR.GetComponent<GetArmHead>().ArmHead;
-                ArmRtoOR = Rattach.gameObject.GetComponent<GetArmHead>().ArmHead - ArmR.GetComponent<GetArmHead>().ArmHead;
+                ArmRtoL = ArmL.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
+                ArmRtoOL = Lattach.gameObject.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
+                ArmRtoOR = Rattach.gameObject.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
 
                 if (Vector3.Cross(ArmRtoL, ArmRtoOL).y <= 0 &&
                     Vector3.Cross(ArmRtoL, ArmRtoOR).y <= 0 &&
@@ -88,36 +84,19 @@ public class PlayerManager : MonoBehaviour {
                     Vector3.Dot(ArmRtoL, ArmRtoOR) > 0
                 )
                 {
-                    Lattach.gameObject.GetComponent<Renderer>().enabled = false;
-                    Lattach.gameObject.GetComponent<Collider>().enabled = false;
-                    Rattach.gameObject.GetComponent<Renderer>().enabled = false;
-                    Rattach.gameObject.GetComponent<Collider>().enabled = false;
+                    if (Lattach.gameObject.GetComponent<ChopsticksManager>().m_bDead == false)
+                    {
+                        Lattach.gameObject.GetComponent<ChopsticksManager>().m_bDead = true;
+                    }
+                    if (Rattach.gameObject.GetComponent<ChopsticksManager>().m_bDead == false)
+                    {
+                        Rattach.gameObject.GetComponent<ChopsticksManager>().m_bDead = true;
+                    }                    
                 }
             }
         }
-
-        if (!ArmL.GetComponent<Renderer>().enabled)
-        {
-            TimerForL++;
-        }
-        if (TimerForL >= 60 * RespawnTimeForL)
-        {
-            TimerForL = 0;
-            ArmL.GetComponent<Renderer>().enabled = true;
-            ArmL.GetComponent<Collider>().enabled = true;
-        }
-
-        if (!ArmR.GetComponent<Renderer>().enabled)
-        {
-            TimerForR++;
-        }
-        if (TimerForR >= 60 * RespawnTimeForR)
-        {
-            TimerForR = 0;
-            ArmR.GetComponent<Renderer>().enabled = true;
-            ArmR.GetComponent<Collider>().enabled = true;
-        }
     }
+
 
     void HpUpdate()
     {
@@ -130,14 +109,18 @@ public class PlayerManager : MonoBehaviour {
         if (Invincible)
         {
 
-           if (KM_Math.GetComponent<KM_Math>().KM_ChangeFlagTimer(6))
+           if (KM_Math.KM_ChangeFlagTimer(6))
            {
-               Body.GetComponent<Renderer>().enabled = false;
+                Body.GetComponent<Renderer>().enabled = false;
+                ArmL.GetComponent<Renderer>().enabled = false;
+                ArmR.GetComponent<Renderer>().enabled = false;
            }
            else
            {
-               Body.GetComponent<Renderer>().enabled = true;
-           }
+                Body.GetComponent<Renderer>().enabled = true;
+                ArmL.GetComponent<Renderer>().enabled = true;
+                ArmR.GetComponent<Renderer>().enabled = true;
+            }
            InvincibleTimer--;
             if (InvincibleTimer<=0)
             {
@@ -146,6 +129,12 @@ public class PlayerManager : MonoBehaviour {
                 Body.GetComponent<BodyManager>().GetDamage = false;
                 InvincibleTimer = InvincibleTimerMax;
             }
+        }
+        else
+        {
+            Body.GetComponent<Renderer>().enabled = true;
+            ArmL.GetComponent<Renderer>().enabled = true;
+            ArmR.GetComponent<Renderer>().enabled = true;
         }
 
         if (Hp > _slider.maxValue)

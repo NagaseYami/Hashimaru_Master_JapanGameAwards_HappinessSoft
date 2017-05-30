@@ -6,7 +6,7 @@ public class KM_Math : MonoBehaviour {
 
     static int KM_ChangeFlagTimer_Timer = 3599;
 
-	public bool KM_ChangeFlagTimer(int l_Timer)
+	static public bool KM_ChangeFlagTimer(int l_Timer)
     {
         bool l_Flag = true;
         if (l_Flag)

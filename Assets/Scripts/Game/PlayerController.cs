@@ -74,7 +74,6 @@ public class PlayerController : MonoBehaviour
 			ArmR.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
 			ArmL.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
 		}
-		
     }
     void Attack()
     {

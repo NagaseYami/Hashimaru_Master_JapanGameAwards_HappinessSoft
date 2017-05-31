@@ -17,7 +17,7 @@ public class TitleManager : MonoBehaviour
 	{
 		if(Input.GetButtonDown("Fire1"))
 		{
-			SceneManager.LoadScene("SelectScene");
+			FadeManager.Instance.LoadScene("SelectScene", 1.0f);
 		}
 
 		// エスケープキーが入力されたらアプリを終了する

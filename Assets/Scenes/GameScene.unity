@@ -693,6 +693,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83afc5a7dc9263d46b7598a126afcbdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player1: {fileID: 0}
+  Player2: {fileID: 0}
+  Player1WinText: {fileID: 0}
+  Player2WinText: {fileID: 0}
+  CharaType1: 0
+  CharaType2: 0
 --- !u!4 &572317278
 Transform:
   m_ObjectHideFlags: 0
@@ -2756,17 +2762,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b060bcb70ab6446a9b82c7e54b0935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Body: {fileID: 197962596}
   ArmL: {fileID: 1614902597}
   ArmR: {fileID: 1367437067}
-  RotateSpeed: 100
-  MoveSpeed: 20
-  Body: {fileID: 197962596}
-  CloseSpeed: 100
-  OpenSpeed: 50
-  RespawnTimeForL: 5
-  RespawnTimeForR: 5
   HpBar: {fileID: 1099222843}
   Hp: 100
+  Damage: 20
+  bDead: 0
+  Invincible: 0
+  InvincibleTimerMax: 180
+  InvincibleTimer: 0
 --- !u!4 &2117050646
 Transform:
   m_ObjectHideFlags: 0

@@ -446,6 +446,68 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Scaling: 0.002
+--- !u!1001 &1141204101
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4027780093505670, guid: 027ab67ae2f6f304ba356aa85e06a9e2, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027780093505670, guid: 027ab67ae2f6f304ba356aa85e06a9e2, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027780093505670, guid: 027ab67ae2f6f304ba356aa85e06a9e2, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027780093505670, guid: 027ab67ae2f6f304ba356aa85e06a9e2, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027780093505670, guid: 027ab67ae2f6f304ba356aa85e06a9e2, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027780093505670, guid: 027ab67ae2f6f304ba356aa85e06a9e2, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027780093505670, guid: 027ab67ae2f6f304ba356aa85e06a9e2, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4027780093505670, guid: 027ab67ae2f6f304ba356aa85e06a9e2, type: 2}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114166954353955098, guid: 027ab67ae2f6f304ba356aa85e06a9e2,
+        type: 2}
+      propertyPath: DebugMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114166954353955098, guid: 027ab67ae2f6f304ba356aa85e06a9e2,
+        type: 2}
+      propertyPath: fadeColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114166954353955098, guid: 027ab67ae2f6f304ba356aa85e06a9e2,
+        type: 2}
+      propertyPath: fadeColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114166954353955098, guid: 027ab67ae2f6f304ba356aa85e06a9e2,
+        type: 2}
+      propertyPath: fadeColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 027ab67ae2f6f304ba356aa85e06a9e2, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1320642301
 GameObject:
   m_ObjectHideFlags: 0

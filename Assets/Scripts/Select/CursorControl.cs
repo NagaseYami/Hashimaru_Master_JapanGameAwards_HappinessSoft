@@ -26,7 +26,7 @@ public class CursorControl : MonoBehaviour
 	private AudioSource sound02;        // 効果音 決定
 	private AudioSource sound03;        // 効果音 キャンセル
 
-	private bool CharSelectFlag;		// キャラクター選択フラグ
+	public bool CharSelectFlag;		// キャラクター選択フラグ
 	
 	// キャラクタータイプ
 	public enum CHARATYPE

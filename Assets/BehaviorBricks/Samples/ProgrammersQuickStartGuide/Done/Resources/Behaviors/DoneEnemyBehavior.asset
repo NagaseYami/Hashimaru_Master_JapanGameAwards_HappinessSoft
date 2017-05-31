@@ -85,7 +85,7 @@ MonoBehaviour:
     />\r\n          <ActionNode id=\"7\" />\r\n          <ConditionEvalNode id=\"8\"
     />\r\n          <ActionNode id=\"9\" />\r\n          <ConditionEvalNode id=\"10\"
     />\r\n        </nodes>\r\n      </_nodes>\r\n      <_selectedNode>\r\n        <ConditionEvalNode
-    id=\"6\" />\r\n      </_selectedNode>\r\n    </BehaviorTree>\r\n    <RepeatDecorator
+    id=\"10\" />\r\n      </_selectedNode>\r\n    </BehaviorTree>\r\n    <RepeatDecorator
     id=\"1\">\r\n      <_data>\r\n        <data selected=\"False\" position=\"275
     5\" name=\"Repeat\" description=\"Repeats the execution of its child node\" cardinality=\"1\"
     hasParent=\"False\">\r\n          <BehaviorTree id=\"0\" />\r\n          <RepeatDecorator
@@ -96,7 +96,7 @@ MonoBehaviour:
     successful\" cardinality=\"-1\" hasParent=\"True\">\r\n          <BehaviorTree
     id=\"0\" />\r\n          <PrioritySelectorNode id=\"2\" />\r\n          <RepeatDecorator
     id=\"1\" />\r\n        </data>\r\n      </_data>\r\n    </PrioritySelectorNode>\r\n
-    \   <ConditionEvalNode id=\"10\">\r\n      <_data>\r\n        <data selected=\"False\"
+    \   <ConditionEvalNode id=\"10\">\r\n      <_data>\r\n        <data selected=\"True\"
     position=\"0 0\" name=\"Samples/ProgQuickStartGuide/IsNight\" description=\"Checks
     whether it is night. It searches for the first light labeld with the 'MainLight'
     tag, and looks for its DayNightCycle script, returning theinformed state. If no
@@ -120,7 +120,7 @@ MonoBehaviour:
     This action never ends.\" cardinality=\"0\" hasParent=\"True\">\r\n          <BehaviorTree
     id=\"0\" />\r\n          <ActionNode id=\"7\" />\r\n          <ConditionEvalNode
     id=\"8\" />\r\n        </data>\r\n      </_data>\r\n    </ActionNode>\r\n    <ConditionEvalNode
-    id=\"6\">\r\n      <_data>\r\n        <data selected=\"True\" position=\"0 0\"
+    id=\"6\">\r\n      <_data>\r\n        <data selected=\"False\" position=\"0 0\"
     name=\"Perception/IsTargetClose\" description=\"Checks whether a target is close
     depending on a given distance\" cardinality=\"0\" hasParent=\"True\">\r\n          <BehaviorTree
     id=\"0\" />\r\n          <ConditionEvalNode id=\"6\" />\r\n          <PrioritySelectorNode

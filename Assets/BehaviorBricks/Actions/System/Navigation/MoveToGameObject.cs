@@ -23,7 +23,7 @@ namespace BBUnity.Actions
             {
                 Debug.LogError("The movement target of this game object is null", gameObject);
                 return;
-            }
+            }	
             targetTransform = target.transform;
 
             navAgent = gameObject.GetComponent<UnityEngine.AI.NavMeshAgent>();

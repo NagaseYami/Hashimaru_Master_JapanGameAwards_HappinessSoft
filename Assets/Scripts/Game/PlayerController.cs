@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour
         {
             Controller();
             Attack();
-        }        
+        }
     }
 
     void Controller()

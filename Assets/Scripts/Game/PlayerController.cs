@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject PlayerManager;
-    public GameObject Body;
-    public GameObject ArmL;
-    public GameObject ArmR;
-
+    private GameObject Character, Body, ArmL, ArmR;
+    
 	public int GamePadNum;
 
     //Controller
-    public float RotateSpeed;
-    public float MoveSpeed;
+    float MoveSpeed,RotateSpeed;
     private Rigidbody rb;
 
     //Attack    
-    public float CloseSpeed = 100;
-    public float OpenSpeed = 50;
+    float CloseSpeed, OpenSpeed;
+
     private bool CloseFlag = false;
     private bool OpenFlag = false;
     private float AlreadyRotation;
@@ -26,12 +22,54 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
 	{
-		rb = Body.GetComponent<Rigidbody>();
+        if (transform.Find("Dog").gameObject.activeSelf != false)
+        {
+            Character = transform.Find("Dog").gameObject;
+        }
+        else if (transform.Find("Elephants").gameObject.activeSelf != false)
+        {
+            Character = transform.Find("Elephants").gameObject;
+        }
+        else if (transform.Find("Giraffe").gameObject.activeSelf != false)
+        {
+            Character = transform.Find("Giraffe").gameObject;
+        }
+        else if (transform.Find("Mouse").gameObject.activeSelf != false)
+        {
+            Character = transform.Find("Mouse").gameObject;
+        }
+        else
+        {
+            Debug.Log("Cant find Character!");
+        }
+
+        Body = Character.transform.Find("Body").gameObject;
+        if (Body == null)
+        {
+            Debug.Log("Cant find Body!");
+        }
+        ArmL = Character.transform.Find("ArmL").gameObject;
+        if (ArmL == null)
+        {
+            Debug.Log("Cant find ArmL!");
+        }
+        ArmR = Character.transform.Find("ArmR").gameObject;
+        if (ArmR == null)
+        {
+            Debug.Log("Cant find ArmR!");
+        }
+
+        MoveSpeed = Character.GetComponent<CharacterManager>().MoveSpeed;
+        RotateSpeed = Character.GetComponent<CharacterManager>().RotateSpeed;
+        CloseSpeed = Character.GetComponent<CharacterManager>().CloseSpeed;
+        OpenSpeed = Character.GetComponent<CharacterManager>().OpenSpeed;
+
+        rb = Body.GetComponent<Rigidbody>();
 	}
 
 	void FixedUpdate()
 	{
-        if (!PlayerManager.GetComponent<PlayerManager>().bDead)
+        if (!gameObject.GetComponent<PlayerManager>().bDead)
         {
             Controller();
             Attack();

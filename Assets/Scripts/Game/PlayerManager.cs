@@ -70,7 +70,7 @@ public class PlayerManager : MonoBehaviour {
 
         Lattach = ArmL.GetComponent<ChopsticksManager> ().attach;
 		Rattach = ArmR.GetComponent<ChopsticksManager> ().attach;
-        HealthBarSlider = transform.Find("Canvas").gameObject.transform.Find("Slider").GetComponent<Slider>();
+        HealthBarSlider = GameObject.Find("Canvas").gameObject.transform.Find("Slider").GetComponent<Slider>();
         InvincibleTimer = InvincibleTimerMax;
     }
 

@@ -9,9 +9,10 @@ public class EnemyController : MonoBehaviour
 	public GameObject Body;
 	public GameObject ArmL;
 	public GameObject ArmR;
+	private GameObject Character;
 
-	public Transform target; //プレイヤーの位置
-	
+	private Rigidbody EnemyRB;
+
 	//Attack
 	public float CloseSpeed = 100;
 	public float OpenSpeed = 50;
@@ -20,13 +21,13 @@ public class EnemyController : MonoBehaviour
 	private float AlreadyRotation;
 
 	// 徘徊行動
-	private float speed = 5.0f;
+	private float speed = 4.0f;
 	private float rotationSmooth = 1.0f;
 	private Vector3 targetPosition;
-	
+
 	// 追跡行動
 	private float changeTargetSqrDistance = 3.0f;
-	private Transform player;
+	public GameObject player;
 	private float ChaseDistance;
 
 
@@ -35,8 +36,45 @@ public class EnemyController : MonoBehaviour
 	//=============================================================================
 	void Start()
 	{
-		// 始めにプレイヤーの位置を取得できるようにする
-		player = GameObject.FindWithTag("Player").transform;
+		if (player.transform.Find("Dog").gameObject.activeSelf != false)
+		{
+			Character = player.transform.Find("Dog").gameObject;
+		}
+		else if (player.transform.Find("Elephants").gameObject.activeSelf != false)
+		{
+			Character = player.transform.Find("Elephants").gameObject;
+		}
+		else if (player.transform.Find("Giraffe").gameObject.activeSelf != false)
+		{
+			Character = player.transform.Find("Giraffe").gameObject;
+		}
+		else if (player.transform.Find("Mouse").gameObject.activeSelf != false)
+		{
+			Character = player.transform.Find("Mouse").gameObject;
+		}
+		else
+		{
+			Debug.Log("Cant find Character!");
+		}
+
+		Body = Character.transform.Find("Body").gameObject;
+		if (Body == null)
+		{
+			Debug.Log("Cant find Body!");
+		}
+		ArmL = Character.transform.Find("ArmL").gameObject;
+		if (ArmL == null)
+		{
+			Debug.Log("Cant find ArmL!");
+		}
+		ArmR = Character.transform.Find("ArmR").gameObject;
+		if (ArmR == null)
+		{
+			Debug.Log("Cant find ArmR!");
+		}
+
+		// ボディのRigidbody情報を取得
+		EnemyRB = transform.Find("Body").GetComponent<Rigidbody>();
 
 		// 目的地を設定
 		targetPosition = GetRandomPositionOnLevel();
@@ -45,26 +83,28 @@ public class EnemyController : MonoBehaviour
 	//=============================================================================
 	// 更新
 	//=============================================================================
-	void Update()
+	void FixedUpdate()
 	{
 		// 追跡距離を測る
-		ChaseDistance = Vector3.Distance(player.transform.position, transform.position);
+		ChaseDistance = Vector3.Distance(EnemyRB.transform.position, transform.position);
 
 
 		//=============================================================================
 		// エネミーの行動選択
 		//=============================================================================
-		
+
+		Debug.Log(ChaseDistance);
+
 		// 追跡行動
-		if (ChaseDistance <= 25.0f)
+		if (ChaseDistance <= 15.0f)
 		{
 			Chase();
 		}
-		//// 徘徊行動
-		//else
-		//{
-		//	Loitering();
-		//}
+		// 徘徊行動
+		else
+		{
+			Loitering();
+		}
 	}
 
 	//=============================================================================
@@ -73,11 +113,14 @@ public class EnemyController : MonoBehaviour
 	void Chase()
 	{
 		// プレイヤーの方向を向く
-		Quaternion targetRotation = Quaternion.LookRotation(player.position - transform.position);
-		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSmooth);
+		Vector3 relativePos = EnemyRB.transform.position - transform.position;
+		
+		Quaternion targetRotation = Quaternion.LookRotation(relativePos - EnemyRB.transform.position);
+		targetRotation = Quaternion.Slerp(EnemyRB.transform.rotation, targetRotation, Time.deltaTime * rotationSmooth);
+		EnemyRB.MoveRotation(targetRotation);
 
 		// 前方に進む
-		transform.Translate(Vector3.forward * speed * Time.deltaTime);
+		EnemyRB.MovePosition(EnemyRB.transform.position + EnemyRB.transform.forward * speed * Time.deltaTime);
 	}
 
 	//=============================================================================
@@ -85,8 +128,8 @@ public class EnemyController : MonoBehaviour
 	//=============================================================================
 	Vector3 GetRandomPositionOnLevel()
 	{
-		float levelSize = 13.0f;
-		return new Vector3(Random.Range(-levelSize, levelSize), 0, Random.Range(-levelSize, levelSize));
+		float levelSize = 12.0f;
+		return new Vector3(Random.Range(-levelSize, levelSize), transform.localPosition.y, Random.Range(-levelSize, levelSize));
 	}
 
 
@@ -96,20 +139,22 @@ public class EnemyController : MonoBehaviour
 	void Loitering()
 	{
 		// 目標地点との距離が小さければ、次のランダムな目標地点を設定する
-		float sqrDistanceToTarget = Vector3.SqrMagnitude(transform.position - targetPosition);
+		float sqrDistanceToTarget = Vector3.SqrMagnitude(EnemyRB.transform.position - targetPosition);
 
 		if (sqrDistanceToTarget < changeTargetSqrDistance)
 		{
 			targetPosition = GetRandomPositionOnLevel();
 		}
 
+		Debug.Log(targetPosition);
+
 		// 目標地点の方向を向く
-		Quaternion targetRotation = Quaternion.LookRotation(targetPosition - transform.position);
-		transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSmooth);
+		Quaternion targetRotation = Quaternion.LookRotation(targetPosition - EnemyRB.transform.position);
+		targetRotation = Quaternion.Slerp(EnemyRB.transform.rotation, targetRotation, Time.deltaTime * rotationSmooth);
+		EnemyRB.MoveRotation(targetRotation);
 
 		// 前方に進む
-		transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
+		EnemyRB.MovePosition(EnemyRB.transform.position + EnemyRB.transform.forward * speed * Time.deltaTime);
 	}
 
 

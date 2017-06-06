@@ -8,9 +8,8 @@ public class SinglePlayManager : MonoBehaviour
 	public GameObject Player1;  //プレイヤー
 	public CursorControl.CHARATYPE CharaType1;      // プレイヤーのタイプ
 
-	public GameObject Enemy1, Enemy2, Enemy3 , Enemy4;
-
-	private EnemyController EnemyCon;
+	public GameObject Enemy1, Enemy2, Enemy3, Enemy4;
+	public GameObject CloneEnemy1, CloneEnemy2, CloneEnemy3, CloneEnemy4;
 
 	private int i;
 	private int Cnt = 1;
@@ -18,6 +17,11 @@ public class SinglePlayManager : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		CloneEnemy1 = Enemy1;
+		CloneEnemy2 = Enemy2;
+		CloneEnemy3 = Enemy3;
+		CloneEnemy4 = Enemy4;
+
 		// キャラクターのタイプを取得
 		CharaType1 = CursorControl.GetCharaType1();
 
@@ -36,7 +40,7 @@ public class SinglePlayManager : MonoBehaviour
 			switch (Cnt)
 			{
 				case 1:
-					Enemy1 = Instantiate(Enemy1, new Vector3(Random.Range(-20.0f, 20.0f), 20.0f, Random.Range(-20.0f, 20.0f)), transform.rotation);
+					CloneEnemy1 = Instantiate(Enemy1, new Vector3(Random.Range(-20.0f, 20.0f), -1.15f, Random.Range(-20.0f, 20.0f)), transform.rotation);
 
 					Cnt++;
 
@@ -45,7 +49,7 @@ public class SinglePlayManager : MonoBehaviour
 					break;
 
 				case 2:
-					Enemy2 = Instantiate(Enemy2, new Vector3(Random.Range(-20.0f, 20.0f), 20.0f, Random.Range(-20.0f, 20.0f)), transform.rotation);
+					CloneEnemy2 = Instantiate(Enemy2, new Vector3(Random.Range(-20.0f, 20.0f), -1.15f, Random.Range(-20.0f, 20.0f)), transform.rotation);
 
 					Cnt++;
 
@@ -54,7 +58,7 @@ public class SinglePlayManager : MonoBehaviour
 					break;
 
 				case 3:
-					Enemy2 = Instantiate(Enemy2, new Vector3(Random.Range(-20.0f, 20.0f), 20.0f, Random.Range(-20.0f, 20.0f)), transform.rotation);
+					CloneEnemy4 = Instantiate(Enemy3, new Vector3(Random.Range(-20.0f, 20.0f), -1.15f, Random.Range(-20.0f, 20.0f)), transform.rotation);
 
 					Cnt++;
 
@@ -62,30 +66,9 @@ public class SinglePlayManager : MonoBehaviour
 
 					break;
 			}
-
-			if (Enemy1 != null)
-			{
-				EnemyCon = Enemy1.GetComponentInChildren<EnemyController>();
-
-				EnemyCon.target = Player1.transform;
-			}
-
-			if (Enemy2 != null)
-			{
-				EnemyCon = Enemy2.GetComponentInChildren<EnemyController>();
-
-				EnemyCon.target = Player1.transform;
-			}
-
-			if (Enemy3 != null)
-			{
-				EnemyCon = Enemy2.GetComponentInChildren<EnemyController>();
-
-				EnemyCon.target = Player1.transform;
-			}
 		}
-		
-		if(Cnt <= 3)
+
+		if (Cnt <= 3)
 		{
 			i++;
 		}

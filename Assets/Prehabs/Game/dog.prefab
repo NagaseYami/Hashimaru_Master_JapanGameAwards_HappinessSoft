@@ -268,9 +268,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1034507783257416}
   serializedVersion: 2
-  m_Mass: 0.01
+  m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -298,9 +298,9 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1460054430162772}
   serializedVersion: 2
-  m_Mass: 0.01
+  m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -382,7 +382,7 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_InflateMesh: 1
-  m_SkinWidth: 1.00000005e-20
+  m_SkinWidth: 0.1
   m_Mesh: {fileID: 4300004, guid: 404733768ef793140b53b72562fd5af0, type: 3}
 --- !u!64 &64273574812095096
 MeshCollider:
@@ -396,7 +396,7 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_InflateMesh: 1
-  m_SkinWidth: 1.00000005e-20
+  m_SkinWidth: 0.1
   m_Mesh: {fileID: 4300002, guid: 404733768ef793140b53b72562fd5af0, type: 3}
 --- !u!114 &114222068871336734
 MonoBehaviour:
@@ -439,7 +439,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   Damage: 20
-  MoveSpeed: 20
+  MoveSpeed: 80
   RotateSpeed: 100
   CloseSpeed: 100
   OpenSpeed: 50

@@ -9,6 +9,8 @@ TagManager:
   - ArmL
   - Field
   - Ball
+  - SpeedItem
+  - PowerItem
   layers:
   - Default
   - TransparentFX

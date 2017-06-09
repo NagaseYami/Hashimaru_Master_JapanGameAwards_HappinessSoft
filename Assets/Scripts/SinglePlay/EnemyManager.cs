@@ -11,7 +11,7 @@ public class EnemyManager : MonoBehaviour
 	public GameObject ArmR;
 
 	//Battle
-	Collision Lattach, Rattach;
+	GameObject Lattach, Rattach;
 	Vector3 ArmRtoL, ArmRtoOL, ArmRtoOR;
 
 	//HP
@@ -54,30 +54,30 @@ public class EnemyManager : MonoBehaviour
 		if (ArmL.GetComponent<Renderer>().enabled != false && ArmR.GetComponent<Renderer>().enabled != false &&
 			Lattach != null && Rattach != null &&
 			ArmL.GetComponent<ChopsticksManager>().bHasamu && ArmR.GetComponent<ChopsticksManager>().bHasamu &&
-			(Lattach.gameObject.tag == "ArmR" || Lattach.gameObject.tag == "ArmL" || Lattach.gameObject.tag == "Body") &&
-			(Rattach.gameObject.tag == "ArmR" || Rattach.gameObject.tag == "ArmL" || Rattach.gameObject.tag == "Body")
+			(Lattach.tag == "ArmR" || Lattach.tag == "ArmL" || Lattach.tag == "Body") &&
+			(Rattach.tag == "ArmR" || Rattach.tag == "ArmL" || Rattach.tag == "Body")
 			)
 		{
-			if (Lattach.gameObject == Rattach.gameObject)
+			if (Lattach == Rattach)
 			{
-				if (Lattach.gameObject.tag == "Body")
+				if (Lattach.tag == "Body")
 				{
-					Lattach.gameObject.GetComponent<BodyManager>().GetDamage = true;
+					Lattach.GetComponent<BodyManager>().GetDamage = true;
 				}
 				else
 				{
-					if (Lattach.gameObject.GetComponent<ChopsticksManager>().m_bDead == false)
+					if (Lattach.GetComponent<ChopsticksManager>().m_bDead == false)
 					{
-						Lattach.gameObject.GetComponent<ChopsticksManager>().m_bDead = true;
+						Lattach.GetComponent<ChopsticksManager>().m_bDead = true;
 					}
 				}
 
 			}
-			else if (Lattach.gameObject.tag == "ArmR" && Rattach.gameObject.tag == "ArmL")
+			else if (Lattach.tag == "ArmR" && Rattach.tag == "ArmL")
 			{
 				ArmRtoL = ArmL.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
-				ArmRtoOL = Lattach.gameObject.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
-				ArmRtoOR = Rattach.gameObject.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
+				ArmRtoOL = Lattach.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
+				ArmRtoOR = Rattach.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
 
 				if (Vector3.Cross(ArmRtoL, ArmRtoOL).y <= 0 &&
 					Vector3.Cross(ArmRtoL, ArmRtoOR).y <= 0 &&
@@ -85,13 +85,13 @@ public class EnemyManager : MonoBehaviour
 					Vector3.Dot(ArmRtoL, ArmRtoOR) > 0
 				)
 				{
-					if (Lattach.gameObject.GetComponent<ChopsticksManager>().m_bDead == false)
+					if (Lattach.GetComponent<ChopsticksManager>().m_bDead == false)
 					{
-						Lattach.gameObject.GetComponent<ChopsticksManager>().m_bDead = true;
+						Lattach.GetComponent<ChopsticksManager>().m_bDead = true;
 					}
-					if (Rattach.gameObject.GetComponent<ChopsticksManager>().m_bDead == false)
+					if (Rattach.GetComponent<ChopsticksManager>().m_bDead == false)
 					{
-						Rattach.gameObject.GetComponent<ChopsticksManager>().m_bDead = true;
+						Rattach.GetComponent<ChopsticksManager>().m_bDead = true;
 					}
 				}
 			}

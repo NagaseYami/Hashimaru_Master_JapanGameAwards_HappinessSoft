@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     //Controller
     float MoveSpeed,RotateSpeed;
+   public float MoveSpeedUp;
     private Rigidbody rb;
 
     //Attack    
@@ -71,26 +72,37 @@ public class PlayerController : MonoBehaviour
 	{
         if (!gameObject.GetComponent<PlayerManager>().bDead)
         {
+            BuffChecker();
             Controller();
             Attack();
         }
     }
 
-	void Controller()
-	{
-		if (GameObject.Find("GameManager").GetComponent<GameManeger>().GameStopFlag == false)
+    void BuffChecker()
+    {
+        if (gameObject.GetComponent<PlayerManager>().bSpeedUp)
+        {
+            MoveSpeedUp = GameObject.Find("SpeedItemManager").gameObject.GetComponent<SpeedItemManager>().SpeedUpValue;
+        }
+        else
+        {
+            MoveSpeedUp = 1.0f;
+        }
+    }
+        
+    void Controller()
+    {
+		// 上方向
+		if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0)
 		{
-			// 上方向
-			if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0)
-			{
-				rb.AddForce(Body.transform.forward * MoveSpeed);
-			}
+			rb.AddForce(Body.transform.forward * MoveSpeed * MoveSpeedUp);
+		}
 
-			// 下方向
-			if (Input.GetAxisRaw("Vertical" + GamePadNum) < 0)
-			{
-				rb.AddForce(-Body.transform.forward * MoveSpeed);
-			}
+		// 下方向
+		if (Input.GetAxisRaw("Vertical" + GamePadNum) < 0)
+		{
+			rb.AddForce(-Body.transform.forward * MoveSpeed * MoveSpeedUp);
+		}
 
 			Vector3 TurnLeft = new Vector3(0.0f, -RotateSpeed, 0.0f);
 			Vector3 TurnRight = new Vector3(0.0f, RotateSpeed, 0.0f);

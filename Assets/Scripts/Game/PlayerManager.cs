@@ -13,11 +13,6 @@ public class PlayerManager : MonoBehaviour {
 
     //状態
     public bool bDead;
-<<<<<<< HEAD
-
-    //無敵
-=======
->>>>>>> 41b42989693b70a085d3755601732a60643dcf5f
     public bool Invincible = false;
 
     //ステータス
@@ -25,10 +20,6 @@ public class PlayerManager : MonoBehaviour {
     public int InvincibleTimerMax = 180;
     int InvincibleTimer = 0;
     Slider HealthBarSlider;
-
-    //Ball
-    public int BallCount = 0;
-
 
     //Ball
     public int BallCount = 0;
@@ -120,11 +111,6 @@ public class PlayerManager : MonoBehaviour {
                     BallCount++;
                     Lattach.gameObject.SetActive(false);
                 }
-                else if (Lattach.gameObject.tag == "Ball")
-                {
-                    BallCount++;
-                    Lattach.gameObject.SetActive(false);
-                }
                 else
                 {
                     if (Lattach.gameObject.GetComponent<ChopsticksManager>().m_bDead == false)
@@ -163,18 +149,6 @@ public class PlayerManager : MonoBehaviour {
 
     void HpUpdate()
     {
-<<<<<<< HEAD
-        if (Hp > _slider.maxValue)
-        {
-            // 最大を超えたら0に戻す
-            Hp = _slider.maxValue;
-        }
-
-        if (Hp <= _slider.minValue)
-        {
-            // 最大を超えたら0に戻す
-            Hp = _slider.minValue;
-=======
         if (Health > HealthBarSlider.maxValue)
         {
             // 最大を超えたら0に戻す
@@ -185,7 +159,6 @@ public class PlayerManager : MonoBehaviour {
         {
             // 最大を超えたら0に戻す
             Health = HealthBarSlider.minValue;
->>>>>>> 41b42989693b70a085d3755601732a60643dcf5f
             bDead = true;
         }
 

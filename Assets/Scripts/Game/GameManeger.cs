@@ -5,15 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManeger : MonoBehaviour
 {
-<<<<<<< HEAD
-    public GameObject Player1, Player2;
-    public GameObject Player1WinText, Player2WinText;
-    public GameObject Ball;
-    public int WinBallNum = 2;
-    public int BallRespawnTime = 10;
-    int BallRespawnTimer = 0;
-	public CursorControl.CHARATYPE CharaType1, CharaType2;	// キャラクタータイプ
-=======
 	GameObject Player1, Player2;
 	GameObject Player1WinText, Player2WinText;
 	GameObject Ball;
@@ -21,7 +12,6 @@ public class GameManeger : MonoBehaviour
 	public int BallRespawnTime = 10;
 	int BallRespawnTimer = 0;
 	public CursorControl.CHARATYPE CharaType1, CharaType2;  // キャラクタータイプ
->>>>>>> 41b42989693b70a085d3755601732a60643dcf5f
 
 	// Use this for initialization
 	void Start()

@@ -27,12 +27,12 @@ public class GameManeger : MonoBehaviour
 		if (Player1WinText == null) { Debug.Log("Cant find Player1WinText!"); }
 		Player2WinText = Player2.transform.Find("Canvas").gameObject.transform.Find("WinText").gameObject;
 		if (Player2WinText == null) { Debug.Log("Cant find Player2WinText!"); }
-
-		// キャラクターのタイプを取得
-		CharaType1 = CursorControl.GetCharaType1();
+        
+        // キャラクターのタイプを取得
+        CharaType1 = CursorControl.GetCharaType1();
 		CharaType2 = CursorControl.GetCharaType2();
 
-		switch (CharaType1)
+        switch (CharaType1)
 		{
 			case CursorControl.CHARATYPE.DOG:
 				Player1.transform.Find("Dog").gameObject.SetActive(true);

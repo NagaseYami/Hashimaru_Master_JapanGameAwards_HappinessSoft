@@ -7,6 +7,8 @@ TagManager:
   - Body
   - ArmR
   - ArmL
+  - Field
+  - Ball
   layers:
   - Default
   - TransparentFX

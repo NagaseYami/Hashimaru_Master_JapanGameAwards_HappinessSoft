@@ -39,6 +39,7 @@ public class ChopsticksManager : MonoBehaviour {
         else
         {            
             m_collider.enabled = true;
+            m_renderer.enabled = true;
         }
 
         if (m_respawntimer >= 60 * RespawnTime)

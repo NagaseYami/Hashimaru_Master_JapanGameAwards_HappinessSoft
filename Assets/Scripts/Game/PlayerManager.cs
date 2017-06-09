@@ -218,14 +218,26 @@ public class PlayerManager : MonoBehaviour {
             if (KM_Math.KM_ChangeFlagTimer(6))
             {
                 Body.GetComponent<Renderer>().enabled = false;
-                ArmL.GetComponent<Renderer>().enabled = false;
-                ArmR.GetComponent<Renderer>().enabled = false;
+                if (ArmL.GetComponent<ChopsticksManager>().m_bDead == false)
+                {
+                    ArmL.GetComponent<Renderer>().enabled = false;
+                }
+                if (ArmR.GetComponent<ChopsticksManager>().m_bDead == false)
+                {
+                    ArmR.GetComponent<Renderer>().enabled = false;
+                }
             }
             else
             {
                 Body.GetComponent<Renderer>().enabled = true;
-                ArmL.GetComponent<Renderer>().enabled = true;
-                ArmR.GetComponent<Renderer>().enabled = true;
+                if (ArmL.GetComponent<ChopsticksManager>().m_bDead == false)
+                {
+                    ArmL.GetComponent<Renderer>().enabled = true;
+                }
+                if (ArmR.GetComponent<ChopsticksManager>().m_bDead == false)
+                {
+                    ArmR.GetComponent<Renderer>().enabled = true;
+                }
             }
             InvincibleTimer--;
             if (InvincibleTimer <= 0)
@@ -235,8 +247,14 @@ public class PlayerManager : MonoBehaviour {
                 Body.GetComponent<BodyManager>().GetDamage = false;
                 InvincibleTimer = InvincibleTimerMax;
                 Body.GetComponent<Renderer>().enabled = true;
-                ArmL.GetComponent<Renderer>().enabled = true;
-                ArmR.GetComponent<Renderer>().enabled = true;
+                if (ArmL.GetComponent<ChopsticksManager>().m_bDead == false)
+                {
+                    ArmL.GetComponent<Renderer>().enabled = true;
+                }
+                if (ArmR.GetComponent<ChopsticksManager>().m_bDead == false)
+                {
+                    ArmR.GetComponent<Renderer>().enabled = true;
+                }
             }
         }
     }

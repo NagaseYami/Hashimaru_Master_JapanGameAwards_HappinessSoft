@@ -55,7 +55,6 @@ public class FadeManager : MonoBehaviour
 
 	public void OnGUI ()
 	{
-	
 		// Fade .
 		if (this.isFading) {
 			//色と透明度を更新して白テクスチャを描画 .

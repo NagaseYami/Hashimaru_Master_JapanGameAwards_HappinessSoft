@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1522309323810038
 GameObject:
   m_ObjectHideFlags: 0
@@ -97,7 +97,7 @@ Transform:
   m_GameObject: {fileID: 1942450005388800}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.04, z: 0}
-  m_LocalScale: {x: 1.3, y: 1, z: 1.3}
+  m_LocalScale: {x: 1.2, y: 1, z: 1.2}
   m_Children: []
   m_Father: {fileID: 4288708233150810}
   m_RootOrder: 2
@@ -126,7 +126,7 @@ Transform:
   m_GameObject: {fileID: 1522309323810038}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.04, z: 0}
-  m_LocalScale: {x: 1.3, y: 1, z: 1.3}
+  m_LocalScale: {x: 1.2, y: 1, z: 1.2}
   m_Children: []
   m_Father: {fileID: 4288708233150810}
   m_RootOrder: 1
@@ -425,12 +425,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 796ebac7c177505459248edc367dc7e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 150
-  Damage: 30
-  MoveSpeed: 80
-  RotateSpeed: 100
-  CloseSpeed: 100
-  OpenSpeed: 50
+  Health: 100
+  Damage: 50
+  MoveSpeed: 25
+  RotateSpeed: 40
+  CloseSpeed: 170
+  OpenSpeed: 30
 --- !u!114 &114637670059660592
 MonoBehaviour:
   m_ObjectHideFlags: 1

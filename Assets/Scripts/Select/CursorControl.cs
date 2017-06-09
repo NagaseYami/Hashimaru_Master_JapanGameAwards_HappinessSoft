@@ -26,7 +26,7 @@ public class CursorControl : MonoBehaviour
 	private AudioSource sound02;        // 効果音 決定
 	private AudioSource sound03;        // 効果音 キャンセル
 
-	public bool CharSelectFlag;		// キャラクター選択フラグ
+	public bool CharSelectFlag;     // キャラクター選択フラグ
 	
 	// キャラクタータイプ
 	public enum CHARATYPE
@@ -153,7 +153,7 @@ public class CursorControl : MonoBehaviour
 					sound01.PlayOneShot(sound01.clip);
 				}
 			}
-
+			
 			// カウンタ加算
 			if (JoystickCnt < JoyCntMax)
 			{

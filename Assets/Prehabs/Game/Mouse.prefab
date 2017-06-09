@@ -46,7 +46,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1762869361087148
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +139,7 @@ Transform:
   m_GameObject: {fileID: 1762869361087148}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.02, z: 0}
-  m_LocalScale: {x: 0.8, y: 1, z: 0.8}
+  m_LocalScale: {x: 0.9, y: 1, z: 0.9}
   m_Children: []
   m_Father: {fileID: 4277157794992790}
   m_RootOrder: 2
@@ -455,10 +455,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   Damage: 20
-  MoveSpeed: 80
-  RotateSpeed: 100
-  CloseSpeed: 100
-  OpenSpeed: 50
+  MoveSpeed: 40
+  RotateSpeed: 175
+  CloseSpeed: 170
+  OpenSpeed: 75
 --- !u!135 &135271190305891706
 SphereCollider:
   m_ObjectHideFlags: 1

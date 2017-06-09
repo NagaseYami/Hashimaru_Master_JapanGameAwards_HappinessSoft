@@ -13,6 +13,21 @@ public class GameManeger : MonoBehaviour
 	int BallRespawnTimer = 0;
 	public CursorControl.CHARATYPE CharaType1, CharaType2;  // キャラクタータイプ
 
+	// ポーズ画面用
+	private bool stopTime = false;
+	public GameObject ui;
+	private GameObject obj;
+	private int GamePadNum = 0;
+	private RectTransform arrow;
+	private int nCnt = 18;
+	public bool GameStopFlag = false;
+
+	// サウンド
+	private AudioSource sound01;        // 効果音 stage1_BGM
+	private AudioSource sound02;        // 効果音 stage2_BGM
+	private AudioSource sound03;        // 効果音 ポーズオン
+	private AudioSource sound04;        // 効果音 ポーズ解除オン
+
 	// Use this for initialization
 	void Start()
 	{
@@ -101,24 +116,19 @@ public class GameManeger : MonoBehaviour
 
 				break;
 		}
+
+		//AudioSourceコンポーネントを取得し、変数に格納
+		AudioSource[] audioSources = GetComponents<AudioSource>();
+		sound01 = audioSources[0];
+		sound02 = audioSources[1];
+		sound03 = audioSources[2];
+		sound04 = audioSources[3];
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-        if (!Ball.activeSelf)
-        {
-            BallRespawnTimer++;
-        }
-        else
-        {
-            BallRespawnTimer = 0;
-        }
-
-        if (BallRespawnTimer >= BallRespawnTime*60)
-        {
-            Ball.SetActive(true);
-        }
+		Pause();
 
 		// キャラクタータイプ デバッグ用
 		if (Input.GetKeyDown(KeyCode.O))
@@ -153,8 +163,117 @@ public class GameManeger : MonoBehaviour
 
 	}
 
-    void LateUpdate()
-    {
-        
-    }
+	void Pause()
+	{
+
+		if (Input.GetButtonDown("Start1") & GameStopFlag == false & GamePadNum != 2)
+		{
+			GamePadNum = 1;
+			GameStop();
+		}
+		else if (Input.GetButtonDown("Start2") & GameStopFlag == false & GamePadNum != 1)
+		{
+			GamePadNum = 2;
+			GameStop();
+		}
+
+		if (stopTime)
+		{// stopTimeフラグがtrueだったら
+			if (nCnt >= 18)
+			{
+				// 上方向
+				if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0.1f)
+				{
+					nCnt = 0;
+					if (arrow.localPosition.y >= 195.0f)
+					{
+						arrow.localPosition = new Vector3(arrow.localPosition.x, -205.0f, arrow.localPosition.z);
+					}
+
+					else
+					{
+						arrow.localPosition = new Vector3(arrow.localPosition.x, arrow.localPosition.y + 200.0f, arrow.localPosition.z);
+					}
+				}
+
+				// 下方向
+				if (Input.GetAxisRaw("Vertical" + GamePadNum) < -0.1f)
+				{
+					nCnt = 0;
+					if (arrow.localPosition.y <= -205.0f)
+					{
+						arrow.localPosition = new Vector3(arrow.localPosition.x, 195.0f, arrow.localPosition.z);
+					}
+
+					else
+					{
+						arrow.localPosition = new Vector3(arrow.localPosition.x, arrow.localPosition.y - 200.0f, arrow.localPosition.z);
+					}
+				}
+			}
+
+			// Aボタンが押されたら
+			if (Input.GetButtonDown("Fire" + GamePadNum))
+			{
+				if (arrow.localPosition.y >= 195.0f)
+				{
+					GameStop();
+				}
+				else if (arrow.localPosition.y <= -205.0f)
+				{
+					GameStop();
+					FadeManager.Instance.LoadScene("TitleScene", 1.0f);
+					GameStopFlag = true;
+				}
+				else
+				{
+					GameStop();
+					FadeManager.Instance.LoadScene("SelectScene", 1.0f);
+					GameStopFlag = true;
+				}
+			}
+			if (nCnt <= 18)
+			{
+				nCnt++;
+			}
+		}
+
+		if (!Ball.activeSelf)
+		{
+			BallRespawnTimer++;
+		}
+		else
+		{
+			BallRespawnTimer = 0;
+		}
+
+		if (BallRespawnTimer >= BallRespawnTime * 60)
+		{
+			Ball.SetActive(true);
+		}
+	}
+
+	void GameStop()
+	{
+		if (!stopTime)
+		{
+			obj = Instantiate(ui);
+			arrow = GameObject.Find("Arrow").GetComponent<RectTransform>();
+
+			Time.timeScale = 0;
+
+			// 効果音 再生
+			sound03.PlayOneShot(sound03.clip);
+		}
+		else
+		{
+			GamePadNum = 0;
+			Time.timeScale = 1;
+			Destroy(obj);
+
+			// 効果音 再生
+			sound04.PlayOneShot(sound04.clip);
+		}
+		stopTime = !stopTime;
+	}
 }

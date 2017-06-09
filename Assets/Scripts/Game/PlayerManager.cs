@@ -8,17 +8,22 @@ public class PlayerManager : MonoBehaviour {
     GameObject Character, Body, ArmL, ArmR;
 
     //Battle
-    Collision Lattach, Rattach;
+    GameObject Lattach, Rattach;
     Vector3 ArmRtoL, ArmRtoOL, ArmRtoOR;
 
     //状態
-    public bool bDead;
+    public bool bDead = false;
+    public bool bSpeedUp = false;
+    public bool bPowerUp = false;
     public bool Invincible = false;
 
     //ステータス
     float Health, Damage,BeDamage=0.0f;
+    float DamageUp = 1.0f;
     public int InvincibleTimerMax = 180;
     int InvincibleTimer = 0;
+    int SpeedUpTimer = 0;
+    int PowerUpTimer = 0;
     Slider HealthBarSlider;
 
     //Ball
@@ -70,7 +75,7 @@ public class PlayerManager : MonoBehaviour {
 
         Lattach = ArmL.GetComponent<ChopsticksManager> ().attach;
 		Rattach = ArmR.GetComponent<ChopsticksManager> ().attach;
-        HealthBarSlider = GameObject.Find("Canvas").gameObject.transform.Find("Slider").GetComponent<Slider>();
+        HealthBarSlider = gameObject.transform.Find("Canvas").gameObject.transform.Find("Slider").GetComponent<Slider>();
         InvincibleTimer = InvincibleTimerMax;
     }
 
@@ -80,6 +85,7 @@ public class PlayerManager : MonoBehaviour {
         {
             Battle();
             HpUpdate();
+            BuffChecker();
         }
         else
         {
@@ -95,37 +101,48 @@ public class PlayerManager : MonoBehaviour {
         if (ArmL.GetComponent<Renderer>().enabled != false && ArmR.GetComponent<Renderer>().enabled != false &&
             Lattach != null && Rattach != null &&
             ArmL.GetComponent<ChopsticksManager>().bHasamu && ArmR.GetComponent<ChopsticksManager>().bHasamu &&
-            (Lattach.gameObject.tag == "ArmR" || Lattach.gameObject.tag == "ArmL" || Lattach.gameObject.tag == "Body" || Lattach.gameObject.tag == "Ball") &&
-            (Rattach.gameObject.tag == "ArmR" || Rattach.gameObject.tag == "ArmL" || Rattach.gameObject.tag == "Body" || Rattach.gameObject.tag == "Ball") 
+            (Lattach.tag == "ArmR" || Lattach.tag == "ArmL" || Lattach.tag == "Body" || Lattach.tag == "Ball" || Lattach.tag == "SpeedItem" || Lattach.tag == "PowerItem") &&
+            (Rattach.tag == "ArmR" || Rattach.tag == "ArmL" || Rattach.tag == "Body" || Rattach.tag == "Ball" || Rattach.tag == "SpeedItem" || Rattach.tag == "PowerItem") 
             )
         {
-            if (Lattach.gameObject == Rattach.gameObject)
+            if (Lattach == Rattach)
             {
-                if (Lattach.gameObject.tag == "Body")
+                if (Lattach.tag == "Body")
                 {
-                    Lattach.gameObject.GetComponent<BodyManager>().GetDamage = true;
-                    Lattach.gameObject.transform.root.gameObject.transform.root.gameObject.GetComponent<PlayerManager>().TakeDamage(Damage);
+                    Lattach.GetComponent<BodyManager>().GetDamage = true;
+                    Debug.Log(Lattach.transform.root.gameObject.name);
+                    Lattach.transform.root.gameObject.GetComponent<PlayerManager>().TakeDamage(Damage*DamageUp);
                 }
-                else if (Lattach.gameObject.tag == "Ball")
+                else if (Lattach.tag == "Ball")
                 {
                     BallCount++;
-                    Lattach.gameObject.SetActive(false);
+                    Lattach.SetActive(false);
+                }
+                else if (Lattach.tag == "SpeedItem")
+                {
+                    Lattach.SetActive(false);
+                    bSpeedUp = true;
+                }
+                else if (Lattach.tag == "PowerItem")
+                {
+                    Lattach.SetActive(false);
+                    bPowerUp = true;
                 }
                 else
                 {
-                    if (Lattach.gameObject.GetComponent<ChopsticksManager>().m_bDead == false)
+                    if (Lattach.GetComponent<ChopsticksManager>().m_bDead == false)
                     {
-                        Lattach.gameObject.GetComponent<ChopsticksManager>().m_bDead = true;
+                        Lattach.GetComponent<ChopsticksManager>().m_bDead = true;
                     }
                 }
 
             }
             
-            else if (Lattach.gameObject.tag == "ArmR" && Rattach.gameObject.tag == "ArmL")
+            else if (Lattach.tag == "ArmR" && Rattach.tag == "ArmL")
             {
                 ArmRtoL = ArmL.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
-                ArmRtoOL = Lattach.gameObject.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
-                ArmRtoOR = Rattach.gameObject.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
+                ArmRtoOL = Lattach.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
+                ArmRtoOR = Rattach.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
 
                 if (Vector3.Cross(ArmRtoL, ArmRtoOL).y <= 0 &&
                     Vector3.Cross(ArmRtoL, ArmRtoOR).y <= 0 &&
@@ -133,19 +150,18 @@ public class PlayerManager : MonoBehaviour {
                     Vector3.Dot(ArmRtoL, ArmRtoOR) > 0
                 )
                 {
-                    if (Lattach.gameObject.GetComponent<ChopsticksManager>().m_bDead == false)
+                    if (Lattach.GetComponent<ChopsticksManager>().m_bDead == false)
                     {
-                        Lattach.gameObject.GetComponent<ChopsticksManager>().m_bDead = true;
+                        Lattach.GetComponent<ChopsticksManager>().m_bDead = true;
                     }
-                    if (Rattach.gameObject.GetComponent<ChopsticksManager>().m_bDead == false)
+                    if (Rattach.GetComponent<ChopsticksManager>().m_bDead == false)
                     {
-                        Rattach.gameObject.GetComponent<ChopsticksManager>().m_bDead = true;
+                        Rattach.GetComponent<ChopsticksManager>().m_bDead = true;
                     }                    
                 }
             }
         }
     }
-
 
     void HpUpdate()
     {
@@ -167,24 +183,52 @@ public class PlayerManager : MonoBehaviour {
             Health -= BeDamage;
             Invincible = true;
         }
+        // HPゲージに値を設定
+        HealthBarSlider.value = Health + 0.01f;
+    }
 
+    void BuffChecker()
+    {
+        if (bSpeedUp)
+        {
+            SpeedUpTimer++;
+            if (SpeedUpTimer > GameObject.Find("SpeedItemManager").gameObject.GetComponent<SpeedItemManager>().SpeedUpTime*60)
+            {
+                bSpeedUp = false;
+                SpeedUpTimer = 0;
+            }
+        }
+        if (bPowerUp)
+        {
+            DamageUp = GameObject.Find("PowerItemManager").gameObject.GetComponent<PowerItemManager>().PowerUpValue;
+            PowerUpTimer++;
+            if (PowerUpTimer > GameObject.Find("PowerItemManager").gameObject.GetComponent<PowerItemManager>().PowerUpTime*60)
+            {
+                bPowerUp = false;
+                PowerUpTimer = 0;
+            }
+        }
+        else
+        {
+            DamageUp = 1.0f;
+        }
         if (Invincible && !bDead)
         {
 
-           if (KM_Math.KM_ChangeFlagTimer(6))
-           {
+            if (KM_Math.KM_ChangeFlagTimer(6))
+            {
                 Body.GetComponent<Renderer>().enabled = false;
                 ArmL.GetComponent<Renderer>().enabled = false;
                 ArmR.GetComponent<Renderer>().enabled = false;
-           }
-           else
-           {
+            }
+            else
+            {
                 Body.GetComponent<Renderer>().enabled = true;
                 ArmL.GetComponent<Renderer>().enabled = true;
                 ArmR.GetComponent<Renderer>().enabled = true;
             }
-           InvincibleTimer--;
-            if (InvincibleTimer<=0)
+            InvincibleTimer--;
+            if (InvincibleTimer <= 0)
             {
                 InvincibleTimer = 0;
                 Invincible = false;
@@ -194,13 +238,10 @@ public class PlayerManager : MonoBehaviour {
                 ArmL.GetComponent<Renderer>().enabled = true;
                 ArmR.GetComponent<Renderer>().enabled = true;
             }
-        }     
-
-        // HPゲージに値を設定
-        HealthBarSlider.value = Health + 0.01f;
+        }
     }
 
-    public void TakeDamage(float l_Damage)
+    void TakeDamage(float l_Damage)
     {
         BeDamage = l_Damage;
     }

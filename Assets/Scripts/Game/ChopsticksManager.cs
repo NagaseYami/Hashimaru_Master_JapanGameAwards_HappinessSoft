@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChopsticksManager : MonoBehaviour {
 
-    public Collision attach;
+    public GameObject attach;
     public bool m_bDead = false;
     public int RespawnTime = 5;
     int m_respawntimer = 0;
@@ -51,6 +51,11 @@ public class ChopsticksManager : MonoBehaviour {
 
     void OnCollisionStay(Collision collision)
     {
-        attach = collision;
+        attach = collision.gameObject;
+    }
+
+    void OnTriggerStay(Collider collider)
+    {
+        attach = collider.gameObject;
     }
 }

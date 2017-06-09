@@ -17,6 +17,7 @@ public class GameManeger : MonoBehaviour
 	void Start()
 	{
 		Ball = GameObject.Find("Ball").gameObject;
+        Ball.SetActive(false);
 		if (Ball == null) { Debug.Log("Cant find Ball!"); }
 		Player1 = GameObject.Find("Player1").gameObject;
 		if (Player1 == null) { Debug.Log("Cant find Palyer1!"); }

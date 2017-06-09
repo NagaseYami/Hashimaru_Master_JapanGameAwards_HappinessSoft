@@ -33,6 +33,8 @@ public class GameManeger : MonoBehaviour
         CharaType1 = CursorControl.GetCharaType1();
 		CharaType2 = CursorControl.GetCharaType2();
 
+        CharaType1 = CursorControl.CHARATYPE.GIRFFE;
+
         switch (CharaType1)
 		{
 			case CursorControl.CHARATYPE.DOG:

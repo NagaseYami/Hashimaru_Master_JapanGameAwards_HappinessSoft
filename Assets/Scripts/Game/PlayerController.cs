@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
 
     //Controller
     float MoveSpeed,RotateSpeed;
-   public float MoveSpeedUp;
+    float MoveSpeedUp;
     private Rigidbody rb;
 
     //Attack    

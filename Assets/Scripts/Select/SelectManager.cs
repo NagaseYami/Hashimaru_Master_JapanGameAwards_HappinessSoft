@@ -9,6 +9,15 @@ public class SelectManager : MonoBehaviour
 	private bool LoadFlag;
 	private bool ReleaseFlag;        // ボタンを押していないフラグ
 
+	// ポーズ画面用
+	private bool stopTime = false;
+	public GameObject ui;
+	private GameObject obj;
+	private int GamePadNum = 0;
+	private RectTransform arrow;
+	private int nCnt = 18;
+	public bool GameStopFlag = false;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -52,5 +61,40 @@ public class SelectManager : MonoBehaviour
 		{
 			Application.Quit();
 		}
+	}
+
+	void Pause()
+	{
+		GamePadNum = 1;
+		GameStop();
+
+		if (stopTime)
+		{// stopTimeフラグがtrueだったら
+
+			// Aボタンが押されたら
+			if (Input.GetButtonDown("Fire" + GamePadNum))
+			{
+
+			}
+		}
+	}
+
+	void GameStop()
+	{
+		if (!stopTime)
+		{
+			obj = Instantiate(ui);
+			arrow = GameObject.Find("Arrow").GetComponent<RectTransform>();
+
+			Time.timeScale = 0;
+
+		}
+		else
+		{
+			GamePadNum = 0;
+			Time.timeScale = 1;
+			Destroy(obj);
+		}
+		stopTime = !stopTime;
 	}
 }

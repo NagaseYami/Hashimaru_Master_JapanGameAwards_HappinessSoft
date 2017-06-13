@@ -23,7 +23,7 @@ public class PowerItemManager : MonoBehaviour {
 				transform.Find("PowerItem").gameObject.GetComponent<ItemManager>().bStartSuicide = false;
 				transform.Find("PowerItem").gameObject.GetComponent<ItemManager>().bStartRespawn = true;
 				transform.Find("PowerItem").gameObject.GetComponent<ItemManager>().SuicideTimer = 0;
-				transform.Find("PowerItem").gameObject.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+				//transform.Find("PowerItem").gameObject.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
 				RespawnTimer++;
 			}
 			if (RespawnTimer >= RespawnTime * 60)

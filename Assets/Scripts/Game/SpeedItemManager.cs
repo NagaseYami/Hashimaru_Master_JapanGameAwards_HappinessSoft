@@ -25,7 +25,7 @@ public class SpeedItemManager : MonoBehaviour {
 				transform.Find("SpeedItem").gameObject.GetComponent<ItemManager>().bStartSuicide = false;
 				transform.Find("SpeedItem").gameObject.GetComponent<ItemManager>().bStartRespawn = true;
 				transform.Find("SpeedItem").gameObject.GetComponent<ItemManager>().SuicideTimer = 0;
-				transform.Find("SpeedItem").gameObject.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+				//transform.Find("SpeedItem").gameObject.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
 				RespawnTimer++;
 			}
 			if (RespawnTimer >= RespawnTime * 60)

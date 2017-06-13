@@ -11,7 +11,7 @@ public class ItemManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         ScaleCache = transform.localScale;
-        transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+        transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
         gameObject.SetActive(false);
 	}
 
@@ -48,7 +48,7 @@ public class ItemManager : MonoBehaviour {
 			{
 				bStartSuicide = false;
 				bStartRespawn = true;
-				transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+				transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
 				gameObject.SetActive(false);
 			}
 		}

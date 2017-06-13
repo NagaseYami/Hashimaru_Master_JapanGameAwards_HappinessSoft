@@ -83,9 +83,12 @@ public class PlayerManager : MonoBehaviour {
     void Update () {
         if (!bDead)
         {
-            Battle();
-            HpUpdate();
-            BuffChecker();
+			if (Time.timeScale == 1)
+			{
+				Battle();
+				HpUpdate();
+				BuffChecker();
+			}
         }
         else
         {

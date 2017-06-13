@@ -18,19 +18,22 @@ public class SpeedItemManager : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if (!transform.Find("SpeedItem").gameObject.activeSelf)
-        {
-            transform.Find("SpeedItem").gameObject.GetComponent<ItemManager>().bStartSuicide = false;
-            transform.Find("SpeedItem").gameObject.GetComponent<ItemManager>().bStartRespawn = true;
-            transform.Find("SpeedItem").gameObject.GetComponent<ItemManager>().SuicideTimer = 0;
-            transform.Find("SpeedItem").gameObject.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
-            RespawnTimer++;
-        }
-        if (RespawnTimer >= RespawnTime * 60)
-        {
-            transform.Find("SpeedItem").gameObject.SetActive(true);
-            transform.Find("SpeedItem").gameObject.transform.position = new Vector3(Random.Range(-15.0f, 15.0f), -0.201f, Random.Range(-15.0f, 15.0f));
-            RespawnTimer = 0;
-        }
+		if (Time.timeScale == 1)
+		{
+			if (!transform.Find("SpeedItem").gameObject.activeSelf)
+			{
+				transform.Find("SpeedItem").gameObject.GetComponent<ItemManager>().bStartSuicide = false;
+				transform.Find("SpeedItem").gameObject.GetComponent<ItemManager>().bStartRespawn = true;
+				transform.Find("SpeedItem").gameObject.GetComponent<ItemManager>().SuicideTimer = 0;
+				transform.Find("SpeedItem").gameObject.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+				RespawnTimer++;
+			}
+			if (RespawnTimer >= RespawnTime * 60)
+			{
+				transform.Find("SpeedItem").gameObject.SetActive(true);
+				transform.Find("SpeedItem").gameObject.transform.position = new Vector3(Random.Range(-15.0f, 15.0f), -0.201f, Random.Range(-15.0f, 15.0f));
+				RespawnTimer = 0;
+			}
+		}
     }
 }

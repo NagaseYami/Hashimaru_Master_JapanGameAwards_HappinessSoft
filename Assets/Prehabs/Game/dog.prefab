@@ -284,7 +284,7 @@ Rigidbody:
   m_GameObject: {fileID: 1927859942352904}
   serializedVersion: 2
   m_Mass: 1.1
-  m_Drag: 0
+  m_Drag: 8
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -409,6 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c948cd802fb7e4eba6139061ba1f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attach: {fileID: 0}
   m_bDead: 0
   RespawnTime: 5
   bHasamu: 0
@@ -439,9 +440,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   Damage: 35
-  MoveSpeed: 35
+  MoveSpeed: 200
   RotateSpeed: 150
-  CloseSpeed: 170
+  CloseSpeed: 250
   OpenSpeed: 70
 --- !u!114 &114720917685930890
 MonoBehaviour:
@@ -454,6 +455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c948cd802fb7e4eba6139061ba1f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attach: {fileID: 0}
   m_bDead: 0
   RespawnTime: 5
   bHasamu: 0

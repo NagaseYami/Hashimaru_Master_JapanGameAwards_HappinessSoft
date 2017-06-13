@@ -12,6 +12,7 @@ public class GameManeger : MonoBehaviour
 	public int BallRespawnTime = 10;
 	int BallRespawnTimer = 0;
 	public CursorControl.CHARATYPE CharaType1, CharaType2;  // キャラクタータイプ
+	private SelectManager.STAGETYPE StageType;		// ステージタイプ
 
 	// ポーズ画面用
 	private bool stopTime = false;
@@ -47,10 +48,8 @@ public class GameManeger : MonoBehaviour
         // キャラクターのタイプを取得
         CharaType1 = CursorControl.GetCharaType1();
 		CharaType2 = CursorControl.GetCharaType2();
-
-        CharaType1 = CursorControl.CHARATYPE.GIRFFE;
-
-        switch (CharaType1)
+	
+		switch (CharaType1)
 		{
 			case CursorControl.CHARATYPE.DOG:
 				Player1.transform.Find("Dog").gameObject.SetActive(true);
@@ -119,13 +118,34 @@ public class GameManeger : MonoBehaviour
 
 				break;
 		}
-
 		//AudioSourceコンポーネントを取得し、変数に格納
 		AudioSource[] audioSources = GetComponents<AudioSource>();
 		sound01 = audioSources[0];
 		sound02 = audioSources[1];
 		sound03 = audioSources[2];
 		sound04 = audioSources[3];
+
+		// ステージタイプを取得
+		StageType = SelectManager.GetStageType();
+
+		switch (StageType)
+		{
+			case SelectManager.STAGETYPE.STAGE01:
+				GameObject.Find("stage01").gameObject.SetActive(true);
+				GameObject.Find("stage02").gameObject.SetActive(false);
+				sound01.Play();
+				sound01.loop = true;
+
+				break;
+
+			case SelectManager.STAGETYPE.STAGE02:
+				GameObject.Find("stage01").gameObject.SetActive(false);
+				GameObject.Find("stage02").gameObject.SetActive(true);
+				sound02.Play();
+				sound02.loop = true;
+
+				break;
+		}
 	}
 
 	// Update is called once per frame
@@ -133,42 +153,59 @@ public class GameManeger : MonoBehaviour
 	{
 		Pause();
 
-		// キャラクタータイプ デバッグ用
-		if (Input.GetKeyDown(KeyCode.O))
+		if (Time.timeScale == 1)
 		{
-			Debug.Log("P1:" + CharaType1 + " P2:" + CharaType2);
-		}
+			// キャラクタータイプ デバッグ用
+			if (Input.GetKeyDown(KeyCode.O))
+			{
+				Debug.Log("P1:" + CharaType1 + " P2:" + CharaType2);
+			}
 
-		// エスケープキーが入力されたらアプリを終了する
-		if (Input.GetKey("escape"))
-		{
-			Application.Quit();
-		}
+			// エスケープキーが入力されたらアプリを終了する
+			if (Input.GetKey("escape"))
+			{
+				Application.Quit();
+			}
 
-		// シーンのリセット
-		if (Input.GetKeyDown(KeyCode.P))
-		{
-			// シーンを読み込む
-			SceneManager.LoadScene("GameScene");
-		}
+			// シーンのリセット
+			if (Input.GetKeyDown(KeyCode.P))
+			{
+				// シーンを読み込む
+				SceneManager.LoadScene("GameScene");
+			}
 
-        if (Player1.GetComponent<PlayerManager>().bDead ||
-            Player2.GetComponent<PlayerManager>().BallCount >= WinBallNum
-            )
-        {
-            Player2WinText.SetActive(true);
-        }
-		if (Player2.GetComponent<PlayerManager>().bDead ||
-            Player1.GetComponent<PlayerManager>().BallCount >= WinBallNum)
-		{
-			Player1WinText.SetActive(true);
-		}
 
+
+			if (Player1.GetComponent<PlayerManager>().bDead ||
+				Player2.GetComponent<PlayerManager>().BallCount >= WinBallNum
+				)
+			{
+				Player2WinText.SetActive(true);
+			}
+			if (Player2.GetComponent<PlayerManager>().bDead ||
+				Player1.GetComponent<PlayerManager>().BallCount >= WinBallNum)
+			{
+				Player1WinText.SetActive(true);
+			}
+
+			if (!Ball.activeSelf)
+			{
+				BallRespawnTimer++;
+			}
+			else
+			{
+				BallRespawnTimer = 0;
+			}
+
+			if (BallRespawnTimer >= BallRespawnTime * 60)
+			{
+				Ball.SetActive(true);
+			}
+		}
 	}
 
 	void Pause()
 	{
-
 		if (Input.GetButtonDown("Start1") & GameStopFlag == false & GamePadNum != 2)
 		{
 			GamePadNum = 1;
@@ -239,20 +276,6 @@ public class GameManeger : MonoBehaviour
 			{
 				nCnt++;
 			}
-		}
-
-		if (!Ball.activeSelf)
-		{
-			BallRespawnTimer++;
-		}
-		else
-		{
-			BallRespawnTimer = 0;
-		}
-
-		if (BallRespawnTimer >= BallRespawnTime * 60)
-		{
-			Ball.SetActive(true);
 		}
 	}
 

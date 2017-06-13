@@ -14,38 +14,43 @@ public class ItemManager : MonoBehaviour {
         transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
         gameObject.SetActive(false);
 	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (bStartRespawn)
-        {
-            transform.localScale += new Vector3(3.0f,3.0f,3.0f);
-            if (transform.localScale.x > ScaleCache.x)
-            {
-                transform.localScale = ScaleCache;
-                bStartRespawn = false;
-            }
-        }
-        if (SuicideTimer >= LiveTime * 60) 
-        {
-            SuicideTimer = 0;
-            bStartSuicide = true;
-        }
-        else
-        {
-            SuicideTimer++;
-        }
 
-        if (bStartSuicide)
-        {
-            transform.localScale *= 0.9f;
-        }
-        if (transform.localScale.x < 0.1)
-        {
-            bStartSuicide = false;
-            bStartRespawn = true;
-            transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
-            gameObject.SetActive(false);
-        }
+	// Update is called once per frame
+	void Update()
+	{
+		if (Time.timeScale == 1)
+		{
+
+			if (bStartRespawn)
+			{
+				transform.localScale += new Vector3(3.0f, 3.0f, 3.0f);
+				if (transform.localScale.x > ScaleCache.x)
+				{
+					transform.localScale = ScaleCache;
+					bStartRespawn = false;
+				}
+			}
+			if (SuicideTimer >= LiveTime * 60)
+			{
+				SuicideTimer = 0;
+				bStartSuicide = true;
+			}
+			else
+			{
+				SuicideTimer++;
+			}
+
+			if (bStartSuicide)
+			{
+				transform.localScale *= 0.9f;
+			}
+			if (transform.localScale.x < 0.1)
+			{
+				bStartSuicide = false;
+				bStartRespawn = true;
+				transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
+				gameObject.SetActive(false);
+			}
+		}
 	}
 }

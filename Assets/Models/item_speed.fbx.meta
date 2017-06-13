@@ -1,18 +1,14 @@
 fileFormatVersion: 2
-guid: dac3c1f04bdeaa94f9ced221e8a7c591
-timeCreated: 1496592359
+guid: 8fdd7792878f98642821b5ec7257cb8f
+timeCreated: 1497336924
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: chopsticks
-    100002: //RootNode
-    100004: pCube2
-    400000: chopsticks
-    400002: //RootNode
-    400004: pCube2
-    2300000: pCube2
-    3300000: pCube2
+    100000: //RootNode
+    400000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
     4300000: pCube2
     9500000: //RootNode
   materials:

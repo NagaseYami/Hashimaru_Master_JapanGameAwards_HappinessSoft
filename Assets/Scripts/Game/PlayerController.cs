@@ -168,53 +168,56 @@ public class PlayerController : MonoBehaviour
 	{
 		if (Input.GetButtonDown("Fire" + GamePadNum) && !CloseFlag && !OpenFlag)
 		{
-			CloseFlag = true;
-
-			switch (GamePadNum)
+			if (!GameObject.Find("GameManager").gameObject.GetComponent<GameManeger>().ButtonRelease)
 			{
-				case 1:
-					switch (CharaType1)
-					{
-						case CursorControl.CHARATYPE.DOG:
-							SE_dog.PlayOneShot(SE_dog.clip);
-							break;
+				CloseFlag = true;
 
-						case CursorControl.CHARATYPE.GIRFFE:
-							SE_giraffe.PlayOneShot(SE_giraffe.clip);
-							break;
+				switch (GamePadNum)
+				{
+					case 1:
+						switch (CharaType1)
+						{
+							case CursorControl.CHARATYPE.DOG:
+								SE_dog.PlayOneShot(SE_dog.clip);
+								break;
 
-						case CursorControl.CHARATYPE.MOUSE:
-							SE_mouse.PlayOneShot(SE_mouse.clip);
-							break;
+							case CursorControl.CHARATYPE.GIRFFE:
+								SE_giraffe.PlayOneShot(SE_giraffe.clip);
+								break;
 
-						case CursorControl.CHARATYPE.ELEPHANTS:
-							SE_elephants.PlayOneShot(SE_elephants.clip);
-							break;
+							case CursorControl.CHARATYPE.MOUSE:
+								SE_mouse.PlayOneShot(SE_mouse.clip);
+								break;
 
-					}
-					break;
+							case CursorControl.CHARATYPE.ELEPHANTS:
+								SE_elephants.PlayOneShot(SE_elephants.clip);
+								break;
 
-				case 2:
-					switch (CharaType2)
-					{
-						case CursorControl.CHARATYPE.DOG:
-							SE_dog.PlayOneShot(SE_dog.clip);
-							break;
+						}
+						break;
 
-						case CursorControl.CHARATYPE.GIRFFE:
-							SE_giraffe.PlayOneShot(SE_giraffe.clip);
-							break;
+					case 2:
+						switch (CharaType2)
+						{
+							case CursorControl.CHARATYPE.DOG:
+								SE_dog.PlayOneShot(SE_dog.clip);
+								break;
 
-						case CursorControl.CHARATYPE.MOUSE:
-							SE_mouse.PlayOneShot(SE_mouse.clip);
-							break;
+							case CursorControl.CHARATYPE.GIRFFE:
+								SE_giraffe.PlayOneShot(SE_giraffe.clip);
+								break;
 
-						case CursorControl.CHARATYPE.ELEPHANTS:
-							SE_elephants.PlayOneShot(SE_elephants.clip);
-							break;
+							case CursorControl.CHARATYPE.MOUSE:
+								SE_mouse.PlayOneShot(SE_mouse.clip);
+								break;
 
-					}
-					break;
+							case CursorControl.CHARATYPE.ELEPHANTS:
+								SE_elephants.PlayOneShot(SE_elephants.clip);
+								break;
+
+						}
+						break;
+				}
 			}
 		}
 

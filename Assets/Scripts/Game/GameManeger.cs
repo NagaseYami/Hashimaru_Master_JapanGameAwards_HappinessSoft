@@ -18,16 +18,18 @@ public class GameManeger : MonoBehaviour
 	private bool stopTime = false;
 	public GameObject ui;
 	private GameObject obj;
-	private int GamePadNum = 0;
+	private int GamePadNum = 1;
 	private RectTransform arrow;
 	private int nCnt = 18;
 	public bool GameStopFlag = false;
-
+	public bool ButtonRelease = false;
+	
 	// サウンド
 	private AudioSource sound01;        // 効果音 stage1_BGM
 	private AudioSource sound02;        // 効果音 stage2_BGM
 	private AudioSource sound03;        // 効果音 ポーズオン
 	private AudioSource sound04;        // 効果音 ポーズ解除オン
+	private AudioSource sound05;        // 効果音 カーソル
 
 	// Use this for initialization
 	void Start()
@@ -124,6 +126,7 @@ public class GameManeger : MonoBehaviour
 		sound02 = audioSources[1];
 		sound03 = audioSources[2];
 		sound04 = audioSources[3];
+		sound05 = audioSources[4];
 
 		// ステージタイプを取得
 		StageType = SelectManager.GetStageType();
@@ -151,6 +154,12 @@ public class GameManeger : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		// ボタンがはなされているか
+		if (Input.GetButtonDown("Fire" + GamePadNum))
+		{
+			ButtonRelease = false;
+		}
+
 		Pause();
 
 		if (Time.timeScale == 1)
@@ -173,8 +182,6 @@ public class GameManeger : MonoBehaviour
 				// シーンを読み込む
 				SceneManager.LoadScene("GameScene");
 			}
-
-
 
 			if (Player1.GetComponent<PlayerManager>().bDead ||
 				Player2.GetComponent<PlayerManager>().BallCount >= WinBallNum
@@ -206,24 +213,29 @@ public class GameManeger : MonoBehaviour
 
 	void Pause()
 	{
-		if (Input.GetButtonDown("Start1") & GameStopFlag == false & GamePadNum != 2)
+		if (Input.GetButtonDown("Start1") & GameStopFlag == false)
 		{
 			GamePadNum = 1;
 			GameStop();
 		}
-		else if (Input.GetButtonDown("Start2") & GameStopFlag == false & GamePadNum != 1)
+		else if (Input.GetButtonDown("Start2") & GameStopFlag == false)
 		{
 			GamePadNum = 2;
 			GameStop();
 		}
-
+		
 		if (stopTime)
 		{// stopTimeフラグがtrueだったら
+
 			if (nCnt >= 18)
 			{
+
 				// 上方向
 				if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0.1f)
 				{
+					// カーソル音
+					sound05.PlayOneShot(sound05.clip);
+
 					nCnt = 0;
 					if (arrow.localPosition.y >= 195.0f)
 					{
@@ -239,6 +251,9 @@ public class GameManeger : MonoBehaviour
 				// 下方向
 				if (Input.GetAxisRaw("Vertical" + GamePadNum) < -0.1f)
 				{
+					// カーソル音
+					sound05.PlayOneShot(sound05.clip);
+
 					nCnt = 0;
 					if (arrow.localPosition.y <= -205.0f)
 					{
@@ -271,6 +286,8 @@ public class GameManeger : MonoBehaviour
 					FadeManager.Instance.LoadScene("SelectScene", 1.0f);
 					GameStopFlag = true;
 				}
+
+				ButtonRelease = true;
 			}
 			if (nCnt <= 18)
 			{
@@ -293,7 +310,7 @@ public class GameManeger : MonoBehaviour
 		}
 		else
 		{
-			GamePadNum = 0;
+			GamePadNum = 1;
 			Time.timeScale = 1;
 			Destroy(obj);
 

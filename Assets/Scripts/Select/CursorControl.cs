@@ -27,7 +27,9 @@ public class CursorControl : MonoBehaviour
 	private AudioSource sound03;        // 効果音 キャンセル
 
 	public bool CharSelectFlag;     // キャラクター選択フラグ
-	
+
+	private GameObject SelectManager;
+
 	// キャラクタータイプ
 	public enum CHARATYPE
 	{
@@ -36,19 +38,6 @@ public class CursorControl : MonoBehaviour
 		MOUSE,		// ネズミ
 		ELEPHANTS	// ゾウ
 	}
-
-	//// ステージタイプ
-	//public enum STAGETYPE
-	//{
-	//	EASY_DOG = 0,   // イヌ		(簡単)
-	//	EASY_GIRFFE,    // キリン	(簡単)
-	//	EASY_MOUSE,     // ネズミ	(簡単)
-	//	EASY_ELEPHANTS, // ゾウ		(簡単)
-	//	HARD_DOG,       // イヌ		(難しい)
-	//	HARD_GIRFFE,    // キリン	(難しい)
-	//	HARD_MOUSE,     // ネズミ	(難しい)
-	//	HARD_ELEPHANTS  // ゾウ		(難しい)
-	//}
 
 	// Use this for initialization
 	void Start()
@@ -60,14 +49,19 @@ public class CursorControl : MonoBehaviour
 		sound01 = audioSources[0];
 		sound02 = audioSources[1];
 		sound03 = audioSources[2];
+
+		SelectManager = GameObject.Find("SelectManager");
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		CharacterSelect();
-		SetCharaType();
-		CursorScaling();
+		if (Time.timeScale == 1 & SelectManager.GetComponent<SelectManager>().LoadFlag == false)
+		{
+			CharacterSelect();
+			SetCharaType();
+			CursorScaling();
+		}
 	}
 
 	//=============================================================================

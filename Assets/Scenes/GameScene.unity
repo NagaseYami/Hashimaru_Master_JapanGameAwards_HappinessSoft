@@ -1124,6 +1124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83afc5a7dc9263d46b7598a126afcbdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PortolEffect: {fileID: 1201212189740458, guid: 007708e28669c974e886d0222c99d62d,
+    type: 2}
   WinBallNum: 2
   BallRespawnTime: 10
   CharaType1: 0

@@ -8,8 +8,9 @@ public class GameManeger : MonoBehaviour
 	GameObject Player1, Player2;
 	GameObject Player1WinText, Player2WinText;
 	GameObject Ball;
+    public GameObject PortolEffect;
 	public int WinBallNum = 2;
-	public int BallRespawnTime = 10;
+	public int BallRespawnTime = 15;
 	int BallRespawnTimer = 0;
 	public CursorControl.CHARATYPE CharaType1, CharaType2;  // キャラクタータイプ
 	private SelectManager.STAGETYPE StageType;		// ステージタイプ
@@ -204,10 +205,17 @@ public class GameManeger : MonoBehaviour
 				BallRespawnTimer = 0;
 			}
 
+            if (BallRespawnTimer == (BallRespawnTime-4)*60)
+            {
+                Instantiate(PortolEffect,new Vector3(0.0f,3.0f,0.0f), Quaternion.identity);
+            }
 			if (BallRespawnTimer >= BallRespawnTime * 60)
 			{
 				Ball.SetActive(true);
-			}
+                Ball.transform.position = new Vector3(0.0f, 3.0f, 0.0f);
+                
+
+            }
 		}
 	}
 

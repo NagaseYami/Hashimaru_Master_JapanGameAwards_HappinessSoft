@@ -16,7 +16,7 @@ public class GameManeger : MonoBehaviour
 	private SelectManager.STAGETYPE StageType;		// ステージタイプ
 
 	// ポーズ画面用
-	private bool stopTime = false;
+	public bool stopTime = false;
 	public GameObject ui;
 	private GameObject obj;
 	private int GamePadNum = 1;
@@ -161,7 +161,12 @@ public class GameManeger : MonoBehaviour
 			ButtonRelease = false;
 		}
 
-		Pause();
+		bool FadeFlag = GameObject.Find("FadeManager").GetComponent<FadeManager>().isFading;
+		
+		if(FadeFlag == false)
+		{
+			Pause();
+		}
 
 		if (Time.timeScale == 1)
 		{

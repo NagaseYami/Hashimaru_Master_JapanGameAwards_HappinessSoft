@@ -10,13 +10,11 @@ public class Countdown : MonoBehaviour
 	float count = 0;
 	float margin = 0;
 	bool marginFlag;
-	bool countDown;
+	bool countDown = true;
 
 	// Use this for initialization
 	void Start()
 	{
-		Time.timeScale = 0;
-
 		text = GameObject.Find(text_num + "_text").GetComponent<Text>();
 		marginFlag = false;
 	}
@@ -24,68 +22,82 @@ public class Countdown : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (countDown == false)
+		bool stopFlag = GameObject.Find("GameManager").GetComponent<GameManeger>().stopTime;
+		Debug.Log(stopFlag);
+
+		bool FadeFlag = GameObject.Find("FadeManager").GetComponent<FadeManager>().isFading;
+
+		if(FadeFlag == false)
 		{
-			margin++;
+			countDown = false;
+			Time.timeScale = 0;
+		}
 
-			if (text_num <= 0)
+		if (stopFlag == false)
+		{
+			if (countDown == false)
 			{
-				text = GameObject.Find("Start_text").GetComponent<Text>();
+				margin++;
 
-				text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - 0.04f);
-
-				if (marginFlag == false)
+				if (text_num <= 0)
 				{
-					text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
-					marginFlag = true;
-				}
-				else if (text.color.a <= 0 & marginFlag == true)
-				{
-					countDown = true;
+					text = GameObject.Find("Start_text").GetComponent<Text>();
 
-					Time.timeScale = 1;
-				}
+					text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - 0.04f);
 
-				
-			}
-			else if (text_num > 0 & margin >= 40)
-			{
-				count++;
-
-				if (marginFlag == false)
-				{
-					text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
-					marginFlag = true;
-				}
-
-				if (count >= 40 & marginFlag == true)
-				{
-					text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - 0.05f);
-				}
-
-				if (text.color.a <= 0 & marginFlag == true)
-				{
-					text_num--;
-
-					if (text_num <= 0)
+					if (marginFlag == false)
 					{
-						marginFlag = false;
-
-					}
-
-					if (text_num > 0)
-					{
-						text = GameObject.Find(text_num + "_text").GetComponent<Text>();
-
 						text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
-
-						text.gameObject.SetActive(true);
-
-						count = 0;
+						marginFlag = true;
 					}
-				}
+					else if (text.color.a <= 0 & marginFlag == true)
+					{
+						countDown = true;
 
-				margin = 40;
+						Time.timeScale = 1;
+					}
+
+
+				}
+				else if (text_num > 0 & margin >= 40)
+				{
+					count++;
+
+					if (marginFlag == false)
+					{
+						text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
+						marginFlag = true;
+					}
+
+					if (count >= 40 & marginFlag == true)
+					{
+						text.color = new Color(text.color.r, text.color.g, text.color.b, text.color.a - 0.05f);
+					}
+
+					if (text.color.a <= 0 & marginFlag == true)
+					{
+						text_num--;
+
+						if (text_num <= 0)
+						{
+							marginFlag = false;
+
+						}
+
+						if (text_num > 0)
+						{
+							text = GameObject.Find(text_num + "_text").GetComponent<Text>();
+
+							text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
+
+							text.gameObject.SetActive(true);
+
+							count = 0;
+						}
+					}
+
+					margin = 40;
+				}
 			}
 		}
 	}

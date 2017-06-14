@@ -919,6 +919,7 @@ GameObject:
   - component: {fileID: 803796607}
   - component: {fileID: 803796609}
   - component: {fileID: 803796608}
+  - component: {fileID: 803796610}
   m_Layer: 5
   m_Name: Giraffe_text
   m_TagString: Untagged
@@ -984,6 +985,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 803796606}
+--- !u!114 &803796610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 803796606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0.93103445, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &818219125
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,6 +1009,7 @@ GameObject:
   - component: {fileID: 818219126}
   - component: {fileID: 818219128}
   - component: {fileID: 818219127}
+  - component: {fileID: 818219129}
   m_Layer: 5
   m_Name: dog_text
   m_TagString: Untagged
@@ -1059,6 +1075,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 818219125}
+--- !u!114 &818219129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 818219125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.034482718, g: 1, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &954939875
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,6 +1099,7 @@ GameObject:
   - component: {fileID: 954939876}
   - component: {fileID: 954939878}
   - component: {fileID: 954939877}
+  - component: {fileID: 954939879}
   m_Layer: 5
   m_Name: Mouse_text
   m_TagString: Untagged
@@ -1134,6 +1165,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 954939875}
+--- !u!114 &954939879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 954939875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0.17241383, b: 1, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
 --- !u!1 &966637198
 GameObject:
   m_ObjectHideFlags: 0
@@ -2778,6 +2823,7 @@ GameObject:
   - component: {fileID: 2038956981}
   - component: {fileID: 2038956983}
   - component: {fileID: 2038956982}
+  - component: {fileID: 2038956984}
   m_Layer: 5
   m_Name: Elephants_text
   m_TagString: Untagged
@@ -2843,6 +2889,20 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2038956980}
+--- !u!114 &2038956984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2038956980}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -900027084, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 0, b: 0, a: 1}
+  m_EffectDistance: {x: 2, y: 2}
+  m_UseGraphicAlpha: 1
 --- !u!224 &2043200886 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224826985778057276, guid: c308f2ae6a964bf42958e9c0c6eeefe7,

@@ -213,23 +213,36 @@ public class GameManeger : MonoBehaviour
 
 	void Pause()
 	{
-		if (Input.GetButtonDown("Start1") & GameStopFlag == false)
+		if (!stopTime)
 		{
-			GamePadNum = 1;
-			GameStop();
+			if (Input.GetButtonDown("Start1") & GameStopFlag == false)
+			{
+				GamePadNum = 1;
+				GameStop();
+			}
+			else if (Input.GetButtonDown("Start2") & GameStopFlag == false)
+			{
+				GamePadNum = 2;
+				GameStop();
+			}
 		}
-		else if (Input.GetButtonDown("Start2") & GameStopFlag == false)
-		{
-			GamePadNum = 2;
-			GameStop();
-		}
-		
-		if (stopTime)
+
+		else if (stopTime)
 		{// stopTimeフラグがtrueだったら
+
+			if (Input.GetButtonDown("Start1") & GameStopFlag == false & GamePadNum == 1)
+			{
+				GamePadNum = 1;
+				GameStop();
+			}
+			else if (Input.GetButtonDown("Start2") & GameStopFlag == false & GamePadNum == 2)
+			{
+				GamePadNum = 2;
+				GameStop();
+			}
 
 			if (nCnt >= 18)
 			{
-
 				// 上方向
 				if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0.1f)
 				{

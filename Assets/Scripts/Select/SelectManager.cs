@@ -86,16 +86,22 @@ public class SelectManager : MonoBehaviour
 			}
 		}
 
+#if DEBUG
+		// シーンのリセット
 		if (Input.GetKeyDown(KeyCode.P))
 		{
+			// シーンを読み込む
 			SceneManager.LoadScene("SelectScene");
 		}
+#endif
 
 		// エスケープキーが入力されたらアプリを終了する
 		if (Input.GetKey("escape"))
 		{
 			Application.Quit();
 		}
+
+
 	}
 
 	void Pause()

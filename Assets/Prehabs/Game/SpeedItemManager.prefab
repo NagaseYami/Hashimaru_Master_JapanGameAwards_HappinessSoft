@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b323910185c5c2644b30c9e30f148883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedUpTime: 5
+  SpeedUpTime: 6
   SpeedUpValue: 1.5
   RespawnTime: 5
   RespawnTimer: 0

@@ -239,12 +239,13 @@ public class CursorControl : MonoBehaviour
 				}
 				break;
 		}
-
+#if DEBUG
 		// キャラクタータイプ デバッグ用
 		if (Input.GetKeyDown(KeyCode.O))
 		{
 			Debug.Log("P1:" + CharaType1 + " P2:" + CharaType2);
 		}
+#endif
 	}
 
 	//=============================================================================

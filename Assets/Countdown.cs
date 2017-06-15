@@ -10,20 +10,29 @@ public class Countdown : MonoBehaviour
 	float count = 0;
 	float margin = 0;
 	bool marginFlag;
-	bool countDown = true;
+	public bool countDown = true;
+	public bool PlayGameBGM;
+
+	// サウンド
+	private AudioSource sound01;        // 効果音 スタート1
+	private AudioSource sound02;        // 効果音 スタート2
 
 	// Use this for initialization
 	void Start()
 	{
 		text = GameObject.Find(text_num + "_text").GetComponent<Text>();
 		marginFlag = false;
+
+		//AudioSourceコンポーネントを取得し、変数に格納
+		AudioSource[] audioSources = GetComponents<AudioSource>();
+		sound01 = audioSources[0];
+		sound02 = audioSources[1];
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		bool stopFlag = GameObject.Find("GameManager").GetComponent<GameManeger>().stopTime;
-		Debug.Log(stopFlag);
+		bool stopFlag = GameObject.Find("GameManager").GetComponent<GameManager>().stopTime;
 
 		bool FadeFlag = GameObject.Find("FadeManager").GetComponent<FadeManager>().isFading;
 
@@ -49,6 +58,10 @@ public class Countdown : MonoBehaviour
 					{
 						text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
 						marginFlag = true;
+
+						sound02.PlayOneShot(sound02.clip);
+
+						PlayGameBGM = true;
 					}
 					else if (text.color.a <= 0 & marginFlag == true)
 					{
@@ -56,7 +69,6 @@ public class Countdown : MonoBehaviour
 
 						Time.timeScale = 1;
 					}
-
 
 				}
 				else if (text_num > 0 & margin >= 40)
@@ -67,6 +79,8 @@ public class Countdown : MonoBehaviour
 					{
 						text.color = new Color(text.color.r, text.color.g, text.color.b, 1);
 						marginFlag = true;
+
+						sound01.PlayOneShot(sound01.clip);
 					}
 
 					if (count >= 40 & marginFlag == true)
@@ -92,6 +106,8 @@ public class Countdown : MonoBehaviour
 
 							text.gameObject.SetActive(true);
 
+							sound01.PlayOneShot(sound01.clip);
+
 							count = 0;
 						}
 					}
@@ -100,5 +116,10 @@ public class Countdown : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	public void SetPlayFlag(bool Flag)
+	{
+		PlayGameBGM = Flag;
 	}
 }

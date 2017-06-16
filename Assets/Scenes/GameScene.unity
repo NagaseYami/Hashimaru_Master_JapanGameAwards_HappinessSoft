@@ -565,6 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b060bcb70ab6446a9b82c7e54b0935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Effect: {fileID: 1817980514967338, guid: f7f5a8a3bf199c24bb07beb1001e180d, type: 2}
   bDead: 0
   bSpeedUp: 0
   bPowerUp: 0
@@ -1860,6 +1861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b060bcb70ab6446a9b82c7e54b0935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Effect: {fileID: 1817980514967338, guid: f7f5a8a3bf199c24bb07beb1001e180d, type: 2}
   bDead: 0
   bSpeedUp: 0
   bPowerUp: 0

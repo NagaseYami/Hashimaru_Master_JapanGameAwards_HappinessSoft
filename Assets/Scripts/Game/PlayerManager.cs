@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerManager : MonoBehaviour {
 
     GameObject Character, Body, ArmL, ArmR;
+    public GameObject Effect;
 
     //Battle
     GameObject Lattach, Rattach;
@@ -123,11 +124,15 @@ public class PlayerManager : MonoBehaviour {
                 }
                 else if (Lattach.tag == "SpeedItem")
                 {
+                   // GameObject i = Instantiate(Effect);
+                   // i.transform.position = Lattach.transform.position;
                     Lattach.SetActive(false);
                     bSpeedUp = true;
                 }
                 else if (Lattach.tag == "PowerItem")
                 {
+                   // GameObject i = Instantiate(Effect);
+                   // i.transform.position = Lattach.transform.position;
                     Lattach.SetActive(false);
                     bPowerUp = true;
                 }

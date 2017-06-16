@@ -206,7 +206,7 @@ public class GameManager : MonoBehaviour
 			// シーンのリセット
 			if (Input.GetKeyDown(KeyCode.P))
 			{
-				// シーンを読み込む
+				// シーンを読み込む0
 				SceneManager.LoadScene("GameScene");
 			}
 #endif

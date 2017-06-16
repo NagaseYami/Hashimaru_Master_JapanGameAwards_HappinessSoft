@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour {
     GameObject Body, ArmL, ArmR;
-    public GameObject Character; 
+    public GameObject Character, Ball; 
     public GameObject Effect;
     public GameObject DeadArmD,DeadArmG,DeadArmE,DeadArmM;
 
@@ -45,7 +45,6 @@ public class PlayerManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
         if(transform.Find("Dog").gameObject.activeSelf != false)
         {
             Character = transform.Find("Dog").gameObject;
@@ -94,7 +93,10 @@ public class PlayerManager : MonoBehaviour {
 		//AudioSourceコンポーネントを取得し、変数に格納
 		AudioSource[] audioSources = GetComponents<AudioSource>();
 		power_UP = audioSources[4];
-	}
+
+        BallCount = 0;
+
+    }
 
     // Update is called once per frame
     void Update () {
@@ -133,7 +135,7 @@ public class PlayerManager : MonoBehaviour {
                     Debug.Log(Lattach.transform.root.gameObject.name);
                     Lattach.transform.root.gameObject.GetComponent<PlayerManager>().TakeDamage(Damage*DamageUp);
                 }
-                else if (Lattach.tag == "Ball")
+                else if (Lattach.tag == "Ball" && Ball.activeSelf)
                 {
                     BallCount++;
                     Lattach.SetActive(false);
@@ -349,7 +351,7 @@ public class PlayerManager : MonoBehaviour {
             if (KM_Math.KM_ChangeFlagTimer(6))
             {
                 Body.GetComponent<Renderer>().enabled = false;
-                /*
+                
                 if (ArmL.GetComponent<ChopsticksManager>().m_bDead == false)
                 {
                     ArmL.GetComponent<Renderer>().enabled = false;
@@ -358,12 +360,12 @@ public class PlayerManager : MonoBehaviour {
                 {
                     ArmR.GetComponent<Renderer>().enabled = false;
                 }
-                */
+                
             }
             else
             {
                 Body.GetComponent<Renderer>().enabled = true;
-                /*
+                
                 if (ArmL.GetComponent<ChopsticksManager>().m_bDead == false)
                 {
                     ArmL.GetComponent<Renderer>().enabled = true;
@@ -372,7 +374,7 @@ public class PlayerManager : MonoBehaviour {
                 {
                     ArmR.GetComponent<Renderer>().enabled = true;
                 }
-                */
+                
             }
             InvincibleTimer--;
             if (InvincibleTimer <= 0)

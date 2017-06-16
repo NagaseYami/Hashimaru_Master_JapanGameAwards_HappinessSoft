@@ -227,26 +227,26 @@ public class PlayerManager : MonoBehaviour {
                         if (Rattach.transform.root.gameObject.transform.Find("Dog").gameObject.activeSelf != false)
                         {
                             i = Instantiate(DeadArmD);
-                            i.transform.position = Lattach.transform.position;
-                            i.transform.rotation = Lattach.transform.rotation;
+                            i.transform.position = Rattach.transform.position;
+                            i.transform.rotation = Rattach.transform.rotation;
                         }
                         else if (Rattach.transform.root.gameObject.transform.Find("Giraffe").gameObject.activeSelf != false)
                         {
                             i = Instantiate(DeadArmG);
-                            i.transform.position = Lattach.transform.position;
-                            i.transform.rotation = Lattach.transform.rotation;
+                            i.transform.position = Rattach.transform.position;
+                            i.transform.rotation = Rattach.transform.rotation;
                         }
                         else if (Rattach.transform.root.gameObject.transform.Find("Elephants").gameObject.activeSelf != false)
                         {
                             i = Instantiate(DeadArmE);
-                            i.transform.position = Lattach.transform.position;
-                            i.transform.rotation = Lattach.transform.rotation;
+                            i.transform.position = Rattach.transform.position;
+                            i.transform.rotation = Rattach.transform.rotation;
                         }
                         else if (Rattach.transform.root.gameObject.transform.Find("Mouse").gameObject.activeSelf != false)
                         {
                             i = Instantiate(DeadArmM);
-                            i.transform.position = Lattach.transform.position;
-                            i.transform.rotation = Lattach.transform.rotation;
+                            i.transform.position = Rattach.transform.position;
+                            i.transform.rotation = Rattach.transform.rotation;
                         }
                         Rattach.GetComponent<ChopsticksManager>().m_bDead = true;
                     }                    

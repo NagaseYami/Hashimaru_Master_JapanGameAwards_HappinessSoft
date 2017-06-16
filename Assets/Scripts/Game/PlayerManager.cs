@@ -26,8 +26,17 @@ public class PlayerManager : MonoBehaviour {
     int PowerUpTimer = 0;
     Slider HealthBarSlider;
 
-    //Ball
-    public int BallCount = 0;
+	public GameObject Effect_Attack;
+	public GameObject Effect_Speed;
+
+	private bool Effect_Attack_Flag;
+	private bool Effect_Speed_Flag;
+
+	private GameObject Effect_Attack_Instance;
+	private GameObject Effect_Speed_Instance;
+
+	//Ball
+	public int BallCount = 0;
 
 	// サウンド
 	private AudioSource power_UP;        // 効果音パワーアップ
@@ -202,22 +211,52 @@ public class PlayerManager : MonoBehaviour {
     {
         if (bSpeedUp)
         {
-            SpeedUpTimer++;
+			if (Effect_Speed_Flag == false)
+			{
+				Effect_Speed_Instance = Instantiate(Effect_Speed, new Vector3(Body.transform.localPosition.x * 40, Body.transform.localPosition.y * 40, Body.transform.localPosition.z * 40), Quaternion.identity);
+				Effect_Speed_Flag = true;
+			}
+
+			Effect_Speed_Instance.transform.localPosition = new Vector3(
+				Body.transform.localPosition.x * 40 + transform.localPosition.x,
+				Body.transform.localPosition.y * 40 + transform.localPosition.y,
+				Body.transform.localPosition.z * 40 + transform.localPosition.z
+				);
+
+			SpeedUpTimer++;
             if (SpeedUpTimer > GameObject.Find("SpeedItemManager").gameObject.GetComponent<SpeedItemManager>().SpeedUpTime*60)
             {
                 bSpeedUp = false;
                 SpeedUpTimer = 0;
+
+				Destroy(Effect_Speed_Instance);
+				Effect_Speed_Flag = false;
             }
         }
         if (bPowerUp)
         {
-            DamageUp = GameObject.Find("PowerItemManager").gameObject.GetComponent<PowerItemManager>().PowerUpValue;
+			if (Effect_Attack_Instance == false)
+			{
+				Effect_Attack_Instance = Instantiate(Effect_Attack, new Vector3(Body.transform.localPosition.x * 40, Body.transform.localPosition.y * 40, Body.transform.localPosition.z * 40), Quaternion.identity);
+				Effect_Attack_Flag = true;
+			}
+
+			Effect_Attack_Instance.transform.localPosition = new Vector3(
+				Body.transform.localPosition.x * 40 + transform.localPosition.x,
+				Body.transform.localPosition.y * 40 + transform.localPosition.y,
+				Body.transform.localPosition.z * 40 + transform.localPosition.z
+				);
+
+			DamageUp = GameObject.Find("PowerItemManager").gameObject.GetComponent<PowerItemManager>().PowerUpValue;
             PowerUpTimer++;
             if (PowerUpTimer > GameObject.Find("PowerItemManager").gameObject.GetComponent<PowerItemManager>().PowerUpTime*60)
             {
                 bPowerUp = false;
                 PowerUpTimer = 0;
-            }
+
+				Destroy(Effect_Attack_Instance);
+				Effect_Attack_Flag = false;
+			}
         }
         else
         {

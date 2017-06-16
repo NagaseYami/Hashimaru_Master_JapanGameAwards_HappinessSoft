@@ -819,6 +819,8 @@ MonoBehaviour:
   bPowerUp: 0
   Invincible: 0
   InvincibleTimerMax: 180
+  Effect_Attack: {fileID: 100000, guid: 0c1b6e2ca3b574f888b870cbaa965084, type: 2}
+  Effect_Speed: {fileID: 100004, guid: 53d818fe21816488e931816bd69d501e, type: 2}
   BallCount: 0
 --- !u!114 &318391567
 MonoBehaviour:
@@ -2691,6 +2693,8 @@ MonoBehaviour:
   bPowerUp: 0
   Invincible: 0
   InvincibleTimerMax: 180
+  Effect_Attack: {fileID: 100000, guid: 0c1b6e2ca3b574f888b870cbaa965084, type: 2}
+  Effect_Speed: {fileID: 100004, guid: 53d818fe21816488e931816bd69d501e, type: 2}
   BallCount: 0
 --- !u!114 &835631163
 MonoBehaviour:

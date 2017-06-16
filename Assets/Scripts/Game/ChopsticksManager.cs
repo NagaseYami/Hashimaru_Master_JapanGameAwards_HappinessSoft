@@ -37,7 +37,7 @@ public class ChopsticksManager : MonoBehaviour {
 			{
 				m_collider.enabled = false;
 				m_renderer.enabled = false;
-				m_respawntimer++;
+                m_respawntimer++;
 			}
 			else
 			{

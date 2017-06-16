@@ -265,7 +265,7 @@ InputManager:
     m_Name: Right2
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: left ctrl
+    negativeButton: right ctrl
     positiveButton: 
     altNegativeButton: 
     altPositiveButton: joystick 2 button 5

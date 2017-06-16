@@ -412,7 +412,7 @@ MonoBehaviour:
   Health: 100
   Damage: 25
   MoveSpeed: 130
-  RotateSpeed: 90
+  RotateSpeed: 120
   CloseSpeed: 250
   OpenSpeed: 40
 --- !u!114 &114103401149835028

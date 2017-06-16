@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour {
-
-    GameObject Character, Body, ArmL, ArmR;
+    GameObject Body, ArmL, ArmR;
+    public GameObject Character; 
     public GameObject Effect;
+    public GameObject DeadArmD,DeadArmG,DeadArmE,DeadArmM;
 
     //Battle
     GameObject Lattach, Rattach;
@@ -148,6 +149,31 @@ public class PlayerManager : MonoBehaviour {
                 {
                     if (Lattach.GetComponent<ChopsticksManager>().m_bDead == false)
                     {
+                        GameObject i;
+                        if (Lattach.transform.root.gameObject.transform.Find("Dog").gameObject.activeSelf != false)
+                        {
+                            i = Instantiate(DeadArmD);
+                            i.transform.position = Lattach.transform.position;
+                            i.transform.rotation = Lattach.transform.rotation;
+                        }
+                        else if (Lattach.transform.root.gameObject.transform.Find("Giraffe").gameObject.activeSelf != false)
+                        {
+                            i = Instantiate(DeadArmG);
+                            i.transform.position = Lattach.transform.position;
+                            i.transform.rotation = Lattach.transform.rotation;
+                        }
+                        else if (Lattach.transform.root.gameObject.transform.Find("Elephants").gameObject.activeSelf != false)
+                        {
+                            i = Instantiate(DeadArmE);
+                            i.transform.position = Lattach.transform.position;
+                            i.transform.rotation = Lattach.transform.rotation;
+                        }
+                        else if (Lattach.transform.root.gameObject.transform.Find("Mouse").gameObject.activeSelf != false)
+                        {
+                            i = Instantiate(DeadArmM);
+                            i.transform.position = Lattach.transform.position;
+                            i.transform.rotation = Lattach.transform.rotation;
+                        }                        
                         Lattach.GetComponent<ChopsticksManager>().m_bDead = true;
                     }
                 }
@@ -168,10 +194,60 @@ public class PlayerManager : MonoBehaviour {
                 {
                     if (Lattach.GetComponent<ChopsticksManager>().m_bDead == false)
                     {
+                        GameObject i;
+                        if (Lattach.transform.root.gameObject.transform.Find("Dog").gameObject.activeSelf != false)
+                        {
+                            i = Instantiate(DeadArmD);
+                            i.transform.position = Lattach.transform.position;
+                            i.transform.rotation = Lattach.transform.rotation;
+                        }
+                        else if (Lattach.transform.root.gameObject.transform.Find("Giraffe").gameObject.activeSelf != false)
+                        {
+                            i = Instantiate(DeadArmG);
+                            i.transform.position = Lattach.transform.position;
+                            i.transform.rotation = Lattach.transform.rotation;
+                        }
+                        else if (Lattach.transform.root.gameObject.transform.Find("Elephants").gameObject.activeSelf != false)
+                        {
+                            i = Instantiate(DeadArmE);
+                            i.transform.position = Lattach.transform.position;
+                            i.transform.rotation = Lattach.transform.rotation;
+                        }
+                        else if (Lattach.transform.root.gameObject.transform.Find("Mouse").gameObject.activeSelf != false)
+                        {
+                            i = Instantiate(DeadArmM);
+                            i.transform.position = Lattach.transform.position;
+                            i.transform.rotation = Lattach.transform.rotation;
+                        }
                         Lattach.GetComponent<ChopsticksManager>().m_bDead = true;
                     }
                     if (Rattach.GetComponent<ChopsticksManager>().m_bDead == false)
                     {
+                        GameObject i;
+                        if (Rattach.transform.root.gameObject.transform.Find("Dog").gameObject.activeSelf != false)
+                        {
+                            i = Instantiate(DeadArmD);
+                            i.transform.position = Lattach.transform.position;
+                            i.transform.rotation = Lattach.transform.rotation;
+                        }
+                        else if (Rattach.transform.root.gameObject.transform.Find("Giraffe").gameObject.activeSelf != false)
+                        {
+                            i = Instantiate(DeadArmG);
+                            i.transform.position = Lattach.transform.position;
+                            i.transform.rotation = Lattach.transform.rotation;
+                        }
+                        else if (Rattach.transform.root.gameObject.transform.Find("Elephants").gameObject.activeSelf != false)
+                        {
+                            i = Instantiate(DeadArmE);
+                            i.transform.position = Lattach.transform.position;
+                            i.transform.rotation = Lattach.transform.rotation;
+                        }
+                        else if (Rattach.transform.root.gameObject.transform.Find("Mouse").gameObject.activeSelf != false)
+                        {
+                            i = Instantiate(DeadArmM);
+                            i.transform.position = Lattach.transform.position;
+                            i.transform.rotation = Lattach.transform.rotation;
+                        }
                         Rattach.GetComponent<ChopsticksManager>().m_bDead = true;
                     }                    
                 }
@@ -234,6 +310,7 @@ public class PlayerManager : MonoBehaviour {
             if (KM_Math.KM_ChangeFlagTimer(6))
             {
                 Body.GetComponent<Renderer>().enabled = false;
+                /*
                 if (ArmL.GetComponent<ChopsticksManager>().m_bDead == false)
                 {
                     ArmL.GetComponent<Renderer>().enabled = false;
@@ -242,10 +319,12 @@ public class PlayerManager : MonoBehaviour {
                 {
                     ArmR.GetComponent<Renderer>().enabled = false;
                 }
+                */
             }
             else
             {
                 Body.GetComponent<Renderer>().enabled = true;
+                /*
                 if (ArmL.GetComponent<ChopsticksManager>().m_bDead == false)
                 {
                     ArmL.GetComponent<Renderer>().enabled = true;
@@ -254,6 +333,7 @@ public class PlayerManager : MonoBehaviour {
                 {
                     ArmR.GetComponent<Renderer>().enabled = true;
                 }
+                */
             }
             InvincibleTimer--;
             if (InvincibleTimer <= 0)

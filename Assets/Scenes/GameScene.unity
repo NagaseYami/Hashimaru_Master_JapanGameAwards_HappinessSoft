@@ -814,6 +814,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b060bcb70ab6446a9b82c7e54b0935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Character: {fileID: 0}
+  Effect: {fileID: 0}
+  DeadArmD: {fileID: 1877438571458880, guid: 47f04c9e725526b44bec4bd5114c340a, type: 2}
+  DeadArmG: {fileID: 1188224172677722, guid: ba8cbd8f850dfd14dac342c286e569b9, type: 2}
+  DeadArmE: {fileID: 1214654969273408, guid: 0409a38f1a81053408d663ba2c212d05, type: 2}
+  DeadArmM: {fileID: 1172175313101700, guid: 49ce10f2a991eca4a9935ebecd43924c, type: 2}
   bDead: 0
   bSpeedUp: 0
   bPowerUp: 0
@@ -2686,6 +2692,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b060bcb70ab6446a9b82c7e54b0935, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Character: {fileID: 0}
+  Effect: {fileID: 0}
+  DeadArmD: {fileID: 1877438571458880, guid: 47f04c9e725526b44bec4bd5114c340a, type: 2}
+  DeadArmG: {fileID: 1188224172677722, guid: ba8cbd8f850dfd14dac342c286e569b9, type: 2}
+  DeadArmE: {fileID: 1214654969273408, guid: 0409a38f1a81053408d663ba2c212d05, type: 2}
+  DeadArmM: {fileID: 1172175313101700, guid: 49ce10f2a991eca4a9935ebecd43924c, type: 2}
   bDead: 0
   bSpeedUp: 0
   bPowerUp: 0

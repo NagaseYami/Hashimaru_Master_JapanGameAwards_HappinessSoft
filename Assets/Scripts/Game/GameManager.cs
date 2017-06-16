@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManeger : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
 	GameObject Player1, Player2;
 	GameObject Player1WinText, Player2WinText;
 	GameObject Ball;
     public GameObject PortolEffect;
-	public int WinBallNum = 2;
+	public int WinBallNum = 3;
 	public int BallRespawnTime = 15;
 	int BallRespawnTimer = 0;
 	public CursorControl.CHARATYPE CharaType1, CharaType2;  // キャラクタータイプ
@@ -31,6 +31,9 @@ public class GameManeger : MonoBehaviour
 	private AudioSource sound03;        // 効果音 ポーズオン
 	private AudioSource sound04;        // 効果音 ポーズ解除オン
 	private AudioSource sound05;        // 効果音 カーソル
+
+	public bool GameEndFlag;
+	private int EndCnt;
 
 	// Use this for initialization
 	void Start()
@@ -137,17 +140,13 @@ public class GameManeger : MonoBehaviour
 			case SelectManager.STAGETYPE.STAGE01:
 				GameObject.Find("stage01").gameObject.SetActive(true);
 				GameObject.Find("stage02").gameObject.SetActive(false);
-				sound01.Play();
-				sound01.loop = true;
-
+				
 				break;
 
 			case SelectManager.STAGETYPE.STAGE02:
 				GameObject.Find("stage01").gameObject.SetActive(false);
 				GameObject.Find("stage02").gameObject.SetActive(true);
-				sound02.Play();
-				sound02.loop = true;
-
+				
 				break;
 		}
 	}
@@ -155,6 +154,28 @@ public class GameManeger : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if(GameObject.Find("Canvas_Countdown").GetComponent<Countdown>().PlayGameBGM == true)
+		{
+			switch (StageType)
+			{
+				case SelectManager.STAGETYPE.STAGE01:
+					sound01.Play();
+					sound01.loop = true;
+
+					GameObject.Find("Canvas_Countdown").GetComponent<Countdown>().SetPlayFlag(false);
+
+					break;
+
+				case SelectManager.STAGETYPE.STAGE02:
+					sound02.Play();
+					sound02.loop = true;
+
+					GameObject.Find("Canvas_Countdown").GetComponent<Countdown>().SetPlayFlag(false);
+
+					break;
+			}
+		}
+
 		// ボタンがはなされているか
 		if (Input.GetButtonDown("Fire" + GamePadNum))
 		{
@@ -170,16 +191,16 @@ public class GameManeger : MonoBehaviour
 
 		if (Time.timeScale == 1)
 		{
-			// キャラクタータイプ デバッグ用
-			if (Input.GetKeyDown(KeyCode.O))
-			{
-				Debug.Log("P1:" + CharaType1 + " P2:" + CharaType2);
-			}
-
 			// エスケープキーが入力されたらアプリを終了する
 			if (Input.GetKey("escape"))
 			{
 				Application.Quit();
+			}
+#if DEBUG
+			// キャラクタータイプ デバッグ用
+			if (Input.GetKeyDown(KeyCode.O))
+			{
+				Debug.Log("P1:" + CharaType1 + " P2:" + CharaType2);
 			}
 
 			// シーンのリセット
@@ -188,17 +209,21 @@ public class GameManeger : MonoBehaviour
 				// シーンを読み込む
 				SceneManager.LoadScene("GameScene");
 			}
-
+#endif
 			if (Player1.GetComponent<PlayerManager>().bDead ||
 				Player2.GetComponent<PlayerManager>().BallCount >= WinBallNum
 				)
 			{
 				Player2WinText.SetActive(true);
+				GameEndFlag = true;
+				GamePadNum = 2;
 			}
 			if (Player2.GetComponent<PlayerManager>().bDead ||
 				Player1.GetComponent<PlayerManager>().BallCount >= WinBallNum)
 			{
 				Player1WinText.SetActive(true);
+				GameEndFlag = true;
+				GamePadNum = 1;
 			}
 
 			if (!Ball.activeSelf)
@@ -218,14 +243,32 @@ public class GameManeger : MonoBehaviour
 			{
 				Ball.SetActive(true);
                 Ball.transform.position = new Vector3(0.0f, 3.0f, 0.0f);
-                
-
             }
+
+			if (GameEndFlag == true)
+			{
+				GameEnd();
+			}
+		}
+	}
+
+	void GameEnd()
+	{
+		if (EndCnt >= 30)
+		{
+			if (Input.GetButtonDown("Fire" + GamePadNum))
+			{
+				FadeManager.Instance.LoadScene("SelectScene", 1.0f);
+			}
+		}
+		else
+		{
+			EndCnt++;
 		}
 	}
 
 	void Pause()
-	{
+	{ 
 		if (!stopTime)
 		{
 			if (Input.GetButtonDown("Start1") & GameStopFlag == false)

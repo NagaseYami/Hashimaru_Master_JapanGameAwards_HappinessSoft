@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09174bfc6a0758642ae6584653c03e5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PowerUpTime: 5
+  PowerUpTime: 6
   PowerUpValue: 1.5
   RespawnTime: 5
   RespawnTimer: 0

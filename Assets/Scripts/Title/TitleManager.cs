@@ -22,7 +22,7 @@ public class TitleManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if(Input.GetButtonDown("Fire1") & LoadFlag == false)
+		if(Input.GetButtonDown("Fire1") | Input.GetButtonDown("Fire2") | Input.GetButtonDown("Start1") | Input.GetButtonDown("Start2") & LoadFlag == false)
 		{
 			FadeManager.Instance.LoadScene("SelectScene", 1.0f);
 
@@ -37,5 +37,14 @@ public class TitleManager : MonoBehaviour
 		{
 			Application.Quit();
 		}
+
+#if DEBUG
+		// シーンのリセット
+		if (Input.GetKeyDown(KeyCode.P))
+		{
+			// シーンを読み込む
+			SceneManager.LoadScene("TitleScene");
+		}
+#endif
 	}
 }

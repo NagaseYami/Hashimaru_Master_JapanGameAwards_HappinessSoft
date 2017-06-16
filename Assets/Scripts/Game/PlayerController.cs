@@ -89,13 +89,21 @@ public class PlayerController : MonoBehaviour
 
 	void Update()
 	{
+		bool GameEnd = GameObject.Find("GameManager").GetComponent<GameManager>().GameEndFlag;
+		
 		if (Time.timeScale == 1)
 		{
 			if (!gameObject.GetComponent<PlayerManager>().bDead)
 			{
 				BuffChecker();
-				Controller();
-				Attack();
+				if(GameObject.Find("FadeManager").GetComponent<FadeManager>().isFading == false)
+				{
+					if(GameEnd == false)
+					{
+						Controller();
+					}
+					Attack();
+				}
 			}
 		}
 	}
@@ -128,16 +136,51 @@ public class PlayerController : MonoBehaviour
 		//	ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
 		//}
 
+		//// 上方向
+		//if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0.3)
+		//{
+		//	rb.AddForce(Body.transform.forward * MoveSpeed * MoveSpeedUp);
+		//}
+
+		//// 下方向
+		//if (Input.GetAxisRaw("Vertical" + GamePadNum) < -0.3)
+		//{
+		//	rb.AddForce(-Body.transform.forward * MoveSpeed * MoveSpeedUp);
+		//}
+
+		//Vector3 TurnLeft = new Vector3(0.0f, -RotateSpeed, 0.0f);
+		//Vector3 TurnRight = new Vector3(0.0f, RotateSpeed, 0.0f);
+
+		//Quaternion deltaRotation;
+
+		//// 左方向
+		//if (Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.1)
+		//{
+		//	deltaRotation = Quaternion.Euler(TurnLeft * Time.deltaTime);
+		//	rb.MoveRotation(rb.rotation * deltaRotation);
+		//	ArmR.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
+		//	ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
+		//}
+
+		//// 右方向
+		//if (Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.1)
+		//{
+		//	deltaRotation = Quaternion.Euler(TurnRight * Time.deltaTime);
+		//	rb.MoveRotation(rb.rotation * deltaRotation);
+		//	ArmR.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
+		//	ArmL.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
+		//}
+
 		// 上方向
-		if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0)
+		if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0.1)
 		{
-			rb.AddForce(Body.transform.forward * MoveSpeed * MoveSpeedUp);
+			rb.AddForce(Body.transform.position.x, Body.transform.position.y, Body.transform.position.z + 1 * MoveSpeed * MoveSpeedUp);
 		}
 
 		// 下方向
-		if (Input.GetAxisRaw("Vertical" + GamePadNum) < 0)
+		if (Input.GetAxisRaw("Vertical" + GamePadNum) < -0.1)
 		{
-			rb.AddForce(-Body.transform.forward * MoveSpeed * MoveSpeedUp);
+			rb.AddForce(Body.transform.position.x, Body.transform.position.y, Body.transform.position.z - 1 * MoveSpeed * MoveSpeedUp);
 		}
 
 		Vector3 TurnLeft = new Vector3(0.0f, -RotateSpeed, 0.0f);
@@ -146,7 +189,19 @@ public class PlayerController : MonoBehaviour
 		Quaternion deltaRotation;
 
 		// 左方向
-		if (Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.01)
+		if (Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.1)
+		{
+			rb.AddForce(Body.transform.position.x - 1 * MoveSpeed * MoveSpeedUp, Body.transform.position.y, Body.transform.position.z);
+		}
+
+		// 右方向
+		if (Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.1)
+		{
+			rb.AddForce(Body.transform.position.x + 1 * MoveSpeed * MoveSpeedUp, Body.transform.position.y, Body.transform.position.z);
+		}
+
+		// 左方向 旋回
+		if (Input.GetAxisRaw("RightStick" + GamePadNum) > 0.1)
 		{
 			deltaRotation = Quaternion.Euler(TurnLeft * Time.deltaTime);
 			rb.MoveRotation(rb.rotation * deltaRotation);
@@ -154,8 +209,8 @@ public class PlayerController : MonoBehaviour
 			ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
 		}
 
-		// 右方向
-		if (Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.01)
+		// 右方向 旋回
+		if (Input.GetAxisRaw("RightStick" + GamePadNum) < -0.1)
 		{
 			deltaRotation = Quaternion.Euler(TurnRight * Time.deltaTime);
 			rb.MoveRotation(rb.rotation * deltaRotation);
@@ -166,57 +221,63 @@ public class PlayerController : MonoBehaviour
 
 	void Attack()
 	{
-		if (Input.GetButtonDown("Fire" + GamePadNum) && !CloseFlag && !OpenFlag)
+		if (Input.GetButtonDown("Right" + GamePadNum) && !CloseFlag && !OpenFlag)
 		{
-			if (!GameObject.Find("GameManager").gameObject.GetComponent<GameManeger>().ButtonRelease)
+			if (!GameObject.Find("GameManager").gameObject.GetComponent<GameManager>().ButtonRelease)
 			{
-				CloseFlag = true;
+				bool GameEnd = GameObject.Find("GameManager").GetComponent<GameManager>().GameEndFlag;
 
-				switch (GamePadNum)
+				if (GameEnd == false)
 				{
-					case 1:
-						switch (CharaType1)
-						{
-							case CursorControl.CHARATYPE.DOG:
-								SE_dog.PlayOneShot(SE_dog.clip);
-								break;
 
-							case CursorControl.CHARATYPE.GIRFFE:
-								SE_giraffe.PlayOneShot(SE_giraffe.clip);
-								break;
+					CloseFlag = true;
 
-							case CursorControl.CHARATYPE.MOUSE:
-								SE_mouse.PlayOneShot(SE_mouse.clip);
-								break;
+					switch (GamePadNum)
+					{
+						case 1:
+							switch (CharaType1)
+							{
+								case CursorControl.CHARATYPE.DOG:
+									SE_dog.PlayOneShot(SE_dog.clip);
+									break;
 
-							case CursorControl.CHARATYPE.ELEPHANTS:
-								SE_elephants.PlayOneShot(SE_elephants.clip);
-								break;
+								case CursorControl.CHARATYPE.GIRFFE:
+									SE_giraffe.PlayOneShot(SE_giraffe.clip);
+									break;
 
-						}
-						break;
+								case CursorControl.CHARATYPE.MOUSE:
+									SE_mouse.PlayOneShot(SE_mouse.clip);
+									break;
 
-					case 2:
-						switch (CharaType2)
-						{
-							case CursorControl.CHARATYPE.DOG:
-								SE_dog.PlayOneShot(SE_dog.clip);
-								break;
+								case CursorControl.CHARATYPE.ELEPHANTS:
+									SE_elephants.PlayOneShot(SE_elephants.clip);
+									break;
 
-							case CursorControl.CHARATYPE.GIRFFE:
-								SE_giraffe.PlayOneShot(SE_giraffe.clip);
-								break;
+							}
+							break;
 
-							case CursorControl.CHARATYPE.MOUSE:
-								SE_mouse.PlayOneShot(SE_mouse.clip);
-								break;
+						case 2:
+							switch (CharaType2)
+							{
+								case CursorControl.CHARATYPE.DOG:
+									SE_dog.PlayOneShot(SE_dog.clip);
+									break;
 
-							case CursorControl.CHARATYPE.ELEPHANTS:
-								SE_elephants.PlayOneShot(SE_elephants.clip);
-								break;
+								case CursorControl.CHARATYPE.GIRFFE:
+									SE_giraffe.PlayOneShot(SE_giraffe.clip);
+									break;
 
-						}
-						break;
+								case CursorControl.CHARATYPE.MOUSE:
+									SE_mouse.PlayOneShot(SE_mouse.clip);
+									break;
+
+								case CursorControl.CHARATYPE.ELEPHANTS:
+									SE_elephants.PlayOneShot(SE_elephants.clip);
+									break;
+
+							}
+							break;
+					}
 				}
 			}
 		}

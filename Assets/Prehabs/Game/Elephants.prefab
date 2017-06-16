@@ -428,7 +428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   Damage: 50
-  MoveSpeed: 200
+  MoveSpeed: 110
   RotateSpeed: 80
   CloseSpeed: 250
   OpenSpeed: 30

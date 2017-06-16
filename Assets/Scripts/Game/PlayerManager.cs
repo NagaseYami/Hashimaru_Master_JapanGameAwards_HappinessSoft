@@ -30,9 +30,11 @@ public class PlayerManager : MonoBehaviour {
     //Ball
     public int BallCount = 0;
 
+	// サウンド
+	private AudioSource power_UP;        // 効果音パワーアップ
 
-    // Use this for initialization
-    void Start () {
+	// Use this for initialization
+	void Start () {
 
         if(transform.Find("Dog").gameObject.activeSelf != false)
         {
@@ -78,7 +80,11 @@ public class PlayerManager : MonoBehaviour {
 		Rattach = ArmR.GetComponent<ChopsticksManager> ().attach;
         HealthBarSlider = gameObject.transform.Find("Canvas").gameObject.transform.Find("Slider").GetComponent<Slider>();
         InvincibleTimer = InvincibleTimerMax;
-    }
+
+		//AudioSourceコンポーネントを取得し、変数に格納
+		AudioSource[] audioSources = GetComponents<AudioSource>();
+		power_UP = audioSources[4];
+	}
 
     // Update is called once per frame
     void Update () {
@@ -128,6 +134,7 @@ public class PlayerManager : MonoBehaviour {
                    // i.transform.position = Lattach.transform.position;
                     Lattach.SetActive(false);
                     bSpeedUp = true;
+					power_UP.PlayOneShot(power_UP.clip);
                 }
                 else if (Lattach.tag == "PowerItem")
                 {
@@ -135,8 +142,9 @@ public class PlayerManager : MonoBehaviour {
                    // i.transform.position = Lattach.transform.position;
                     Lattach.SetActive(false);
                     bPowerUp = true;
-                }
-                else
+					power_UP.PlayOneShot(power_UP.clip);
+				}
+				else
                 {
                     if (Lattach.GetComponent<ChopsticksManager>().m_bDead == false)
                     {

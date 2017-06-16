@@ -31,7 +31,7 @@ public class SpeedItemManager : MonoBehaviour {
 			if (RespawnTimer >= RespawnTime * 60)
 			{
 				transform.Find("SpeedItem").gameObject.SetActive(true);
-				transform.Find("SpeedItem").gameObject.transform.position = new Vector3(Random.Range(-15.0f, 15.0f), -0.201f, Random.Range(-15.0f, 15.0f));
+				transform.Find("SpeedItem").gameObject.transform.position = new Vector3(Random.Range(-13.0f, 13.0f), -0.201f, Random.Range(-13.0f, 13.0f));
 				RespawnTimer = 0;
 			}
 		}

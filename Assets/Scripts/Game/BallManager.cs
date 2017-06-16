@@ -19,7 +19,10 @@ public class BallManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		
+        if (transform.position.y<=-10.0f)
+        {
+            gameObject.SetActive(false);
+        }
 	}
 
     private void LateUpdate()

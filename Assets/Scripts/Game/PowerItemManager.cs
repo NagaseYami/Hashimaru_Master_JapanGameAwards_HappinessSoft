@@ -29,7 +29,7 @@ public class PowerItemManager : MonoBehaviour {
 			if (RespawnTimer >= RespawnTime * 60)
 			{
 				transform.Find("PowerItem").gameObject.SetActive(true);
-				transform.Find("PowerItem").gameObject.transform.position = new Vector3(Random.Range(-15.0f, 15.0f), -0.83f, Random.Range(-15.0f, 15.0f));
+				transform.Find("PowerItem").gameObject.transform.position = new Vector3(Random.Range(-13.0f, 13.0f), -0.83f, Random.Range(-13.0f, 13.0f));
 				RespawnTimer = 0;
 			}
 		}

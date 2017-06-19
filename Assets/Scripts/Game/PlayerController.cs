@@ -27,6 +27,9 @@ public class PlayerController : MonoBehaviour
 	private AudioSource SE_mouse;      // 効果音 イヌ
 	private AudioSource SE_elephants;        // 効果音 イヌ
 
+	private Rigidbody rbArmR;
+	private Rigidbody rbArmL;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -85,6 +88,9 @@ public class PlayerController : MonoBehaviour
 		// キャラクターのタイプを取得
 		CharaType1 = CursorControl.GetCharaType1();
 		CharaType2 = CursorControl.GetCharaType2();
+
+		rbArmR = ArmR.GetComponent<Rigidbody>();
+		rbArmL = ArmL.GetComponent<Rigidbody>();
 	}
 
 	void Update()
@@ -124,7 +130,7 @@ public class PlayerController : MonoBehaviour
 	{
 
 		//if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0 | Input.GetAxisRaw("Vertical" + GamePadNum) < 0 |
-		//	Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.01 |Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.01)
+		//	Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.01 | Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.01)
 		//{
 		//	float test = Mathf.Atan2(0.0f - Input.GetAxisRaw("Vertical" + GamePadNum), 0.0f - Input.GetAxisRaw("Horizontal" + GamePadNum));
 		//	Debug.Log(test);
@@ -135,6 +141,20 @@ public class PlayerController : MonoBehaviour
 		//	ArmR.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
 		//	ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
 		//}
+
+
+		if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0 | Input.GetAxisRaw("Vertical" + GamePadNum) < 0 |
+			Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.01 | Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.01)
+		{
+			Vector3 PlayerVec = new Vector3(-Input.GetAxisRaw("Horizontal" + GamePadNum), 0, Input.GetAxisRaw("Vertical" + GamePadNum) );
+
+			Body.transform.forward = Vector3.Slerp (Body.transform.forward, PlayerVec, Time.deltaTime * RotateSpeed);
+			rb.AddForce(Body.transform.forward * MoveSpeed * MoveSpeedUp);
+
+			rbArmL.MoveRotation(Body.transform.rotation);
+			rbArmR.MoveRotation(Body.transform.rotation);
+		}
+
 
 		//// 上方向
 		//if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0.3)
@@ -171,57 +191,60 @@ public class PlayerController : MonoBehaviour
 		//	ArmL.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
 		//}
 
-		// 上方向
-		if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0.1)
-		{
-			rb.AddForce(Body.transform.position.x, Body.transform.position.y, Body.transform.position.z + 1 * MoveSpeed * MoveSpeedUp);
-		}
 
-		// 下方向
-		if (Input.GetAxisRaw("Vertical" + GamePadNum) < -0.1)
-		{
-			rb.AddForce(Body.transform.position.x, Body.transform.position.y, Body.transform.position.z - 1 * MoveSpeed * MoveSpeedUp);
-		}
 
-		Vector3 TurnLeft = new Vector3(0.0f, -RotateSpeed, 0.0f);
-		Vector3 TurnRight = new Vector3(0.0f, RotateSpeed, 0.0f);
 
-		Quaternion deltaRotation;
+		//// 上方向
+		//if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0.1)
+		//{
+		//	rb.AddForce(Body.transform.position.x, Body.transform.position.y, Body.transform.position.z + 1 * MoveSpeed * MoveSpeedUp);
+		//}
 
-		// 左方向
-		if (Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.1)
-		{
-			rb.AddForce(Body.transform.position.x - 1 * MoveSpeed * MoveSpeedUp, Body.transform.position.y, Body.transform.position.z);
-		}
+		//// 下方向
+		//if (Input.GetAxisRaw("Vertical" + GamePadNum) < -0.1)
+		//{
+		//	rb.AddForce(Body.transform.position.x, Body.transform.position.y, Body.transform.position.z - 1 * MoveSpeed * MoveSpeedUp);
+		//}
 
-		// 右方向
-		if (Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.1)
-		{
-			rb.AddForce(Body.transform.position.x + 1 * MoveSpeed * MoveSpeedUp, Body.transform.position.y, Body.transform.position.z);
-		}
+		//Vector3 TurnLeft = new Vector3(0.0f, -RotateSpeed, 0.0f);
+		//Vector3 TurnRight = new Vector3(0.0f, RotateSpeed, 0.0f);
 
-		// 左方向 旋回
-		if (Input.GetAxisRaw("RightStick" + GamePadNum) > 0.1)
-		{
-			deltaRotation = Quaternion.Euler(TurnLeft * Time.deltaTime);
-			rb.MoveRotation(rb.rotation * deltaRotation);
-			ArmR.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
-			ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
-		}
+		//Quaternion deltaRotation;
 
-		// 右方向 旋回
-		if (Input.GetAxisRaw("RightStick" + GamePadNum) < -0.1)
-		{
-			deltaRotation = Quaternion.Euler(TurnRight * Time.deltaTime);
-			rb.MoveRotation(rb.rotation * deltaRotation);
-			ArmR.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
-			ArmL.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
-		}
+		//// 左方向
+		//if (Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.1)
+		//{
+		//	rb.AddForce(Body.transform.position.x - 1 * MoveSpeed * MoveSpeedUp, Body.transform.position.y, Body.transform.position.z);
+		//}
+
+		//// 右方向
+		//if (Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.1)
+		//{
+		//	rb.AddForce(Body.transform.position.x + 1 * MoveSpeed * MoveSpeedUp, Body.transform.position.y, Body.transform.position.z);
+		//}
+
+		//// 左方向 旋回
+		//if (Input.GetAxisRaw("RightStick" + GamePadNum) > 0.1)
+		//{
+		//	deltaRotation = Quaternion.Euler(TurnLeft * Time.deltaTime);
+		//	rb.MoveRotation(rb.rotation * deltaRotation);
+		//	ArmR.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
+		//	ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
+		//}
+
+		//// 右方向 旋回
+		//if (Input.GetAxisRaw("RightStick" + GamePadNum) < -0.1)
+		//{
+		//	deltaRotation = Quaternion.Euler(TurnRight * Time.deltaTime);
+		//	rb.MoveRotation(rb.rotation * deltaRotation);
+		//	ArmR.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
+		//	ArmL.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
+		//}
 	}
 
 	void Attack()
 	{
-		if (Input.GetButtonDown("Right" + GamePadNum) && !CloseFlag && !OpenFlag)
+		if (Input.GetButtonDown("Fire" + GamePadNum) && !CloseFlag && !OpenFlag)
 		{
 			if (!GameObject.Find("GameManager").gameObject.GetComponent<GameManager>().ButtonRelease)
 			{
@@ -284,8 +307,10 @@ public class PlayerController : MonoBehaviour
 
 		if (CloseFlag)
 		{
-			ArmR.transform.RotateAround(Body.transform.position, Vector3.up, -CloseSpeed * Time.deltaTime);
-			ArmL.transform.RotateAround(Body.transform.position, Vector3.up, CloseSpeed * Time.deltaTime);
+			ArmR.transform.eulerAngles = new Vector3(0, Body.transform.eulerAngles.y, 0);
+			ArmL.transform.eulerAngles = new Vector3(0, Body.transform.eulerAngles.y, 0);
+			ArmR.transform.RotateAround(Body.transform.position, Vector3.up, -AlreadyRotation);
+			ArmL.transform.RotateAround(Body.transform.position, Vector3.up, AlreadyRotation);
 			AlreadyRotation += CloseSpeed * Time.deltaTime;
 			ArmR.GetComponent<ChopsticksManager>().bHasamu = true;
 			ArmL.GetComponent<ChopsticksManager>().bHasamu = true;
@@ -303,8 +328,10 @@ public class PlayerController : MonoBehaviour
 
 		if (OpenFlag)
 		{
-			ArmR.transform.RotateAround(Body.transform.position, Vector3.up, OpenSpeed * Time.deltaTime);
-			ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -OpenSpeed * Time.deltaTime);
+			ArmR.transform.eulerAngles = new Vector3(0, Body.transform.eulerAngles.y-30, 0);
+			ArmL.transform.eulerAngles = new Vector3(0, Body.transform.eulerAngles.y+30, 0);
+			ArmR.transform.RotateAround(Body.transform.position, Vector3.up, AlreadyRotation);
+			ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -AlreadyRotation);
 			AlreadyRotation += OpenSpeed * Time.deltaTime;
 			if (AlreadyRotation >= 30)
 			{

@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a56cb92081920c4ca01f16b62dd6716, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LiveTime: 5
+  LiveTime: 6
   SuicideTimer: 0
   bStartRespawn: 1
   bStartSuicide: 0

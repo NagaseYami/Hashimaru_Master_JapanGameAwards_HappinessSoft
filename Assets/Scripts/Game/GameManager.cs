@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 
 	public bool GameEndFlag;
 	private int EndCnt;
+	private bool FadeFlag;
 
 	// Use this for initialization
 	void Start()
@@ -256,9 +257,14 @@ public class GameManager : MonoBehaviour
 	{
 		if (EndCnt >= 30)
 		{
-			if (Input.GetButtonDown("Fire" + GamePadNum))
+			if (FadeFlag == false)
 			{
-				FadeManager.Instance.LoadScene("SelectScene", 1.0f);
+				if (Input.GetButtonDown("Fire" + GamePadNum))
+				{
+					FadeManager.Instance.LoadScene("SelectScene", 1.0f);
+
+					FadeFlag = true;
+				}
 			}
 		}
 		else

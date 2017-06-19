@@ -97,7 +97,7 @@ Transform:
   m_GameObject: {fileID: 1674481334094982}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 40.000076, y: 40, z: 40.000076}
+  m_LocalScale: {x: 50, y: 50, z: 50}
   m_Children:
   - {fileID: 4504667023650868}
   - {fileID: 4309173626842170}
@@ -289,7 +289,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!54 &54625657238629628
 Rigidbody:
@@ -316,7 +316,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: -0.01}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.02, z: -0.008}
+  m_ConnectedAnchor: {x: 0, y: 0.02, z: -0.009}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -348,7 +348,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: -0.01}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.02, z: -0.008}
+  m_ConnectedAnchor: {x: 0, y: 0.02, z: -0.009}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -382,7 +382,7 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_InflateMesh: 1
-  m_SkinWidth: 0.1
+  m_SkinWidth: 0.15
   m_Mesh: {fileID: 4300004, guid: 404733768ef793140b53b72562fd5af0, type: 3}
 --- !u!64 &64496384518404010
 MeshCollider:
@@ -396,7 +396,7 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_InflateMesh: 1
-  m_SkinWidth: 0.1
+  m_SkinWidth: 0.15
   m_Mesh: {fileID: 4300002, guid: 404733768ef793140b53b72562fd5af0, type: 3}
 --- !u!114 &114298801986024170
 MonoBehaviour:
@@ -458,7 +458,7 @@ MonoBehaviour:
   Health: 100
   Damage: 20
   MoveSpeed: 185
-  RotateSpeed: 170
+  RotateSpeed: 2.1
   CloseSpeed: 250
   OpenSpeed: 75
 --- !u!135 &135271190305891706

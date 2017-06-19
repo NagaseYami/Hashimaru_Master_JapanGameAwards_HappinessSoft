@@ -42,6 +42,8 @@ public class PlayerManager : MonoBehaviour {
 
 	// サウンド
 	private AudioSource power_UP;        // 効果音パワーアップ
+	private AudioSource Damage_SE;      // ダメージ
+	private AudioSource boomerang;		// ブーメラン
 
 	// Use this for initialization
 	void Start () {
@@ -93,9 +95,11 @@ public class PlayerManager : MonoBehaviour {
 		//AudioSourceコンポーネントを取得し、変数に格納
 		AudioSource[] audioSources = GetComponents<AudioSource>();
 		power_UP = audioSources[4];
+		Damage_SE = audioSources[5];
+		boomerang = audioSources[6];
 
-        BallCount = 0;
-
+		BallCount = 0;
+		
     }
 
     // Update is called once per frame
@@ -134,7 +138,9 @@ public class PlayerManager : MonoBehaviour {
                     Lattach.GetComponent<BodyManager>().GetDamage = true;
                     Debug.Log(Lattach.transform.root.gameObject.name);
                     Lattach.transform.root.gameObject.GetComponent<PlayerManager>().TakeDamage(Damage*DamageUp);
-                }
+
+					Damage_SE.PlayOneShot(Damage_SE.clip);
+				}
                 else if (Lattach.tag == "Ball" && Ball.activeSelf)
                 {
                     BallCount++;
@@ -160,7 +166,9 @@ public class PlayerManager : MonoBehaviour {
                 {
                     if (Lattach.GetComponent<ChopsticksManager>().m_bDead == false)
                     {
-                        GameObject i;
+						boomerang.PlayOneShot(boomerang.clip);
+
+						GameObject i;
                         if (Lattach.transform.root.gameObject.transform.Find("Dog").gameObject.activeSelf != false)
                         {
                             i = Instantiate(DeadArmD);
@@ -197,13 +205,15 @@ public class PlayerManager : MonoBehaviour {
                 ArmRtoOL = Lattach.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
                 ArmRtoOR = Rattach.GetComponent<ChopsticksManager>().ArmHead - ArmR.GetComponent<ChopsticksManager>().ArmHead;
 
-                if (Vector3.Cross(ArmRtoL, ArmRtoOL).y <= 0 &&
+				if (Vector3.Cross(ArmRtoL, ArmRtoOL).y <= 0 &&
                     Vector3.Cross(ArmRtoL, ArmRtoOR).y <= 0 &&
                     Vector3.Dot(ArmRtoL, ArmRtoOL) > 0 &&
                     Vector3.Dot(ArmRtoL, ArmRtoOR) > 0
                 )
                 {
-                    if (Lattach.GetComponent<ChopsticksManager>().m_bDead == false)
+					boomerang.PlayOneShot(boomerang.clip);
+
+					if (Lattach.GetComponent<ChopsticksManager>().m_bDead == false)
                     {
                         GameObject i;
                         if (Lattach.transform.root.gameObject.transform.Find("Dog").gameObject.activeSelf != false)
@@ -301,9 +311,9 @@ public class PlayerManager : MonoBehaviour {
 			}
 
 			Effect_Speed_Instance.transform.localPosition = new Vector3(
-				Body.transform.localPosition.x * 40 + transform.localPosition.x,
-				Body.transform.localPosition.y * 40 + transform.localPosition.y,
-				Body.transform.localPosition.z * 40 + transform.localPosition.z
+				Body.transform.localPosition.x * 50 + transform.localPosition.x,
+				Body.transform.localPosition.y * 50 + transform.localPosition.y,
+				Body.transform.localPosition.z * 50 + transform.localPosition.z
 				);
 
 			SpeedUpTimer++;
@@ -325,9 +335,9 @@ public class PlayerManager : MonoBehaviour {
 			}
 
 			Effect_Attack_Instance.transform.localPosition = new Vector3(
-				Body.transform.localPosition.x * 40 + transform.localPosition.x,
-				Body.transform.localPosition.y * 40 + transform.localPosition.y,
-				Body.transform.localPosition.z * 40 + transform.localPosition.z
+				Body.transform.localPosition.x * 50 + transform.localPosition.x,
+				Body.transform.localPosition.y * 50 + transform.localPosition.y,
+				Body.transform.localPosition.z * 50 + transform.localPosition.z
 				);
 
 			DamageUp = GameObject.Find("PowerItemManager").gameObject.GetComponent<PowerItemManager>().PowerUpValue;

@@ -128,21 +128,6 @@ public class PlayerController : MonoBehaviour
 
 	void Controller()
 	{
-
-		//if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0 | Input.GetAxisRaw("Vertical" + GamePadNum) < 0 |
-		//	Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.01 | Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.01)
-		//{
-		//	float test = Mathf.Atan2(0.0f - Input.GetAxisRaw("Vertical" + GamePadNum), 0.0f - Input.GetAxisRaw("Horizontal" + GamePadNum));
-		//	Debug.Log(test);
-
-		//	rb.AddForce(new Vector3(-Input.GetAxisRaw("Horizontal" + GamePadNum), 0, Input.GetAxisRaw("Vertical" + GamePadNum)) * MoveSpeed * MoveSpeedUp);
-		//	rb.MoveRotation(Quaternion.Euler(0, test * Mathf.Rad2Deg + 90, 0));
-
-		//	ArmR.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
-		//	ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
-		//}
-
-
 		if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0 | Input.GetAxisRaw("Vertical" + GamePadNum) < 0 |
 			Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.01 | Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.01)
 		{
@@ -154,92 +139,6 @@ public class PlayerController : MonoBehaviour
 			rbArmL.MoveRotation(Body.transform.rotation);
 			rbArmR.MoveRotation(Body.transform.rotation);
 		}
-
-
-		//// 上方向
-		//if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0.3)
-		//{
-		//	rb.AddForce(Body.transform.forward * MoveSpeed * MoveSpeedUp);
-		//}
-
-		//// 下方向
-		//if (Input.GetAxisRaw("Vertical" + GamePadNum) < -0.3)
-		//{
-		//	rb.AddForce(-Body.transform.forward * MoveSpeed * MoveSpeedUp);
-		//}
-
-		//Vector3 TurnLeft = new Vector3(0.0f, -RotateSpeed, 0.0f);
-		//Vector3 TurnRight = new Vector3(0.0f, RotateSpeed, 0.0f);
-
-		//Quaternion deltaRotation;
-
-		//// 左方向
-		//if (Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.1)
-		//{
-		//	deltaRotation = Quaternion.Euler(TurnLeft * Time.deltaTime);
-		//	rb.MoveRotation(rb.rotation * deltaRotation);
-		//	ArmR.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
-		//	ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
-		//}
-
-		//// 右方向
-		//if (Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.1)
-		//{
-		//	deltaRotation = Quaternion.Euler(TurnRight * Time.deltaTime);
-		//	rb.MoveRotation(rb.rotation * deltaRotation);
-		//	ArmR.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
-		//	ArmL.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
-		//}
-
-
-
-
-		//// 上方向
-		//if (Input.GetAxisRaw("Vertical" + GamePadNum) > 0.1)
-		//{
-		//	rb.AddForce(Body.transform.position.x, Body.transform.position.y, Body.transform.position.z + 1 * MoveSpeed * MoveSpeedUp);
-		//}
-
-		//// 下方向
-		//if (Input.GetAxisRaw("Vertical" + GamePadNum) < -0.1)
-		//{
-		//	rb.AddForce(Body.transform.position.x, Body.transform.position.y, Body.transform.position.z - 1 * MoveSpeed * MoveSpeedUp);
-		//}
-
-		//Vector3 TurnLeft = new Vector3(0.0f, -RotateSpeed, 0.0f);
-		//Vector3 TurnRight = new Vector3(0.0f, RotateSpeed, 0.0f);
-
-		//Quaternion deltaRotation;
-
-		//// 左方向
-		//if (Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.1)
-		//{
-		//	rb.AddForce(Body.transform.position.x - 1 * MoveSpeed * MoveSpeedUp, Body.transform.position.y, Body.transform.position.z);
-		//}
-
-		//// 右方向
-		//if (Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.1)
-		//{
-		//	rb.AddForce(Body.transform.position.x + 1 * MoveSpeed * MoveSpeedUp, Body.transform.position.y, Body.transform.position.z);
-		//}
-
-		//// 左方向 旋回
-		//if (Input.GetAxisRaw("RightStick" + GamePadNum) > 0.1)
-		//{
-		//	deltaRotation = Quaternion.Euler(TurnLeft * Time.deltaTime);
-		//	rb.MoveRotation(rb.rotation * deltaRotation);
-		//	ArmR.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
-		//	ArmL.transform.RotateAround(Body.transform.position, Vector3.up, -RotateSpeed * Time.deltaTime);
-		//}
-
-		//// 右方向 旋回
-		//if (Input.GetAxisRaw("RightStick" + GamePadNum) < -0.1)
-		//{
-		//	deltaRotation = Quaternion.Euler(TurnRight * Time.deltaTime);
-		//	rb.MoveRotation(rb.rotation * deltaRotation);
-		//	ArmR.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
-		//	ArmL.transform.RotateAround(Body.transform.position, Vector3.up, RotateSpeed * Time.deltaTime);
-		//}
 	}
 
 	void Attack()

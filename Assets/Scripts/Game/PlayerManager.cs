@@ -295,7 +295,8 @@ public class PlayerManager : MonoBehaviour {
         {
             Health -= BeDamage;
             Invincible = true;
-        }
+			InvisibleON();
+		}
         // HPゲージに値を設定
         HealthBarSlider.value = Health + 0.01f;
     }
@@ -312,7 +313,7 @@ public class PlayerManager : MonoBehaviour {
 
 			Effect_Speed_Instance.transform.localPosition = new Vector3(
 				Body.transform.localPosition.x * 50 + transform.localPosition.x,
-				Body.transform.localPosition.y * 50 + transform.localPosition.y,
+				Body.transform.localPosition.y * 50 + transform.localPosition.y + 1.5f,
 				Body.transform.localPosition.z * 50 + transform.localPosition.z
 				);
 
@@ -336,7 +337,7 @@ public class PlayerManager : MonoBehaviour {
 
 			Effect_Attack_Instance.transform.localPosition = new Vector3(
 				Body.transform.localPosition.x * 50 + transform.localPosition.x,
-				Body.transform.localPosition.y * 50 + transform.localPosition.y,
+				Body.transform.localPosition.y * 50 + transform.localPosition.y + 1,
 				Body.transform.localPosition.z * 50 + transform.localPosition.z
 				);
 
@@ -357,7 +358,6 @@ public class PlayerManager : MonoBehaviour {
         }
         if (Invincible && !bDead)
         {
-
             if (KM_Math.KM_ChangeFlagTimer(6))
             {
                 Body.GetComponent<Renderer>().enabled = false;
@@ -391,7 +391,8 @@ public class PlayerManager : MonoBehaviour {
             {
                 InvincibleTimer = 0;
                 Invincible = false;
-                Body.GetComponent<BodyManager>().GetDamage = false;
+				InvisibleOFF();
+				Body.GetComponent<BodyManager>().GetDamage = false;
                 InvincibleTimer = InvincibleTimerMax;
                 Body.GetComponent<Renderer>().enabled = true;
                 if (ArmL.GetComponent<ChopsticksManager>().m_bDead == false)
@@ -417,4 +418,18 @@ public class PlayerManager : MonoBehaviour {
         ArmL.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         ArmR.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
     }
+
+	void InvisibleON()
+	{
+		Body.layer = 9;
+		ArmL.layer = 9;
+		ArmR.layer = 9;
+	}
+
+	void InvisibleOFF()
+	{
+		Body.layer = 8;
+		ArmL.layer = 8;
+		ArmR.layer = 8;
+	}
 }

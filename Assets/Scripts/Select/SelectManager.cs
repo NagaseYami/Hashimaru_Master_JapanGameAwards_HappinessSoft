@@ -13,6 +13,8 @@ public class SelectManager : MonoBehaviour
 	private AudioSource sound01;        // 効果音 カーソル
 	private AudioSource sound02;        // 効果音 決定
 	private AudioSource sound03;        // 効果音 キャンセル
+	private AudioSource sound04;        // 効果音 オープン
+	private AudioSource sound05;        // 効果音 クローズ
 
 	public enum STAGETYPE
 	{
@@ -20,7 +22,7 @@ public class SelectManager : MonoBehaviour
 		STAGE02
 	}
 
-	// ポーズ画面用
+	//// ステージセレクト画面用
 	private bool stopTime = false;
 	public GameObject ui;
 	private GameObject obj;
@@ -29,6 +31,19 @@ public class SelectManager : MonoBehaviour
 	private RectTransform stage01;
 	private RectTransform stage02;
 	private int Count;
+
+	// ポーズ画面用
+	public bool stopTimeSelect = false;
+	public GameObject uiSelect;
+	private GameObject objSelect;
+	private int GamePadNumSelect = 1;
+	private RectTransform arrow;
+	private int nCntSelect = 18;
+	public bool GameStopFlagSelect = false;
+	public bool ButtonReleaseSelect = false;
+	private bool SelectPuseFlag = false;
+	private bool FadeFlag;
+	private bool FadeFlagSelect;
 
 	private bool stage01Flag = true;
 	private bool stage02Flag = false;
@@ -40,25 +55,58 @@ public class SelectManager : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
+		Cursor.visible = false;
+		FadeFlagSelect = GameObject.Find("FadeManager").GetComponent<FadeManager>().isFading;
+
 		// カーソルオブジェクト情報取得
 		Cursor1 = GameObject.Find("Cursor1");
 		Cursor2 = GameObject.Find("Cursor2");
 
 		LoadFlag = false;
 		ReleaseFlag = true;
+		GameStopFlagSelect = false;
+		SelectPuseFlag = false;
+		ButtonReleaseSelect = false;
+		FadeFlag = false;
+		FadeFlagSelect = false;
 
-		StageType = STAGETYPE.STAGE01;
+	StageType = STAGETYPE.STAGE01;
 
 		//AudioSourceコンポーネントを取得し、変数に格納
 		AudioSource[] audioSources = GetComponents<AudioSource>();
 		sound01 = audioSources[1];
 		sound02 = audioSources[2];
 		sound03 = audioSources[3];
+		sound04 = audioSources[4];
+		sound05 = audioSources[5];
 	}
 
 	private void Update()
 	{
-		Pause();
+		// エスケープキーが入力されたらアプリを終了する
+		if (Input.GetKey("escape"))
+		{
+			Application.Quit();
+		}
+
+		if (LoadFlag == false)
+		{
+			if (SelectPuseFlag == false & FadeFlagSelect == false & ButtonReleaseSelect == false)
+			{
+				Pause();
+			}
+
+			if (FadeFlagSelect == false)
+			{
+				PauseSelect();
+			}
+
+			// ボタンがはなされているか
+			if (Input.GetButtonDown("Fire" + GamePadNum))
+			{
+				ButtonReleaseSelect = false;
+			}
+		}
 	}
 
 	// Update is called once per frame
@@ -94,14 +142,6 @@ public class SelectManager : MonoBehaviour
 			SceneManager.LoadScene("SelectScene");
 		}
 #endif
-
-		// エスケープキーが入力されたらアプリを終了する
-		if (Input.GetKey("escape"))
-		{
-			Application.Quit();
-		}
-
-
 	}
 
 	void Pause()
@@ -164,7 +204,7 @@ public class SelectManager : MonoBehaviour
 			if (Count >= 3)
 			{
 				// 左方向
-				if (Input.GetAxisRaw("Horizontal" + GamePadNum) > 0.1f)
+				if ((Input.GetAxisRaw("Horizontal1") > 0.1f) | (Input.GetAxisRaw("Horizontal2") > 0.1f))
 				{
 					// フラグがオフの場合
 					if (stage01Flag == false)
@@ -182,7 +222,7 @@ public class SelectManager : MonoBehaviour
 				}
 
 				// 右方向
-				if (Input.GetAxisRaw("Horizontal" + GamePadNum) < -0.1f)
+				if ((Input.GetAxisRaw("Horizontal1") < -0.1f) | (Input.GetAxisRaw("Horizontal2") < -0.1f))
 				{
 					// フラグがオフの場合
 					if (stage02Flag == false)
@@ -200,7 +240,7 @@ public class SelectManager : MonoBehaviour
 				}
 
 				// Aボタンが押されたら
-				if (Input.GetButtonDown("Fire" + GamePadNum) & LoadFlag == false)
+				if (Input.GetButtonDown("Fire1") | Input.GetButtonDown("Fire2") & LoadFlag == false & FadeFlagSelect == false)
 				{
 					GameStop();
 					FadeManager.Instance.LoadScene("GameScene", 1.0f);
@@ -212,7 +252,7 @@ public class SelectManager : MonoBehaviour
 				}
 
 				// Bボタンが押されたら
-				if (Input.GetButtonDown("Back" + GamePadNum) & LoadFlag == false)
+				if (Input.GetButtonDown("Back1") | Input.GetButtonDown("Back2") & LoadFlag == false)
 				{
 					GameStop();
 
@@ -259,4 +299,135 @@ public class SelectManager : MonoBehaviour
 	{
 		return StageType;
 	}
+
+
+
+	void PauseSelect()
+	{
+		if (!stopTimeSelect)
+		{
+			if (Input.GetButtonDown("Start1") & GameStopFlagSelect == false)
+			{
+				GamePadNumSelect = 1;
+				GameStopSelect();
+			}
+			else if (Input.GetButtonDown("Start2") & GameStopFlagSelect == false)
+			{
+				GamePadNumSelect = 2;
+				GameStopSelect();
+			}
+		}
+
+		else if (stopTimeSelect)
+		{// stopTimeフラグがtrueだったら
+
+			if (Input.GetButtonDown("Start1") & GameStopFlagSelect == false & GamePadNumSelect == 1)
+			{
+				GamePadNumSelect = 1;
+				GameStopSelect();
+			}
+			else if (Input.GetButtonDown("Start2") & GameStopFlagSelect == false & GamePadNumSelect == 2)
+			{
+				GamePadNumSelect = 2;
+				GameStopSelect();
+			}
+
+			if (nCntSelect >= 18)
+			{
+				// 上方向
+				if (Input.GetAxisRaw("Vertical" + GamePadNumSelect) > 0.1f)
+				{
+					// カーソル音
+					sound01.PlayOneShot(sound01.clip);
+
+					nCntSelect = 0;
+					if (arrow.localPosition.y >= 195.0f)
+					{
+						arrow.localPosition = new Vector3(arrow.localPosition.x, -205.0f, arrow.localPosition.z);
+					}
+
+					else
+					{
+						arrow.localPosition = new Vector3(arrow.localPosition.x, arrow.localPosition.y + 200.0f, arrow.localPosition.z);
+					}
+				}
+
+				// 下方向
+				if (Input.GetAxisRaw("Vertical" + GamePadNumSelect) < -0.1f)
+				{
+					// カーソル音
+					sound01.PlayOneShot(sound01.clip);
+
+					nCntSelect = 0;
+					if (arrow.localPosition.y <= -205.0f)
+					{
+						arrow.localPosition = new Vector3(arrow.localPosition.x, 195.0f, arrow.localPosition.z);
+					}
+
+					else
+					{
+						arrow.localPosition = new Vector3(arrow.localPosition.x, arrow.localPosition.y - 200.0f, arrow.localPosition.z);
+					}
+				}
+			}
+
+			// Aボタンが押されたら
+			if (Input.GetButtonDown("Fire" + GamePadNumSelect) & LoadFlag == false )
+			{
+				if (arrow.localPosition.y >= 195.0f)
+				{
+					GameStopSelect();
+				}
+				else if (arrow.localPosition.y <= -205.0f)
+				{
+					GameStopSelect();
+					FadeManager.Instance.LoadScene("TitleScene", 1.0f);
+					GameStopFlagSelect = true;
+					LoadFlag = true;
+				}
+				else
+				{
+					GameStopSelect();
+					FadeManager.Instance.LoadScene("SelectScene", 1.0f);
+					GameStopFlagSelect = true;
+					LoadFlag = true;
+				}
+
+				ButtonReleaseSelect = true;
+			}
+			if (nCntSelect <= 18)
+			{
+				nCntSelect++;
+			}
+		}
+	}
+
+	void GameStopSelect()
+	{
+		if (!stopTimeSelect)
+		{
+			objSelect = Instantiate(uiSelect);
+			arrow = GameObject.Find("Arrow").GetComponent<RectTransform>();
+
+			Time.timeScale = 0;
+
+			// 効果音 再生
+			sound04.PlayOneShot(sound04.clip);
+
+			SelectPuseFlag = true;
+		}
+		else
+		{
+			GamePadNumSelect = 1;
+			Time.timeScale = 1;
+			Destroy(objSelect);
+
+			// 効果音 再生
+			sound05.PlayOneShot(sound05.clip);
+
+			SelectPuseFlag = false;
+		}
+		stopTimeSelect = !stopTimeSelect;
+	}
+
 }

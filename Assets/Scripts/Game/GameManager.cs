@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 	public int BallRespawnTime = 15;
 	int BallRespawnTimer = 0;
 	public CursorControl.CHARATYPE CharaType1, CharaType2;  // キャラクタータイプ
-	private SelectManager.STAGETYPE StageType;		// ステージタイプ
+	private SelectManager.STAGETYPE StageType;      // ステージタイプ
 
 	// ポーズ画面用
 	public bool stopTime = false;
@@ -31,14 +31,18 @@ public class GameManager : MonoBehaviour
 	private AudioSource sound03;        // 効果音 ポーズオン
 	private AudioSource sound04;        // 効果音 ポーズ解除オン
 	private AudioSource sound05;        // 効果音 カーソル
+	private AudioSource sound06;        // 効果音 勝利音
 
 	public bool GameEndFlag;
 	private int EndCnt;
 	private bool FadeFlag;
+	private bool BGM_Stop;
 
 	// Use this for initialization
 	void Start()
 	{
+		Cursor.visible = false;
+
 		Ball = GameObject.Find("Ball").gameObject;
         Ball.SetActive(false);
 		if (Ball == null) { Debug.Log("Cant find Ball!"); }
@@ -132,6 +136,7 @@ public class GameManager : MonoBehaviour
 		sound03 = audioSources[2];
 		sound04 = audioSources[3];
 		sound05 = audioSources[4];
+		sound06 = audioSources[5];
 
 		// ステージタイプを取得
 		StageType = SelectManager.GetStageType();
@@ -155,7 +160,13 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if(GameObject.Find("Canvas_Countdown").GetComponent<Countdown>().PlayGameBGM == true)
+		// エスケープキーが入力されたらアプリを終了する
+		if (Input.GetKey("escape"))
+		{
+			Application.Quit();
+		}
+
+		if (GameObject.Find("Canvas_Countdown").GetComponent<Countdown>().PlayGameBGM == true)
 		{
 			switch (StageType)
 			{
@@ -192,11 +203,6 @@ public class GameManager : MonoBehaviour
 
 		if (Time.timeScale == 1)
 		{
-			// エスケープキーが入力されたらアプリを終了する
-			if (Input.GetKey("escape"))
-			{
-				Application.Quit();
-			}
 #if DEBUG
 			// キャラクタータイプ デバッグ用
 			if (Input.GetKeyDown(KeyCode.O))
@@ -255,6 +261,15 @@ public class GameManager : MonoBehaviour
 
 	void GameEnd()
 	{
+		sound01.Stop();
+		sound02.Stop();
+
+		if(BGM_Stop == false)
+		{
+			sound06.Play();
+			BGM_Stop = true;
+		}
+
 		if (EndCnt >= 30)
 		{
 			if (FadeFlag == false)

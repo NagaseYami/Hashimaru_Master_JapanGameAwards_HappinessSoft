@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4826387316998476}
   - component: {fileID: 114011063404919196}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Giraffe
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 54514457137617180}
   - component: {fileID: 59382671899822170}
   - component: {fileID: 114103401149835028}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArmR
   m_TagString: ArmR
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 54100091951868566}
   - component: {fileID: 59383680394448562}
   - component: {fileID: 114825921693421758}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArmL
   m_TagString: ArmL
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 54373668656923152}
   - component: {fileID: 114428651252237728}
   - component: {fileID: 135791403996240842}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Body
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1239549008090202}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0.02, z: -0.004}
   m_LocalScale: {x: 1.5, y: 1, z: 1.5}
   m_Children: []
   m_Father: {fileID: 4826387316998476}
@@ -122,7 +122,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1753401903609082}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0.02, z: -0.004}
   m_LocalScale: {x: 1.5, y: 1, z: 1.5}
   m_Children: []
   m_Father: {fileID: 4826387316998476}
@@ -275,7 +275,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!54 &54373668656923152
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -290,7 +290,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!54 &54514457137617180
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -305,7 +305,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!59 &59382671899822170
 HingeJoint:
   m_ObjectHideFlags: 1
@@ -316,7 +316,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: -0.01}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.02, z: -0.015}
+  m_ConnectedAnchor: {x: 0, y: 0.02, z: -0.019000001}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -348,7 +348,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0, z: -0.01}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.02, z: -0.015}
+  m_ConnectedAnchor: {x: 0, y: 0.02, z: -0.019000001}
   m_UseSpring: 0
   m_Spring:
     spring: 0
@@ -382,7 +382,7 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_InflateMesh: 1
-  m_SkinWidth: 0.15
+  m_SkinWidth: 0.2
   m_Mesh: {fileID: 4300002, guid: 404733768ef793140b53b72562fd5af0, type: 3}
 --- !u!64 &64599905569253980
 MeshCollider:
@@ -396,7 +396,7 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_InflateMesh: 1
-  m_SkinWidth: 0.15
+  m_SkinWidth: 0.2
   m_Mesh: {fileID: 4300004, guid: 404733768ef793140b53b72562fd5af0, type: 3}
 --- !u!114 &114011063404919196
 MonoBehaviour:
@@ -411,7 +411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Health: 100
   Damage: 25
-  MoveSpeed: 140
+  MoveSpeed: 150
   RotateSpeed: 1.8
   CloseSpeed: 250
   OpenSpeed: 40

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 54303740495960082}
   - component: {fileID: 114637670059660592}
   - component: {fileID: 135137267822713726}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Body
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4288708233150810}
   - component: {fileID: 114581173204299308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Elephants
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 54431450161744562}
   - component: {fileID: 59394526177105764}
   - component: {fileID: 114251332495852158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArmL
   m_TagString: ArmL
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 54887877466833960}
   - component: {fileID: 59228766637909396}
   - component: {fileID: 114817947831494114}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArmR
   m_TagString: ArmR
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1942450005388800}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0.02, z: -0.002}
   m_LocalScale: {x: 1.2, y: 1, z: 1.2}
   m_Children: []
   m_Father: {fileID: 4288708233150810}
@@ -125,7 +125,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1522309323810038}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0.02, z: -0.002}
   m_LocalScale: {x: 1.2, y: 1, z: 1.2}
   m_Children: []
   m_Father: {fileID: 4288708233150810}
@@ -275,7 +275,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!54 &54431450161744562
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -290,7 +290,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!54 &54887877466833960
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -305,7 +305,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!59 &59228766637909396
 HingeJoint:
   m_ObjectHideFlags: 1
@@ -382,7 +382,7 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_InflateMesh: 1
-  m_SkinWidth: 0.15
+  m_SkinWidth: 0.2
   m_Mesh: {fileID: 4300004, guid: 404733768ef793140b53b72562fd5af0, type: 3}
 --- !u!64 &64747458470613276
 MeshCollider:
@@ -396,7 +396,7 @@ MeshCollider:
   serializedVersion: 2
   m_Convex: 1
   m_InflateMesh: 1
-  m_SkinWidth: 0.15
+  m_SkinWidth: 0.2
   m_Mesh: {fileID: 4300002, guid: 404733768ef793140b53b72562fd5af0, type: 3}
 --- !u!114 &114251332495852158
 MonoBehaviour:

@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class TitleManager : MonoBehaviour
 {
 	private bool LoadFlag;
-
+	private int Count;
 	private AudioSource sound01;        // 効果音 決定
 
 	// Use this for initialization
@@ -17,12 +17,14 @@ public class TitleManager : MonoBehaviour
 		//AudioSourceコンポーネントを取得し、変数に格納
 		AudioSource[] audioSources = GetComponents<AudioSource>();
 		sound01 = audioSources[1];
+
+		Cursor.visible = false;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		if(Input.GetButtonDown("Fire1") | Input.GetButtonDown("Fire2") | Input.GetButtonDown("Start1") | Input.GetButtonDown("Start2") & LoadFlag == false)
+		if((Input.GetButtonDown("Fire1") | Input.GetButtonDown("Fire2") | Input.GetButtonDown("Start1") | Input.GetButtonDown("Start2")) & LoadFlag == false)
 		{
 			FadeManager.Instance.LoadScene("SelectScene", 1.0f);
 
@@ -31,6 +33,13 @@ public class TitleManager : MonoBehaviour
 
 			LoadFlag = true;
 		}
+
+		if(Count >= 600 & LoadFlag == false)
+		{
+			FadeManager.Instance.LoadScene("OpeningScene", 0.5f);
+			LoadFlag = true;
+		}
+		Count++;
 
 		// エスケープキーが入力されたらアプリを終了する
 		if (Input.GetKey("escape"))

@@ -1,0 +1,551 @@
+fileFormatVersion: 2
+guid: f4edeb991ef6c7448aa52310a6fd8e78
+timeCreated: 1496573164
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: grass
+    100002: grass01
+    100004: grass010
+    100006: grass011
+    100008: grass012
+    100010: grass013
+    100012: grass014
+    100014: grass015
+    100016: grass016
+    100018: grass02
+    100020: grass03
+    100022: grass04
+    100024: grass05
+    100026: grass06
+    100028: grass07
+    100030: grass08
+    100032: grass09
+    100034: leaf01
+    100036: leaf01 1
+    100038: leaf01 10
+    100040: leaf01 11
+    100042: leaf01 2
+    100044: leaf01 3
+    100046: leaf01 4
+    100048: leaf01 5
+    100050: leaf01 6
+    100052: leaf01 7
+    100054: leaf01 8
+    100056: leaf01 9
+    100058: leaf02
+    100060: leaf02 1
+    100062: leaf02 10
+    100064: leaf02 11
+    100066: leaf02 2
+    100068: leaf02 3
+    100070: leaf02 4
+    100072: leaf02 5
+    100074: leaf02 6
+    100076: leaf02 7
+    100078: leaf02 8
+    100080: leaf02 9
+    100082: leaf03
+    100084: leaf03 1
+    100086: leaf03 10
+    100088: leaf03 11
+    100090: leaf03 2
+    100092: leaf03 3
+    100094: leaf03 4
+    100096: leaf03 5
+    100098: leaf03 6
+    100100: leaf03 7
+    100102: leaf03 8
+    100104: leaf03 9
+    100106: leaf04
+    100108: leaf04 1
+    100110: leaf04 10
+    100112: leaf04 11
+    100114: leaf04 2
+    100116: leaf04 3
+    100118: leaf04 4
+    100120: leaf04 5
+    100122: leaf04 6
+    100124: leaf04 7
+    100126: leaf04 8
+    100128: leaf04 9
+    100130: leaf05
+    100132: leaf05 1
+    100134: leaf05 10
+    100136: leaf05 11
+    100138: leaf05 2
+    100140: leaf05 3
+    100142: leaf05 4
+    100144: leaf05 5
+    100146: leaf05 6
+    100148: leaf05 7
+    100150: leaf05 8
+    100152: leaf05 9
+    100154: stage
+    100156: //RootNode
+    100158: tree
+    100160: tree 1
+    100162: tree 10
+    100164: tree 11
+    100166: tree 2
+    100168: tree 3
+    100170: tree 4
+    100172: tree 5
+    100174: tree 6
+    100176: tree 7
+    100178: tree 8
+    100180: tree 9
+    100182: tree01
+    100184: tree010
+    100186: tree011
+    100188: tree012
+    100190: tree02
+    100192: tree03
+    100194: tree04
+    100196: tree05
+    100198: tree06
+    100200: tree07
+    100202: tree08
+    100204: tree09
+    400000: grass
+    400002: grass01
+    400004: grass010
+    400006: grass011
+    400008: grass012
+    400010: grass013
+    400012: grass014
+    400014: grass015
+    400016: grass016
+    400018: grass02
+    400020: grass03
+    400022: grass04
+    400024: grass05
+    400026: grass06
+    400028: grass07
+    400030: grass08
+    400032: grass09
+    400034: leaf01
+    400036: leaf01 1
+    400038: leaf01 10
+    400040: leaf01 11
+    400042: leaf01 2
+    400044: leaf01 3
+    400046: leaf01 4
+    400048: leaf01 5
+    400050: leaf01 6
+    400052: leaf01 7
+    400054: leaf01 8
+    400056: leaf01 9
+    400058: leaf02
+    400060: leaf02 1
+    400062: leaf02 10
+    400064: leaf02 11
+    400066: leaf02 2
+    400068: leaf02 3
+    400070: leaf02 4
+    400072: leaf02 5
+    400074: leaf02 6
+    400076: leaf02 7
+    400078: leaf02 8
+    400080: leaf02 9
+    400082: leaf03
+    400084: leaf03 1
+    400086: leaf03 10
+    400088: leaf03 11
+    400090: leaf03 2
+    400092: leaf03 3
+    400094: leaf03 4
+    400096: leaf03 5
+    400098: leaf03 6
+    400100: leaf03 7
+    400102: leaf03 8
+    400104: leaf03 9
+    400106: leaf04
+    400108: leaf04 1
+    400110: leaf04 10
+    400112: leaf04 11
+    400114: leaf04 2
+    400116: leaf04 3
+    400118: leaf04 4
+    400120: leaf04 5
+    400122: leaf04 6
+    400124: leaf04 7
+    400126: leaf04 8
+    400128: leaf04 9
+    400130: leaf05
+    400132: leaf05 1
+    400134: leaf05 10
+    400136: leaf05 11
+    400138: leaf05 2
+    400140: leaf05 3
+    400142: leaf05 4
+    400144: leaf05 5
+    400146: leaf05 6
+    400148: leaf05 7
+    400150: leaf05 8
+    400152: leaf05 9
+    400154: stage
+    400156: //RootNode
+    400158: tree
+    400160: tree 1
+    400162: tree 10
+    400164: tree 11
+    400166: tree 2
+    400168: tree 3
+    400170: tree 4
+    400172: tree 5
+    400174: tree 6
+    400176: tree 7
+    400178: tree 8
+    400180: tree 9
+    400182: tree01
+    400184: tree010
+    400186: tree011
+    400188: tree012
+    400190: tree02
+    400192: tree03
+    400194: tree04
+    400196: tree05
+    400198: tree06
+    400200: tree07
+    400202: tree08
+    400204: tree09
+    2300000: grass01
+    2300002: grass010
+    2300004: grass011
+    2300006: grass012
+    2300008: grass013
+    2300010: grass014
+    2300012: grass015
+    2300014: grass016
+    2300016: grass02
+    2300018: grass03
+    2300020: grass04
+    2300022: grass05
+    2300024: grass06
+    2300026: grass07
+    2300028: grass08
+    2300030: grass09
+    2300032: leaf01
+    2300034: leaf01 1
+    2300036: leaf01 10
+    2300038: leaf01 11
+    2300040: leaf01 2
+    2300042: leaf01 3
+    2300044: leaf01 4
+    2300046: leaf01 5
+    2300048: leaf01 6
+    2300050: leaf01 7
+    2300052: leaf01 8
+    2300054: leaf01 9
+    2300056: leaf02
+    2300058: leaf02 1
+    2300060: leaf02 10
+    2300062: leaf02 11
+    2300064: leaf02 2
+    2300066: leaf02 3
+    2300068: leaf02 4
+    2300070: leaf02 5
+    2300072: leaf02 6
+    2300074: leaf02 7
+    2300076: leaf02 8
+    2300078: leaf02 9
+    2300080: leaf03
+    2300082: leaf03 1
+    2300084: leaf03 10
+    2300086: leaf03 11
+    2300088: leaf03 2
+    2300090: leaf03 3
+    2300092: leaf03 4
+    2300094: leaf03 5
+    2300096: leaf03 6
+    2300098: leaf03 7
+    2300100: leaf03 8
+    2300102: leaf03 9
+    2300104: leaf04
+    2300106: leaf04 1
+    2300108: leaf04 10
+    2300110: leaf04 11
+    2300112: leaf04 2
+    2300114: leaf04 3
+    2300116: leaf04 4
+    2300118: leaf04 5
+    2300120: leaf04 6
+    2300122: leaf04 7
+    2300124: leaf04 8
+    2300126: leaf04 9
+    2300128: leaf05
+    2300130: leaf05 1
+    2300132: leaf05 10
+    2300134: leaf05 11
+    2300136: leaf05 2
+    2300138: leaf05 3
+    2300140: leaf05 4
+    2300142: leaf05 5
+    2300144: leaf05 6
+    2300146: leaf05 7
+    2300148: leaf05 8
+    2300150: leaf05 9
+    2300152: stage
+    2300154: tree
+    2300156: tree 1
+    2300158: tree 10
+    2300160: tree 11
+    2300162: tree 2
+    2300164: tree 3
+    2300166: tree 4
+    2300168: tree 5
+    2300170: tree 6
+    2300172: tree 7
+    2300174: tree 8
+    2300176: tree 9
+    3300000: grass01
+    3300002: grass010
+    3300004: grass011
+    3300006: grass012
+    3300008: grass013
+    3300010: grass014
+    3300012: grass015
+    3300014: grass016
+    3300016: grass02
+    3300018: grass03
+    3300020: grass04
+    3300022: grass05
+    3300024: grass06
+    3300026: grass07
+    3300028: grass08
+    3300030: grass09
+    3300032: leaf01
+    3300034: leaf01 1
+    3300036: leaf01 10
+    3300038: leaf01 11
+    3300040: leaf01 2
+    3300042: leaf01 3
+    3300044: leaf01 4
+    3300046: leaf01 5
+    3300048: leaf01 6
+    3300050: leaf01 7
+    3300052: leaf01 8
+    3300054: leaf01 9
+    3300056: leaf02
+    3300058: leaf02 1
+    3300060: leaf02 10
+    3300062: leaf02 11
+    3300064: leaf02 2
+    3300066: leaf02 3
+    3300068: leaf02 4
+    3300070: leaf02 5
+    3300072: leaf02 6
+    3300074: leaf02 7
+    3300076: leaf02 8
+    3300078: leaf02 9
+    3300080: leaf03
+    3300082: leaf03 1
+    3300084: leaf03 10
+    3300086: leaf03 11
+    3300088: leaf03 2
+    3300090: leaf03 3
+    3300092: leaf03 4
+    3300094: leaf03 5
+    3300096: leaf03 6
+    3300098: leaf03 7
+    3300100: leaf03 8
+    3300102: leaf03 9
+    3300104: leaf04
+    3300106: leaf04 1
+    3300108: leaf04 10
+    3300110: leaf04 11
+    3300112: leaf04 2
+    3300114: leaf04 3
+    3300116: leaf04 4
+    3300118: leaf04 5
+    3300120: leaf04 6
+    3300122: leaf04 7
+    3300124: leaf04 8
+    3300126: leaf04 9
+    3300128: leaf05
+    3300130: leaf05 1
+    3300132: leaf05 10
+    3300134: leaf05 11
+    3300136: leaf05 2
+    3300138: leaf05 3
+    3300140: leaf05 4
+    3300142: leaf05 5
+    3300144: leaf05 6
+    3300146: leaf05 7
+    3300148: leaf05 8
+    3300150: leaf05 9
+    3300152: stage
+    3300154: tree
+    3300156: tree 1
+    3300158: tree 10
+    3300160: tree 11
+    3300162: tree 2
+    3300164: tree 3
+    3300166: tree 4
+    3300168: tree 5
+    3300170: tree 6
+    3300172: tree 7
+    3300174: tree 8
+    3300176: tree 9
+    4300000: stage
+    4300002: grass01
+    4300004: grass02
+    4300006: grass03
+    4300008: grass04
+    4300010: grass05
+    4300012: grass06
+    4300014: grass07
+    4300016: grass08
+    4300018: grass09
+    4300020: grass010
+    4300022: grass011
+    4300024: grass012
+    4300026: grass013
+    4300028: grass014
+    4300030: grass015
+    4300032: grass016
+    4300034: tree
+    4300036: leaf01
+    4300038: leaf02
+    4300040: leaf03
+    4300042: leaf04
+    4300044: leaf05
+    4300046: tree
+    4300048: leaf01
+    4300050: leaf02
+    4300052: leaf03
+    4300054: leaf04
+    4300056: leaf05
+    4300058: tree
+    4300060: leaf01
+    4300062: leaf02
+    4300064: leaf03
+    4300066: leaf04
+    4300068: leaf05
+    4300070: tree
+    4300072: leaf01
+    4300074: leaf02
+    4300076: leaf03
+    4300078: leaf04
+    4300080: leaf05
+    4300082: tree
+    4300084: leaf01
+    4300086: leaf02
+    4300088: leaf03
+    4300090: leaf04
+    4300092: leaf05
+    4300094: tree
+    4300096: leaf01
+    4300098: leaf02
+    4300100: leaf03
+    4300102: leaf04
+    4300104: leaf05
+    4300106: tree
+    4300108: leaf01
+    4300110: leaf02
+    4300112: leaf03
+    4300114: leaf04
+    4300116: leaf05
+    4300118: tree
+    4300120: leaf01
+    4300122: leaf02
+    4300124: leaf03
+    4300126: leaf04
+    4300128: leaf05
+    4300130: tree
+    4300132: leaf01
+    4300134: leaf02
+    4300136: leaf03
+    4300138: leaf04
+    4300140: leaf05
+    4300142: tree
+    4300144: leaf01
+    4300146: leaf02
+    4300148: leaf03
+    4300150: leaf04
+    4300152: leaf05
+    4300154: tree
+    4300156: leaf01
+    4300158: leaf02
+    4300160: leaf03
+    4300162: leaf04
+    4300164: leaf05
+    4300166: tree
+    4300168: leaf01
+    4300170: leaf02
+    4300172: leaf03
+    4300174: leaf04
+    4300176: leaf05
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

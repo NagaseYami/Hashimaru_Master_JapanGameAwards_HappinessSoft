@@ -133,10 +133,11 @@ public class PlayerManager : MonoBehaviour {
         {
             if (Lattach == Rattach)
             {
-                if (Lattach.tag == "Body")
+				Debug.Log(Lattach.gameObject.name);
+				if (Lattach.tag == "Body")
                 {
                     Lattach.GetComponent<BodyManager>().GetDamage = true;
-                    Debug.Log(Lattach.transform.root.gameObject.name);
+
                     Lattach.transform.root.gameObject.GetComponent<PlayerManager>().TakeDamage(Damage*DamageUp);
 
 					Damage_SE.PlayOneShot(Damage_SE.clip);

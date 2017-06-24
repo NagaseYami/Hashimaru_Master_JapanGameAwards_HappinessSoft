@@ -211,8 +211,7 @@ public class PlayerController : MonoBehaviour
 			ArmR.transform.RotateAround(Body.transform.position, Vector3.up, -AlreadyRotation);
 			ArmL.transform.RotateAround(Body.transform.position, Vector3.up, AlreadyRotation);
 			AlreadyRotation += CloseSpeed * Time.deltaTime;
-			ArmR.GetComponent<ChopsticksManager>().bHasamu = true;
-			ArmL.GetComponent<ChopsticksManager>().bHasamu = true;
+			
 			if (AlreadyRotation >= 30)
 			{
 				ArmR.transform.eulerAngles = new Vector3(0, Body.transform.eulerAngles.y - 30, 0);
@@ -220,10 +219,11 @@ public class PlayerController : MonoBehaviour
 				CloseFlag = false;
 				OpenFlag = true;
 				AlreadyRotation = 0;
-				ArmR.GetComponent<ChopsticksManager>().bHasamu = false;
-				ArmL.GetComponent<ChopsticksManager>().bHasamu = false;
 			}
 		}
+
+		ArmR.GetComponent<ChopsticksManager>().bHasamu = CloseFlag;
+		ArmL.GetComponent<ChopsticksManager>().bHasamu = CloseFlag;
 
 		if (OpenFlag)
 		{

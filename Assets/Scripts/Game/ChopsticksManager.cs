@@ -21,7 +21,7 @@ public class ChopsticksManager : MonoBehaviour {
 
     void FixedUpdate()
     {
-        attach = null;
+        //attach = null;
     }
 	// Update is called once per frame
 	void Update()
@@ -29,9 +29,11 @@ public class ChopsticksManager : MonoBehaviour {
 
 		if (Time.timeScale == 1)
 		{
+			//attach = null;
+
 			ArmHead = transform.position - Body.transform.position;
 			ArmHead.Normalize();
-			ArmHead = ArmHead * 3.5f + Body.transform.position;
+			ArmHead = ArmHead * 3.5f*transform.localScale.x + Body.transform.position;
 
 			if (m_bDead)
 			{
@@ -56,7 +58,7 @@ public class ChopsticksManager : MonoBehaviour {
     void OnCollisionStay(Collision collision)
     {
         attach = collision.gameObject;
-    }
+	}
 
     void OnTriggerStay(Collider collider)
     {

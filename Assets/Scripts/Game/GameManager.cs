@@ -38,6 +38,8 @@ public class GameManager : MonoBehaviour
 	private bool FadeFlag;
 	private bool BGM_Stop;
 
+	public GameObject hubuki;
+
 	// Use this for initialization
 	void Start()
 	{
@@ -129,6 +131,7 @@ public class GameManager : MonoBehaviour
 
 				break;
 		}
+
 		//AudioSourceコンポーネントを取得し、変数に格納
 		AudioSource[] audioSources = GetComponents<AudioSource>();
 		sound01 = audioSources[0];
@@ -268,13 +271,15 @@ public class GameManager : MonoBehaviour
 		{
 			sound06.Play();
 			BGM_Stop = true;
+
+			hubuki = Instantiate(hubuki);
 		}
 
-		if (EndCnt >= 30)
+		if (EndCnt >= 120)
 		{
 			if (FadeFlag == false)
 			{
-				if (Input.GetButtonDown("Fire" + GamePadNum))
+				if (Input.GetButtonDown("Fire1") | Input.GetButtonDown("Fire2") | Input.GetButtonDown("Back1") | Input.GetButtonDown("Back2"))
 				{
 					FadeManager.Instance.LoadScene("SelectScene", 1.0f);
 

@@ -21,7 +21,7 @@ public class ChopsticksManager : MonoBehaviour {
 
     void FixedUpdate()
     {
-        //attach = null;
+        attach = null;
     }
 	// Update is called once per frame
 	void Update()
@@ -33,7 +33,7 @@ public class ChopsticksManager : MonoBehaviour {
 
 			ArmHead = transform.position - Body.transform.position;
 			ArmHead.Normalize();
-			ArmHead = ArmHead * 3.5f*transform.localScale.x + Body.transform.position;
+			ArmHead = ArmHead * 4.0f*transform.localScale.x + Body.transform.position;
 
 			if (m_bDead)
 			{

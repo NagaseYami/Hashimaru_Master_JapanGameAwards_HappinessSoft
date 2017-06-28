@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 54175781039673362}
   - component: {fileID: 59721497601651420}
   - component: {fileID: 114222068871336734}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArmR
   m_TagString: ArmR
   m_Icon: {fileID: 0}
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 54934579800510076}
   - component: {fileID: 59280657334805012}
   - component: {fileID: 114720917685930890}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ArmL
   m_TagString: ArmL
   m_Icon: {fileID: 0}
@@ -62,7 +62,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4686731427872762}
   - component: {fileID: 114464889392190654}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dog
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 54723777569911912}
   - component: {fileID: 114242889062179918}
   - component: {fileID: 135597122186748412}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Body
   m_TagString: Body
   m_Icon: {fileID: 0}

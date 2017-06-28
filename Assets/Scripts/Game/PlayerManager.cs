@@ -144,6 +144,7 @@ public class PlayerManager : MonoBehaviour {
 				}
                 else if (Lattach.tag == "Ball" && Ball.activeSelf)
                 {
+
                     BallCount++;
                     Lattach.SetActive(false);
                 }

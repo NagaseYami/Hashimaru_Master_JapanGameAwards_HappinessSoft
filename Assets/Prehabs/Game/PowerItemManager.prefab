@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 23410395502745586}
   - component: {fileID: 114436259054242928}
   - component: {fileID: 54052607961150170}
-  - component: {fileID: 64119151497318964}
   - component: {fileID: 114640749297323854}
+  - component: {fileID: 135800606180992404}
   m_Layer: 0
   m_Name: PowerItem
   m_TagString: PowerItem
@@ -69,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1617104101371908}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.83, z: 3.589}
+  m_LocalPosition: {x: 0, y: -1.06, z: 3.589}
   m_LocalScale: {x: 120, y: 120, z: 120}
   m_Children: []
   m_Father: {fileID: 4346635413771214}
@@ -129,20 +129,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!64 &64119151497318964
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1617104101371908}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 6d1f5a2601ee0bc4985f28d54b2c308e, type: 3}
 --- !u!114 &114436259054242928
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -167,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PowerUpTime: 6
   PowerUpValue: 1.5
-  RespawnTime: 5
+  RespawnTime: 7
   RespawnTimer: 0
 --- !u!114 &114640749297323854
 MonoBehaviour:
@@ -184,3 +170,15 @@ MonoBehaviour:
   SuicideTimer: 0
   bStartRespawn: 1
   bStartSuicide: 0
+--- !u!135 &135800606180992404
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1617104101371908}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.01
+  m_Center: {x: 0.0000029477524, y: 0.009442766, z: 0.0000498211}

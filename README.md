@@ -1,7 +1,7 @@
 # ハシマル
 3年生前期に日本ゲーム大賞に応募した作品です。 チームワークです。  
 Unityの作品です。  
-ゲーム本体はReleaseからダウンロードしてください。https://github.com/NagaseYami/Maruhashi_Master_JapanGameAwards_HappinessSoft/releases  
+ゲーム本体はReleaseからダウンロードしてください。https://github.com/NagaseYami/Hashimaru_Master_JapanGameAwards_HappinessSoft/releases  
 もしご指摘、ご鞭撻、ご不明なところがあれば、nagaseyami@yahoo.co.jpにご連絡していただければと思います。
 ## 作品紹介
 「ハシマル」（ハシ×アニマル）２人でプレイする対戦アクションゲームです。  
